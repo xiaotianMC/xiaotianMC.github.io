@@ -370,6 +370,10 @@ nav a:hover:before{
 	.bottomtext a{
 		margin-top: 0.35rem;
 	}
+	
+	.mobile-footer a{
+                font-size: 12px;
+        }
 
     /* Foooter Block */
 
