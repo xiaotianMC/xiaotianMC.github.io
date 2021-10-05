@@ -1,0 +1,25 @@
+/* Basic Difine*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+:root{
+    --lightDark: #252627;
+    --lightWhite: #f8f9fa;
+    --body: #f6f7f9;
+    --footerWhite: #e3e7ec;
+    --footerFont-Black: #3c3d3f;
+}
+
+a , h1 , h2 , h3 , h4{
+    text-decoration: none;
+    color: var(--lightDark);
+}
+
+body{
+    background-color: var(--body);
+}

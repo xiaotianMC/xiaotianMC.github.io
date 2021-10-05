@@ -1,0 +1,155 @@
+
+footer{
+    position: absolute;
+    width: 100%;
+    height: 10rem;
+    background-color: #fff;
+    margin-bottom: 0rem;
+    margin-top: 9rem;
+    box-shadow: 0.1rem -0.1rem 0.3rem #d3cdcd;
+}
+
+.footerurl{
+    margin-left: 10rem;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+}
+
+.bilibiliurl{
+    width: 5rem;
+    height: 5rem;
+    background-color: rgb(161, 161, 245);
+    border-radius: 2.5rem;
+    margin-top: 2.5rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem #c5adad;
+}
+
+.qqurl{
+    width: 5rem;
+    height: 5rem;
+    background-color: rgb(119, 63, 63);
+    border-radius: 2.5rem;
+    margin-left: 3rem;
+    margin-top: 2.5rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem #c5adad;
+}
+
+.acfunurl{
+    width: 5rem;
+    height: 5rem;
+    background-color: #ff0000;
+    border-radius: 2.5rem;
+    margin-left: 3rem;
+    margin-top: 2.5rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem #c5adad;
+}
+
+.bilibiliicon{
+    position: relative;
+    height: 3rem;
+    margin-left: 1rem;
+    margin-top: 0.8rem;
+}
+
+.qqicon{
+    position: relative;
+    height: 3rem;
+    margin-left: 1.2rem;
+    margin-top: 0.8rem;
+}
+
+.acfunicon{
+    position: relative;
+    height: 4rem;
+    margin-left: -0.2rem;
+    margin-top: 0.6rem;
+}
+
+.footerfont{
+    cursor: pointer;
+    position: relative;
+    margin-left: 42rem;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.footerfonttitle{
+    color: rgb(107, 87, 87);
+    position: relative;
+    border-bottom: 0.15rem solid rgb(79, 231, 231);
+    width: 36px;
+}
+
+.bottomtext{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 144px;
+}
+
+.footertext{
+    display: flex;
+    flex-direction: column;
+    margin-top: -0.4rem;
+}
+
+.footerfont_margin{
+    margin-left: 4rem;
+}
+
+.allus{
+    width: 44px;
+}
+
+.tools{
+    margin-top: 0.42rem;
+}
+
+.bottom_tools{
+    margin-top: 0.39rem;
+}
+
+.bottomtext a {
+    margin-top: 0.2rem;
+}
+
+.others{
+    margin-left: 5.2rem;
+
+}
+.others_2{
+    margin-left: 7rem;
+    margin-top: -4.55rem;
+}
+
+.footerblock{
+    width: 100%;
+    height: 2.4rem;
+    background-color: rgb(75, 67, 67);
+    margin-top: 2rem;
+    box-shadow: 0.1rem -0.1rem 0.3rem #d4cccc;
+}
+
+.footerblock a{
+    position: absolute;
+    color: rgb(238, 222, 222);
+}
+
+.footerblock_copyright{
+    left: 3rem;
+    top: 10.5rem;
+    width: 17rem;
+}
+
+.power{
+    left: 25rem;
+    top: 10.5rem;
+}
+
+.githuburl{
+    left: 31rem;
+    top: 10.5rem;
+}
