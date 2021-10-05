@@ -1,0 +1,351 @@
+@import url(all-connect/all-webpage.css);
+
+/* BASIC DEFINE*/
+
+.center{
+    display: flex;
+    flex-direction: column;
+    z-index: 8;
+    position: relative;
+}
+
+/* FONT COLOR */
+p,h2{
+    color: var(--lightWhite);
+}
+
+a{
+    color: var(--lightWhite);
+}
+
+.Head p ,.Head h3, h1{
+    color: var(--lightWhite);
+}
+
+footer a{
+    position: relative;
+    color: var(--lightDark);
+}
+
+
+/* ELEMENTS VALUE DEFINE */
+
+img{
+    height: 90px;
+}
+
+p{
+    margin-top: 1.5rem;
+    font-size: 20px;
+    line-height: 1.8rem;
+}
+
+h2{
+    font-size: 30px;
+}
+
+svg{
+    align-items: center;
+}
+
+.details .btn{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 8rem;
+    padding-top: 6rem;
+}
+
+.details a{
+    font-size: 22px;
+    font-family: "Segoe UI",sans-serif;
+    font-weight: 600;
+    align-items: center;
+}
+
+
+
+/* PC DISPLAY */
+
+@media only screen and (min-width: 920px) {
+
+
+/* HEAD */
+
+.Head{
+    position: relative;
+    background: url(photolibrary/indeximg/minecraft-Header.png) no-repeat;
+    width: 100%;
+    height: 41rem;
+    margin: auto;
+}
+
+.headIntroduce{
+    position: relative;
+    margin-top: 3rem;
+    margin-left: 8rem;
+}
+
+/* NAV */
+.nav{
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2rem;
+    margin-left: 7.5rem;
+}
+
+.navUp{
+    display: flex;
+}
+
+
+img{
+    flex-grow: 1;      /* FOR THE NAV IMG */ 
+    flex-basis: auto;
+    height: 5rem;
+}
+
+
+.headNavSide{
+    display: flex;
+    flex-grow: 1;
+    flex-basis: auto; 
+    margin-left: 4rem; 
+}
+
+.navPre{
+    display: flex;
+    flex-grow: 1;
+}
+
+/* NAV FONT DEFINE */
+
+ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+li{
+    flex-grow: 1;
+    word-wrap: break-word;
+}
+
+.nav a{
+    font-size: 22px;
+    padding-left: 3rem;
+    font-family: "Segoe UI",sans-serif;
+    font-weight: 600;
+}
+
+
+
+
+
+
+/*MAIN*/
+
+
+
+/* MAIN BLOCK */
+.gameServer{
+	width: 100%;
+	height: 500px;
+	background-color: #000000;
+    background: url(photolibrary/indeximg/Haruhi.jfif) no-repeat -450px -150px;
+}
+
+.softwareProject{
+	width: 100%;
+	height: 500px;
+	background-color: #965454;
+}
+
+.aboutUs{
+    width: 100%;
+	height: 500px;
+	background-color: #614646;
+}
+
+.ourGame{
+	width: 100%;
+	height: 500px;
+	background-color: #614646;
+}
+
+
+/* ALL-USE */
+
+.details{
+    margin-top: 3rem;
+    margin-left: 8rem;
+}
+
+
+
+/* Foooter Block */
+
+.footerblock{
+    width: 100%;
+    height: 2.8rem;
+    background-color: var(--footerWhite);
+    margin-top: 0rem;
+    box-shadow: 0.1rem -0.1rem 0.3rem #d4cccc;
+    position: absolute;
+}
+
+.footerblock svg{
+    margin-top: 0.2rem;
+    margin-left: 0.5rem;
+}
+
+.footerBlockCopyright{
+    display: block;
+    margin-left: 4rem;
+    margin-top: -2rem;
+}
+
+}
+
+
+
+
+/*-----------
+-------------
+-------------
+-------------*/
+
+
+/* mobile display */
+
+@media (max-width: 920px) {
+
+/* pc display in other */
+
+.pc-footer{
+    display: none;
+}
+
+.headNavSide{
+    display: none;
+}
+
+/* basic define */
+
+p{
+    font-size: 16px;
+}
+
+
+
+/*HEAD */
+
+.Head{
+    width: 100%;
+    height: 36rem;
+    background: url(photolibrary/indeximg/minecraft-Header.png) no-repeat -450px -150px;
+    margin-top: 0;
+}
+
+.headIntroduce{
+	position: relative;
+	margin-top: 1rem;
+	padding-left: 1,8rem;
+}
+
+
+
+/* side  bar */
+
+/* NAV */
+.nav{
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    margin-left: 2rem;
+}
+
+.navUp{
+    display: flex;
+}
+
+
+img{
+    flex-grow: 1;      /* FOR THE NAV IMG */ 
+    flex-basis: auto;
+    height: 5rem;
+}
+
+
+.navPre{
+    display: flex;
+    flex-grow: 1;
+}
+
+/* MAIN BLOCK */
+
+.gameServer{
+	width: 100%;
+	height: 500px;
+	background-color: #000000;
+	background: url(photolibrary/indeximg/Haruhi.jfif) no-repeat -450px -150px;
+}
+
+.softwareProject{
+	width: 100%;
+	height: 500px;
+	background-color: #965454;
+}
+
+.aboutUs{
+    width: 100%;
+	height: 500px;
+	background-color: #614646;
+}
+
+.ourGame{
+	width: 100%;
+	height: 500px;
+	background-color: #614646;
+}
+
+/* ALL-USE */
+
+.details{
+    padding-top: 2rem;
+    margin-left: 1.8rem;
+}
+
+img{
+    flex-grow: 1;      /* FOR THE NAV IMG */ 
+    flex-basis: auto;
+    height: 5rem;
+}
+
+/* footer */
+
+.footerblock{
+    width: 100%;
+    height: 3rem;
+    background-color: var(--footerWhite);
+    margin-top: 0rem;
+    box-shadow: 0.1rem -0.1rem 0.3rem #d4cccc;
+    position: absolute;
+}
+
+.footerblock svg{
+    margin-top: 0.3rem;
+    margin-left: 0.5rem;
+}
+
+.footerBlockCopyright{
+    display: block;
+    margin-left: 4rem;
+    margin-top: -2.25rem;
+}
+
+
+}

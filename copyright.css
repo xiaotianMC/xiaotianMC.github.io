@@ -1,0 +1,44 @@
+@import url(all-connect/webconnect.css);
+
+.center svg{
+    height: 4rem;
+}
+
+.largesvg{
+    height: 1rem;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.editor{
+    width: 82rem;
+    height: 12rem;
+    background-color: #fff;
+    margin: auto;
+    border-radius: 0.6rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+    margin-top: 6rem;
+    background: url(photolibrary/copyrightimg/minecraftwallpaper.jpg);
+}
+
+.main{
+    width: 82rem;
+    height: 80rem;
+    background-color: #fff;
+    margin: auto;
+    border-radius: 0.6rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+    margin-top: 4rem;
+}
+
+.editorimg{
+    height: 12rem;
+}
+
+td{
+    text-align: center;
+}

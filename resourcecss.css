@@ -1,0 +1,48 @@
+@import url(all-connect/webconnect.css);
+
+/* Basic Difine*/
+
+h3{
+    width: 180px;
+    height: 40px;
+    background-color: rgb(155, 155, 228);
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.acgBtn a{
+    position: relative;
+    top: 18%;
+    color: rgb(252, 252, 252);
+}
+
+/* Center */
+
+.center{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.acg{
+    width: 84rem;
+    height: 22rem;
+    background-color: #fff;
+    border-radius: 0.4rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+}
+
+.acgBtn{
+    margin-left: 52rem;
+    margin-top: 16rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.acgPlay{
+    margin-left: 3rem;
+}
+

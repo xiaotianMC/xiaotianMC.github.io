@@ -1,0 +1,93 @@
+@import url(all-connect/webconnect.css);
+
+*{
+    list-style: none;
+}
+
+.center svg{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.maincenter{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.index{
+    position: relative;
+    left: 0rem;
+}
+
+.menu{
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.item{
+    border-top: 1px solid #78c0f0;
+    overflow: hidden;
+    position: relative;
+}
+
+.btn{
+    display: block;
+    padding: 16px 20px;
+    background: #78c0f0;
+    color: #fff;
+    position: relative;
+}
+
+.btn:before{
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #78c0f0;
+    left: 20px;
+    bottom: -7px;
+    transform: rotate(45deg);
+}
+
+.smenu{
+    background: rgb(52, 68, 68);
+    overflow: hidden;
+}
+
+.smenu a{
+    display: block;
+    padding: 16px 26px;
+    color: #fff;
+    font-size: 14px;
+    margin: 4px 0;
+    position: relative;
+}
+
+.smenu a:before{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    border-radius: 0px 3.5px 3.5px 0px;
+    background: #78c0f0;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.smenu a:hover:before{
+    opacity: 1;
+}
+
+.center{
+    width: 80rem;
+    height: 100rem;
+    background-color: #fff;
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+    margin-left: 4rem;
+    border-radius: 0.5rem;
+}

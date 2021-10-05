@@ -1,0 +1,32 @@
+@import url(all-connect/webconnect.css);
+
+.main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.languagejson{
+    width: 40rem;
+    height: 24rem;
+    background-color: #fff;
+}
+
+.exgroup{
+    margin: auto;
+}
+
+.exgroup_1{
+    width: 28rem;
+    height: 16rem;
+    background-color: #fff;
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+}
+
+.exgroup_2{
+    width: 28rem;
+    height: 16rem;
+    background-color: #fff;
+    box-shadow: 0.1rem 0.1rem 0.3rem #e6e1e1;
+}
