@@ -1,0 +1,109 @@
+/* Basic Difine*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+:root{
+    --white: #fff;
+    --lightDark: #252627;
+    --lightWhite: #f8f9fa;
+    --body: #f6f7f9;
+}
+
+a , h1 , h2 , h3 , h4{
+    text-decoration: none;
+    color: var(--lightDark);
+}
+
+body{
+    background: url(img/.jpg) no-repeat;background-size:100% 100%;background-attachment: fixed;
+    background-color: var(--lightDark);
+}
+
+/* center */
+
+.center{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* leftBar */
+
+.leftBar{
+    width: 400px;
+    height: 800px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.leftMain{
+    display: flex;
+    flex-direction: column;
+}
+
+.time{
+    width: 100%;
+    height: 120px;
+    background-color: var(--lightWhite);
+    position: relative;
+    border-radius: 8px;
+    opacity: 0.96;
+}
+
+#timeN{
+    color: var(--lightDark);
+    font-size: 50px;
+    cursor: pointer;
+    margin: 0.8rem 0rem 0rem 1rem; 
+}
+
+.greetings{
+    color: var(--lightDark);
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.other{
+    width: 100%;
+    height: 500px;
+    background-color: var(--lightWhite);
+    margin-top: 1rem;
+    border-radius: 8px;
+    opacity: 0.96;
+}
+
+.musicPlay{
+    width: 100%;
+    height: 200px;
+    background-color: var(--lightWhite);
+    margin-top: 1rem;
+    border-radius: 8px;
+    opacity: 0.96;
+}
+
+/* rightBar */
+
+.rightBar{
+    width: 400px;
+    height: 800px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.rightMain{
+    display: flex;
+    flex-direction: column;
+}
+
+.form{
+    width: 100%;
+    height: 852px;
+    background-color: var(--lightWhite);
+    border-radius: 8px;
+    opacity: 0.96;
+    margin-left: -10rem;
+}
