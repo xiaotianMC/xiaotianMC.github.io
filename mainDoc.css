@@ -64,7 +64,7 @@ a , h1 , h2 , h3 , h4 {
 
 
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1100px) {
 
 
 /* CENTER */
@@ -297,7 +297,7 @@ footer{
 
 
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
 img{
     width: inherit;
     min-width: 400px;
