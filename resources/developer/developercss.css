@@ -12,6 +12,7 @@
     border-radius: .3125rem;
     border: solid 3px var(--themeColor-dark);
     box-shadow: 5px 4px var(--themeColor-dark);
+    margin-bottom: 40px;
 }
 
 h1{
@@ -32,17 +33,24 @@ h1{
     flex-direction: column;
 }
 
-.developerList li{
-    width: 1000px;
+.aspects{
+    padding: 10px;
+    background-color: var(--themeColor-dark);
+    max-width: 200px;
+    color: var(--lightWhite);
+}
+
+.people{
+    min-width: 1000px;
     height: 60px;
     display: flex;
     background-color: var(--body);
     align-items: center;
     justify-content: space-between;
     padding: 0 15px 0 15px;
-    margin-top: 30px;
-    border-radius: 8px ;
+    border-radius: 0 8px 8px 0px;
     border: solid 2px var(--themeColor-dark);
+    border-top: 0;
 }
 
 .developerList img{
