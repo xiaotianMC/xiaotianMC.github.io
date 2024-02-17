@@ -1,0 +1,94 @@
+/* bodyMain */
+
+.modIntro{
+    display: flex;
+    margin-top: 1.25rem;
+}
+
+.introContainer{
+    margin: auto;
+}
+
+.mainList{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* listBlock */
+.blockContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.listBlock{
+    margin: auto;
+    margin-top: 3.125rem;
+    background-color: var(--body);
+    position: relative;
+    width: 62.5rem;
+}
+
+
+/* modCover */
+.modCover{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 6.25rem;
+}
+
+.imgContainer{
+    background-color: var(--themeColor-light);
+    height: 6.25rem;
+    text-align: center;
+    padding: .625rem 1.25rem .625rem 1.25rem;
+}
+img{
+    max-height: 5rem;
+}
+.partRight{
+    margin-left: 2.5rem;
+}
+
+
+/* modLinks */
+.outLinks{
+    margin: 1.25rem 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.linkTitle{
+    font-size: 25px;
+    color: var(--lightWhite);
+    background-color: var(--themeColor-dark);
+    padding: .625rem 0 .625rem 1.25rem;
+}
+
+.outLinks_container{
+    margin: 1.25rem;
+}
+
+.fushuBlock{
+    display: flex;
+    justify-content: space-between;
+}
+
+.fushuBlock div{
+    display: flex;
+    
+}
+
+.linkIntro{
+    padding: .375rem;
+    border-radius: .3125rem;
+    color: var(--lightWhite);
+    background-color: var(--themeColor-dark);
+    font-weight: 500;
+}
+
+.leftMargin{
+    margin-left: 1.25rem;
+}

@@ -1,0 +1,20 @@
+.banner{
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: #dad6d6 -0.08rem 0 0.4rem 0.1rem;
+}
+.bannerContainer{
+    display: flex;
+    margin-left: 3.125rem;
+    padding: 1.25rem 0px 1.25rem 0;
+}
+.bannerContainer p{
+    display: flex;
+    align-items: center;
+    margin-left: .625rem;
+    padding: 10px;
+    height: 30px;
+    background-color: var(--themeColor-light);
+    border-radius: .5rem;
+    color: var(--lightWhite);
+}

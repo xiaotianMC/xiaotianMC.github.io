@@ -1,0 +1,63 @@
+@media (max-width: 900px) {
+
+/* BANNER */
+
+.banner{
+    display: flex;
+    width: 100%;
+    height: 350px;
+    background-image: url(http://127.0.0.1:5500/res/img/animate/47621790_p0.jpg) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center -250px;
+}
+
+.mainBanner{
+    display: flex;
+    width: 100%;
+    height: 52px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #feffff;
+    align-items: center;
+    box-shadow: 1px 2px 2px rgba(0,0,0,0.07);
+    padding: 0 20px;
+}
+
+nav{
+    display: flex;
+    width: 100%;
+}
+
+nav a{
+    line-height: 40px;
+}
+
+.userInformation{
+    display: flex;
+}
+
+.userInformation p{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.userInformation a{
+    line-height: 40px;
+    margin-left: 15px;
+    width: max-content;
+}
+
+/* WITHOUT INDEX */
+.outBanner{
+    margin-bottom: 80px;
+}
+
+
+}

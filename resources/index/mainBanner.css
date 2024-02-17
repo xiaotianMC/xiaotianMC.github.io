@@ -1,0 +1,41 @@
+/* HEADER */
+header{
+    display: flex;
+    width: 100%;
+    background-color: var(--headerBackground);
+    height: 3.75rem;
+    position: relative;
+    box-shadow: #817575 0rem -1px 0.4rem 0.1rem;
+    align-items: center;
+}
+
+header div{
+    display: flex;
+}
+
+.headerContainer{
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 5% 0 5%;
+    flex-wrap: wrap;
+}
+
+header img{
+    height: 40px;
+}
+
+/* HEADER TABLE */
+.headerSelection{
+    align-items: center;
+}
+
+.headerSelection ul{
+    display: flex;
+    flex-direction: row;
+}
+
+.headerSelection li{
+    margin-left: 2.5rem;
+    font-size: 16px;
+}

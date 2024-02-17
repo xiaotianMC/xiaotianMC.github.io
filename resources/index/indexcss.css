@@ -1,0 +1,112 @@
+/* CENTER */
+
+.center{
+    width: 100%;
+}
+
+.blockContainer{
+    display: flex;
+    flex-direction: column
+}
+
+.block{
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+    background-color: var(--themeColor-light);
+    align-items: center;
+    
+}
+
+.headBlock{
+    display: flex;
+    height: 700px;
+    background-color: var(--themeColor-light);
+}
+
+.blockUs{
+    background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
+    url(index_img/AboutUs_bg.png) no-repeat;
+    background-position: 50% 55%;
+}
+
+.blockPjModsIntro{
+    background: url(index_img/mcModIntro.png) no-repeat;
+    background-position: 100% 60%;
+    justify-content: end;
+}
+
+.blockMcServer{
+    background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
+    url(index_img/mcServer_ER2.png) no-repeat;
+    background-position: 40% 65%;
+}
+
+.shadowMask{
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+    align-items: center;
+    background: linear-gradient(to right, transparent, 28%, var(--themeColor-dark));
+    padding: 0 5%;
+}
+
+/* IN BLOCK */
+
+.innerBlock{
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 0 5%;
+}
+
+.innerBlock_inMask{
+    display: flex;
+    flex-direction: column;
+}
+
+.leftPart{
+    color: var(--lightWhite);
+    display: flex;
+    flex-direction: column;
+}
+
+.rightpart{
+    color: var(--lightWhite);
+    display: flex;
+    flex-direction: column;
+}
+
+.leftPart h1 , .rightpart h1{
+    color: var(--lightWhite);
+}
+
+.leftPart p , .rightpart p{
+    max-width: 600px;
+    min-width: 300px;
+    font-size: 20px;
+    margin-top: .625rem;
+}
+
+
+/* BUTTON */
+.buttonContainer{
+    margin-top: 40px;
+}
+
+.button{
+    padding: .625rem;
+    background-color: var(--themeColor-light);
+    border-radius: .3125rem;
+    margin-top: 1.25rem;
+    border: solid 2px var(--lightWhite);
+    color: var(--lightWhite);
+    box-shadow: 3px 2px var(--lightWhite);
+    font-weight: 550;
+    font-size: 20px;
+    transition: 0.5s ease;
+}
+
+.button:hover{
+    background-color: var(--themeColor-dark);
+    box-shadow: 5px 4px var(--lightWhite);
+}
