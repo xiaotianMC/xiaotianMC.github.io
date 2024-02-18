@@ -18,6 +18,7 @@
     
 }
 
+/* OUT BLOCK*/
 .headBlock{
     display: flex;
     height: 700px;
@@ -109,4 +110,34 @@
 .button:hover{
     background-color: var(--themeColor-dark);
     box-shadow: 5px 4px var(--lightWhite);
+}
+
+
+
+@media screen and (max-width: 1100px) {
+    .blockUs{
+        background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
+        url(index_img/AboutUs_bg.jpg) no-repeat;
+        background-position: 50% 55%;
+    }
+    
+    .blockPjModsIntro{
+        background: url(index_img/mcModIntro.png) no-repeat;
+        background-position: 80% 60%;
+        justify-content: end;
+    }
+    
+    .blockMcServer{
+        background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
+        url(index_img/mcServer_ER2.png) no-repeat;
+        background-position: 60% 65%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .blockPjModsIntro{
+        background: url(index_img/mcModIntro.png) no-repeat;
+        background-position: 50% 60%;
+        justify-content: end;
+    }
 }
