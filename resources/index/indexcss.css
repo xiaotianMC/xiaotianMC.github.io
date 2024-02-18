@@ -26,7 +26,7 @@
 
 .blockUs{
     background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
-    url(index_img/AboutUs_bg.png) no-repeat;
+    url(index_img/AboutUs_bg.jpg) no-repeat;
     background-position: 50% 55%;
 }
 
