@@ -52,10 +52,12 @@ header img{
     }
 
     .mobileHeader{
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 4%;
         width: 100%;
         background-color: var(--headerBackground);
-        height: 3.75rem;
         position: relative;
         box-shadow: #817575 0rem -1px 0.4rem 0.1rem;
     }
@@ -73,8 +75,7 @@ header img{
         width: 20px;
         height: 20px;
         position: relative;
-        top: 25px;
-        left: 20px;
+        top: 5px;
     }
     
     .hamburgerContainer span {
