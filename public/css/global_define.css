@@ -132,6 +132,9 @@ footer .item{
 }
 
 .webLinks li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 3.75rem;
     height: 3.75rem;
     border-radius: 50%;
@@ -143,11 +146,8 @@ footer .item{
 }
 
 .webLinks svg{
-    display: flex;
-    margin: auto;
     width: 2.0625rem;
     height: 2.0625rem;
-    margin-top: .8125rem;
 }
 
 .webLinks p{
