@@ -2,16 +2,16 @@
 
 .center{
     width: 100%;
+    display: grid;
 }
 
 .blockContainer{
-    display: flex;
-    flex-direction: column
+    display: grid;
+    grid-template-rows: auto;
 }
 
 .block{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     height: 400px;
     background-color: var(--themeColor-light);
     align-items: center;
@@ -20,7 +20,7 @@
 
 /* OUT BLOCK*/
 .headBlock{
-    display: flex;
+    display: grid;
     height: 700px;
     background-color: var(--themeColor-light);
 }
@@ -44,8 +44,7 @@
 }
 
 .shadowMask{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     height: 400px;
     align-items: center;
     background: linear-gradient(to right, transparent, 28%, var(--themeColor-dark));
@@ -55,26 +54,26 @@
 /* IN BLOCK */
 
 .innerBlock{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto;
     margin: 0 5% 0 5%;
 }
 
 .innerBlock_inMask{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto;
 }
 
 .leftPart{
     color: var(--lightWhite);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto;
 }
 
 .rightpart{
     color: var(--lightWhite);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto;
 }
 
 .leftPart h1 , .rightpart h1{
