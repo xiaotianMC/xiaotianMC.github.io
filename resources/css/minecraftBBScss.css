@@ -1,0 +1,96 @@
+.center{
+    margin-top: 50px;
+    width: 100%;
+}
+
+.center p{
+    margin: 0;
+}
+
+.innerCenter{
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.listTitle{
+    padding: .625rem .9375rem .625rem .9375rem;
+    background-color: var(--lightWhite);
+    border-radius: .3125rem;
+    border: solid 3px var(--themeColor-dark);
+    box-shadow: 5px 4px var(--themeColor-dark);
+}
+
+h1{
+    color: var(--themeColor-dark);
+    font-weight: 550;
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+.listTitle p{
+    color: var(--themeColor-dark);
+    font-weight: 550;
+    margin-bottom: 0;
+}
+
+/* LIST */
+.listContainer{
+    margin: 0 2%;
+}
+
+.bbsContainer{
+    margin-top: 20px;
+    background-color: var(--bs-action-bg);
+    border-radius: 6px;
+    box-shadow: var(--themeColor-dark) 0 0 5px 0;
+    max-width: 500px;
+}
+
+.innerBbs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.infoCollection{
+    height: 70px;
+    display: flex;
+    padding: 0 3%;
+}
+
+/* BANDAGE */
+.bandageStatus{
+    display: flex;
+    align-items: center;
+    margin-right: 3%;
+}
+
+.bandageStatus div{
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.center img{
+    margin-right: 5px;
+}
+
+.mainInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainInfo p{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+button{
+    z-index: 0;
+}
