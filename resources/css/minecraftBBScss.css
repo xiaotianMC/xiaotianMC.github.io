@@ -37,11 +37,14 @@ h1{
 
 /* LIST */
 .listContainer{
-    margin: 0 2%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+    gap: 20px;
+    align-items: center;
+    margin-top: 40px;
 }
 
 .bbsContainer{
-    margin-top: 20px;
     background-color: var(--bs-action-bg);
     border-radius: 6px;
     box-shadow: var(--themeColor-dark) 0 0 5px 0;
@@ -93,4 +96,33 @@ h1{
 
 button{
     z-index: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .center{
+        padding: 0 2%;
+    }
+
+    .listContainer{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(319px,1fr));
+        gap: 20px;
+        align-items: center;
+        margin-top: 40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .center{
+        padding: 0 2%;
+    }
+
+    .listContainer{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(300px,500px));
+        gap: 20px;
+        align-items: center;
+        margin: auto;
+        margin-top: 40px;
+    }
 }
