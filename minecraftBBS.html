@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>萤火盛夏</title>
+    <title>我的世界相关中文论坛收集-萤火盛夏</title>
     <link rel="shortcut icon" href="public\img\Glowstone_JE4_BE2.webp">
     <!--STYLE-->
+    <link rel="stylesheet" href="public\lib\halfmoon-master\halfmoon-master\css\halfmoon.min.css">
     <link rel="stylesheet" href="public/css/global_define.css">
-    <link rel="stylesheet" href="resources\index\indexcss.css">
     <link rel="stylesheet" href="resources\index\mainBanner.css">
-    <!--SCRIPT-->
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="resources\css\minecraftBBScss.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<main>
+    <!--HEADER-->
     <header class="PCheader">
         <div class="headerContainer">
             <div>
@@ -33,6 +34,7 @@
                     </li>
                 </ul>
             </div>
+        </div>
     </header>
     <header class="mobileHeader">
         <div>
@@ -59,86 +61,64 @@
                     </ul>
                 </div>
     </header>
-        
+<main>
     <div class="center">
-        <div class="headBlock">
-            <div></div>
-        </div>
-        <div class="blockCountainer">
-            <div class="block , blockMcServer">
-                <div class="innerBlock">
-                    <div class="leftPart">
-                        <h1>我的世界服务器：ER2</h1>
-                        <p>ER2（EasyRedstone2）是一个成立于2022年8月22日的生电向服务器，目前基础设施均已发展完善，物资较为充足。</p>
-                    </div>
-                    <div class="buttonContainer">
-                        <a class="button" href="">服务器，启动！</a>
-                    </div>
-                </div>
+        <div class="innerCenter">
+            <div class="listTitle">
+                <h1>我的世界相关中文论坛收集</h1>
+                <p>更新时间：2024.2.23</p>
             </div>
-            <div class="mobileText">
-                <div class="innerBlock">
-                    <div class="leftPart">
-                        <h1>我的世界服务器：ER2</h1>
-                        <p>ER2（EasyRedstone2）是一个成立于2022年8月22日的生电向服务器，目前基础设施均已发展完善，物资较为充足。</p>
-                    </div>
-                    <div class="buttonContainer">
-                        <a class="button" href="">服务器，启动！</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="blockContainer">
-            <div class="block , blockPjModsIntro">
-                <div class="shadowMask">
-                    <div class="innerBlock_inMask">
-                        <div class="rightpart">
-                            <h1>我们的项目：模组介绍</h1>
-                            <p>我的世界模组介绍是萤火盛夏目前的主要项目。我们会持续给大家带来准确、可信的内容，优化模组介绍系列视频的观感。</p>
+            <div class="listContainer">
+                <div class="bbsContainer">
+                    <div class="innerBbs">
+                        <div class="infoCollection">
+                            <div class="bandageStatus">
+                                <div>
+                                    <span class="badge text-bg-success">已备案 √</span>
+                                    <span class="badge text-bg-primary">中型论坛</span>
+                                </div>
+                            </div>
+                            <div class="mainInfo">
+                                <img src="resources\BBS\icon\ZITBBS_icon.png" alt="" srcset="">
+                                <div class="mainText">
+                                    <p>小僵尸论坛（ZITBBS）</p>
+                                    <small class="text-body-secondary">https://www.zitbbs.com/</small>
+                                </div>
+                            </div>
                         </div>
-                        <div class="buttonContainer">
-                            <a class="button" href="mcmod_links.html">浏览相关资源</a>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary" onclick="ZITBBScopy()">
+                                <a class="icon-link icon-link-hover">
+                                    复制网址
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                                    </svg>
+                                </a>
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="window.open('https://www.zitbbs.com/','_self')">
+                                <a href="https://www.zitbbs.com/" class="icon-link icon-link-hover">
+                                    访问
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                                    </svg>
+                                </a>
+                            </button>
                         </div>
                     </div>
+                    
                 </div>
-            </div>
-            <div class="mobileText">
-                <div class="innerBlock">
-                    <div class="rightpart">
-                        <h1>我们的项目：模组介绍</h1>
-                        <p>我的世界模组介绍是萤火盛夏目前的主要项目。我们会持续给大家带来准确、可信的内容，优化模组介绍系列视频的观感。</p>
-                    </div>
-                    <div class="buttonContainer">
-                        <a class="button" href="mcmod_links.html">浏览相关资源</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="blockCountainer" id="blockUs">
-            <div class="block , blockUs">
-                <div class="innerBlock">
-                    <div class="leftPart">
-                        <h1>关于我们</h1>
-                        <p>萤火盛夏是一个以Minecraft内容为主的内容创作团队，同时也创作其他各种类型的内容，如动画（手书、MAD）、鬼畜等。</p>
-                    </div>
-                    <div class="buttonContainer">
-                        <a class="button" href="">了解更多 & 加入我们</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mobileText">
-                <div class="innerBlock">
-                    <div class="leftPart">
-                        <h1>关于我们</h1>
-                        <p>萤火盛夏是一个以Minecraft内容为主的内容创作团队，同时也创作其他各种类型的内容，如动画（手书、MAD）、鬼畜等。</p>
-                    </div>
-                    <div class="buttonContainer">
-                        <a class="button" href="">了解更多 & 加入我们</a>
+                <div class="bbsContainer">
+                    <div class="innerBbs">
+                        <img src="" alt="" srcset="">
+                        <p>111</p>
+                        <p>444</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</main>
     <!--FOOTER-->
     <footer>
         <div class="footerContainer">
@@ -172,13 +152,7 @@
                         <li>欢迎您的来访！ヾ(≧▽≦*)o</li>
                     </ul>
                     <ul class="footerItems_row">
-                        <li>
-                            <span id="busuanzi_container_site_uv">本站访客数 <span id="busuanzi_value_site_uv">
-                            </span> 人次</span>
-                        </li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li class="footer-item-info"><a href="developer.html">贡献者</a></li>
+                        <li class="footer-item-info"><a>贡献者</a></li>
                         <li class="footer-item-info">技术使用</li>
                         <li class="footer-item-info"><a>公告板</a></li>
                     </ul>
@@ -210,5 +184,20 @@
 </main>
     <!--SRCIPT-->
     <script src="pub/lib/trigger-1.0.5/dist/bundle.js"></script>
+    <script type="module" src="/resources/BBS/minecraftBBS.js"></script>
+    <script>
+        function ZITBBScopy (){
+        navigator.clipboard.writeText("https://www.zitbbs.com/")
+            .then(
+                () => {
+                    console.log("粘贴文本成功");
+                },
+                () => {
+                    console.log("clipboard write failed");
+                }
+            );
+        }
+
+    </script>
 </body>
 </html>
