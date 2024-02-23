@@ -13,6 +13,22 @@
     <link rel="stylesheet" href="resources\css\minecraftBBScss.css">
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3"></script>
+    <script>
+        function ZITBBScopy (){
+        navigator.clipboard.writeText("https://www.zitbbs.com/")
+            .then(
+                () => {
+                    console.log("粘贴文本成功");
+                },
+                () => {
+                    console.log("clipboard write failed");
+                }
+            );
+        }
+    </script>
 </head>
 <body>
     <!--HEADER-->
@@ -70,7 +86,7 @@
             </div>
             <div class="alert alert-primary" role="alert">
                 <h5 class="alert-heading">声明</h5>
-                萤火盛夏团队不对该页面展示的网站及其内部内容的真实性、安全性负责。<u><strong>对于访问其他网站时发生的一切安全性问题，萤火盛夏不承担任何责任。</strong></u>访问时请注意您的个人信息安全。
+                萤火盛夏团队不对该页面展示的网站及其内部内容的真实性、安全性负责。<u><strong>对于访问下列网站时发生的一切安全性、内容真实性问题，萤火盛夏不承担任何责任。</strong></u>访问时请注意您的个人信息安全。
               </div>
             <div class="listContainer">
                 <div class="bbsContainer">
@@ -78,7 +94,8 @@
                         <div class="infoCollection">
                             <div class="bandageStatus">
                                 <div>
-                                    <span class="badge text-bg-success">已备案 √</span>
+                                    <span class="badge text-bg-danger">未备案 ×
+                                    </span>
                                     <span class="badge text-bg-primary">中型论坛</span>
                                 </div>
                             </div>
@@ -257,19 +274,7 @@
     <!--SRCIPT-->
     <script src="pub/lib/trigger-1.0.5/dist/bundle.js"></script>
     <script type="module" src="/resources/BBS/minecraftBBS.js"></script>
-    <script>
-        function ZITBBScopy (){
-        navigator.clipboard.writeText("https://www.zitbbs.com/")
-            .then(
-                () => {
-                    console.log("粘贴文本成功");
-                },
-                () => {
-                    console.log("clipboard write failed");
-                }
-            );
-        }
-
-    </script>
+   
+   
 </body>
 </html>
