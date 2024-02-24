@@ -108,6 +108,28 @@ button{
     z-index: 0;
 }
 
+.badge{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.badge svg{
+    vertical-align: text-top;
+}
+
+.text-bg-primary a{
+    display: block;
+    position: relative;
+    height: 10px;
+    margin-left: 2px;
+}
+
+.text-bg-danger , .text-bg-success{
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width: 1000px) {
     .center{
         padding: 0 2%;
