@@ -149,6 +149,11 @@ footer .item{
     height: 2.0625rem;
 }
 
+.ACfun-link svg{
+    width: 36px;
+    height: 36px;
+}
+
 .webLinks p{
     margin-right: .9375rem;
     margin-bottom: .5rem;
