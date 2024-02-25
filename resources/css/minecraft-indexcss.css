@@ -1,0 +1,19 @@
+.center{
+    margin-top: 40px;
+}
+
+.blockLinks{
+    display: flex;
+    justify-content: center;
+}
+
+.innerGrid{
+    display: grid;
+    gap: 20px;
+}
+
+/* BLOCK */
+.linkBlock{
+    padding: 20px;
+    background-color: var(--lightWhite);
+}
