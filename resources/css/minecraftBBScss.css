@@ -41,7 +41,7 @@ h1{
     margin-bottom: 0;
 }
 
-.alert{
+.alert-success{
     margin-bottom: 40px;
 }
 
@@ -74,13 +74,13 @@ h1{
 }
 
 /* BANDAGE */
-.bandageStatus{
+.badgeStatus{
     display: flex;
     align-items: center;
     margin-right: 3%;
 }
 
-.bandageStatus div{
+.badgeStatus div{
     height: 40px;
     display: flex;
     flex-direction: column;
@@ -88,8 +88,10 @@ h1{
 }
 
 .center img{
-    margin-right: 5px;
-    height: 50px;
+    margin-right: 7px;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
 }
 
 .mainInfo{
