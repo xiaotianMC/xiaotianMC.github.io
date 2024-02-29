@@ -64,6 +64,14 @@
         "bbs-type": "大型"
     },
     {
+        "name": "MCBBS 2ND",
+        "type": "小型论坛",
+        "value": false,
+        "icon": "/resources/BBS/icon/MCBBS-2ND_icon.png",
+        "url": "https://mcbbs.app",
+        "bbs-type": "小型"
+    },
+    {
         "name": "MCUTC",
         "type": "小型论坛",
         "value": true,
