@@ -74,7 +74,7 @@
     {
         "name": "MCUTC",
         "type": "小型论坛",
-        "value": true,
+        "value": false,
         "icon": "/resources/BBS/icon/MCUTC_icon.png",
         "url": "https://bbs.mcutc.cn",
         "bbs-type": "小型"
@@ -82,7 +82,7 @@
     {
         "name": "MineBBS",
         "type": "大型论坛",
-        "value": true,
+        "value": false,
         "icon": "/resources/BBS/icon/MineBBS_icon.png",
         "url": "https://www.minebbs.com",
         "bbs-type": "大型"
