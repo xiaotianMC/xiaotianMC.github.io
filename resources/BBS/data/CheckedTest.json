@@ -82,7 +82,7 @@
     {
         "name": "MineBBS",
         "type": "大型论坛",
-        "value": false,
+        "value": true,
         "icon": "/resources/BBS/icon/MineBBS_icon.png",
         "url": "https://www.minebbs.com",
         "bbs-type": "大型"
