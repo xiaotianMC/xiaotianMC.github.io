@@ -28,14 +28,13 @@
                         <a href="">我的世界服务器</a>
                     </li>
                     <li>
-                        <a href="">项目：模组介绍</a>
+                        <a href="/minecraft/minecraft-index.html">Minecraft 相关内容</a>
                     </li>
                     <li>
                         <a href="#blockUs">关于我们</a>
                     </li>
                 </ul>
             </div>
-        </div>
     </header>
     <header class="mobileHeader">
         <div>
@@ -54,7 +53,7 @@
                             <a href="">我的世界服务器</a>
                         </li>
                         <li>
-                            <a href="">项目：模组介绍</a>
+                            <a href="/minecraft/minecraft-index.html">Minecraft 相关内容</a>
                         </li>
                         <li>
                             <a href="#blockUs">关于我们</a>
@@ -67,7 +66,7 @@
         <div class="innerCenter">
             <div class="listTitle">
                 <h1>我的世界相关中文论坛收集</h1>
-                <p>更新时间：2024.2.28</p>
+                <p>更新时间：2024.3.3</p>
             </div>
             <div class="alert alert-primary" role="alert">
                 <h5 class="alert-heading">声明</h5>
@@ -192,24 +191,6 @@
     <!--SRCIPT-->
     <script src="/resources//BBS//CheckBBS.js"></script>
     <script>
-    //while(!finished);
-    /*
-    setTimeout(()=>{
-        console.log('寻找并加载提示框事件');
-    const popoverTriggerList = document.querySelectorAll(
-        "[data-bs-toggle='popover']"
-    );
-    const popoverList = [...popoverTriggerList].map(
-        popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl)
-    );
-    const popover = new bootstrap.Popover(".popover-dismiss", {
-        trigger: "focus"
-    });},
-    // 在这里修改延迟（单位：毫秒）
-    // 如果json未加载会报错
-    1000
-    )
-    */
     Get_BBS_JSON('/resources/BBS/data/CheckedTest.json').then(
     (value) => {
         var BBS_JSON = JSON.parse(JSON.stringify(value));
@@ -231,6 +212,5 @@
     }
     )
     </script>
-   
 </body>
 </html>
