@@ -107,7 +107,7 @@
         "name": "MineTalk",
         "type": "小型论坛",
         "value": false,
-        "icon": "/resources/BBS/icon/MineTalk_icon.avif",
+        "icon": "/resources/BBS/icon/MineTalk_icon.png",
         "url": "https://www.minebox.store",
         "bbs-type": "小型"
     },
