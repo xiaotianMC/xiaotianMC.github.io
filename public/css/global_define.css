@@ -140,7 +140,7 @@ footer .item{
     background-color: #5090aa;
 }
 
-.ACfun-link , .QQ-link{
+.GitHub-link , .QQ-link{
     margin-left: .3438rem;
 }
 
@@ -149,7 +149,7 @@ footer .item{
     height: 2.0625rem;
 }
 
-.ACfun-link svg{
+.GitHub-link svg{
     width: 36px;
     height: 36px;
 }
