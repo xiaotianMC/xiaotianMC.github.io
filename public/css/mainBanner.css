@@ -5,7 +5,7 @@
     background-color: var(--headerBackground);
     height: 3.75rem;
     position: relative;
-    box-shadow: #817575 0rem -1px 0.4rem 0.1rem;
+    box-shadow: #817575 0rem -4px 0.4rem 0.1rem;
     align-items: center;
 }
 
@@ -15,10 +15,12 @@
 
 .headerContainer{
     width: 100%;
+    height: inherit;
     flex-direction: row;
     justify-content: space-between;
     margin: 0 5% 0 5%;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 header img{
@@ -28,18 +30,32 @@ header img{
 
 /* HEADER TABLE */
 .headerSelection{
-    align-items: center;
+    height: inherit;
 }
 
 .headerSelection ul{
+    height: inherit;
     display: flex;
     flex-direction: row;
     margin: 0 !important;
 }
 
 .headerSelection li{
-    margin-left: 2.5rem;
+    height: inherit;
     font-size: 16px;
+}
+
+.headerSelection a{
+    padding: 0 20px;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+}
+
+.headerSelection a:hover{
+    background-color: var(--themeColor-light);
+    color: var(--lightWhite);
 }
 
 @media screen and (min-width: 800px) {
