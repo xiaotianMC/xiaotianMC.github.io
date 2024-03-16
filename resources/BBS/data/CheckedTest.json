@@ -26,7 +26,7 @@
     {
         "name": "Hi世界（HiMCBBS）",
         "type": "小型论坛",
-        "value": false,
+        "value": true,
         "icon": "/resources/BBS/icon/HIMCBBS_icon.png",
         "url": "https://www.himcbbs.com",
         "bbs-type": "小型"
