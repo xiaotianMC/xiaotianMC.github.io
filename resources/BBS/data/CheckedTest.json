@@ -1,5 +1,13 @@
 [
     {
+        "name": "BCL论坛",
+        "type": "小型论坛",
+        "value": false,
+        "icon": "/resources/BBS/icon/BCL_icon.png",
+        "url": "https://www.bclcraft.cn/bbs",
+        "bbs-type": "小型"
+    },
+    {
         "name": "小黑资源论坛（BLMCPIA）",
         "type": "小型论坛",
         "value": false,
@@ -26,9 +34,9 @@
     {
         "name": "Hi世界（HiMCBBS）",
         "type": "小型论坛",
-        "value": false,
+        "value": true,
         "icon": "/resources/BBS/icon/HIMCBBS_icon.png",
-        "url": "https://www.himcbbs.com",
+        "url": "https://www.himcbbs.net",
         "bbs-type": "小型"
     },
     {
