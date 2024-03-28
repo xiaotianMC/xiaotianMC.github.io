@@ -1,0 +1,24 @@
+.center{
+    width: 100%;
+    display: flex;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.innerCenter{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+    justify-content: space-around;
+    padding: 0 5%;
+}
+
+.option{
+    max-width: 300px;
+    background-color: var(--lightWhite);
+    border: 8px solid var(--themeColor-dark);
+    border-radius: 5px;
+    justify-self: center;
+    padding: 100px;
+}
