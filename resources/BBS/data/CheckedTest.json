@@ -4,7 +4,7 @@
         "type": "小型论坛",
         "value": false,
         "icon": "/resources/BBS/icon/BCL_icon.png",
-        "url": "https://www.bclcraft.cn/bbs",
+        "url": "https://bcl-bbs.cn",
         "bbs-type": "小型"
     },
     {
@@ -42,7 +42,7 @@
     {
         "name": "IKUNMC",
         "type": "小型论坛",
-        "value": true,
+        "value": false,
         "icon": "/resources/BBS/icon/IKUNMC_icon.png",
         "url": "https://www.ikunmc.com",
         "bbs-type": "小型"
