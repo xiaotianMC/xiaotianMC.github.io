@@ -110,6 +110,7 @@
     "**/*.ts"
   ],
   "exclude": [
-    "**/*.js"
+    "**/*.js",
+    "resources/BBS/CheckBBS.ts"
   ]
 }
