@@ -42,7 +42,7 @@
     {
         "name": "IKUNMC",
         "type": "小型论坛",
-        "value": "备案异常 ?",
+        "value": "备案异常 ？",
         "icon": "/resources/BBS/icon/IKUNMC_icon.png",
         "url": "https://www.ikunmc.com",
         "bbs-type": "小型"
@@ -106,7 +106,7 @@
     {
         "name": "暮光方块论坛",
         "type": "小型论坛",
-        "value": "已备案 √",
+        "value": "备案异常 ？",
         "icon": "/resources/BBS/icon/MGFK_icon.png",
         "url": "https://bbs.tsfk.top",
         "bbs-type": "小型"
