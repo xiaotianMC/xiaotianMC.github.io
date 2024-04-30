@@ -1,0 +1,79 @@
+svg{
+    color: var(--lightWhite);
+}
+
+.center{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.title h1{
+    padding: 15px;
+    background-color: var(--themeColor-dark);
+    border-radius: 4px;
+    color: var(--lightWhite);
+}
+
+.palette{
+    display: grid;
+    grid-template-columns: repeat(5, 140px);
+    grid-gap: 40px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.colorContainer{
+    width: 160px;
+    height: 200px;
+}
+
+.innerColor{
+    padding: 15px 5px;
+    background-color: var(--body);
+    box-shadow: var(--boxShadow) 0 0 3px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.color{
+    width: 140px;
+    height: 140px;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.innerColor p{
+    display: flex;
+    justify-content: center;
+}
+
+.colorNum{
+    font-size: 16px;
+    color: #888888;
+}
+
+.copyNum{
+    width: 25px;
+    height: 25px;
+    bottom: 0;
+    right: 0;
+    background-color: var(--themeColor-dark);
+	padding: .3125rem;
+	border-radius: 8px 0 5px 0;
+    z-index: 999;
+	position: absolute;
+    color: var(--lightWhite);
+}
+
+.colorName{
+    font-size: 18px;
+    font-weight: 600;
+}
