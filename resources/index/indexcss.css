@@ -147,6 +147,33 @@ footer {
     margin-top: 0;
 }
 
+/* PROJ */
+.projBlock{
+    max-width: inherit;
+    min-width: 800px;
+    display: flex;
+    justify-content: center;
+    margin: 0 5% 0 5%;
+}
+
+.ourProject{
+    max-width: 1920px;
+    min-width: 800px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    grid-gap: 10px;
+    align-items: center;
+}
+
+.projectContainer{
+    display: flex;
+    width: 140px;
+    height: 80px;
+    background-color: var(--lightWhite);
+    padding: 10px;border-radius: 5px;
+    border: var(--themeColor-light) solid 3px;
+}
 @media screen and (max-width: 1100px) {
     .blockPjModsIntro{
         background-position: 80% 60%;
