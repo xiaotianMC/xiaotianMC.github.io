@@ -48,15 +48,7 @@
         "bbs-type": "大型"
     },
     {
-        "name": "萝卜论坛（luobomc）",
-        "type": "小型论坛",
-        "value": "未备案 ×",
-        "icon": "/resources/BBS/icon/luoboMC_icon.png",
-        "url": "https://www.luobomc.top",
-        "bbs-type": "小型"
-    },
-    {
-        "name": "MCBBS 2ND",
+        "name": "SkyMC",
         "type": "小型论坛",
         "value": "未备案 ×",
         "icon": "/resources/BBS/icon/MCBBS-2ND_icon.png",
@@ -114,7 +106,7 @@
     {
         "name": "美西螈论坛",
         "type": "小型论坛",
-        "value": "未备案 ×",
+        "value": "备案异常 ？",
         "icon": "/resources/BBS/icon/MCMXY_icon.png",
         "url": "https://www.mcmxy.cn",
         "bbs-type": "小型"
