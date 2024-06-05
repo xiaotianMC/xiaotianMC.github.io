@@ -6,9 +6,17 @@
     {
         "name": "灵梦红",
         "value": "#DE3C31"        
-    }
+    },
     {
         "name": "茉子绿",
         "value": "#6BBB88"        
+    },
+    {
+        "name": "羽月紫"
+        "value": "#7167BF"
+    },
+    {
+        "name": "绫濑粉"
+        "value": "#C46AAA"
     }
 ]
