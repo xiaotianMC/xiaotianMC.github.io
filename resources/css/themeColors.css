@@ -22,13 +22,9 @@ svg{
     color: var(--lightWhite);
 }
 
-.outPalette{
-    display: flex;
-    justify-content: center;
-}
-
 .palette{
     max-width: 880px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, 160px);
     grid-gap: 30px 20px;
