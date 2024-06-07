@@ -22,17 +22,23 @@ svg{
     color: var(--lightWhite);
 }
 
+.outPalette{
+    display: flex;
+    justify-content: center;
+}
+
 .palette{
+    max-width: 880px;
     display: grid;
-    grid-template-columns: repeat(5, 140px);
-    grid-gap: 40px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, 160px);
+    grid-gap: 30px 20px;
     margin-top: 30px;
 }
 
 .colorContainer{
+    display: block;
     width: 160px;
-    height: 200px;
+    height: 220px;
 }
 
 .innerColor{
@@ -68,7 +74,7 @@ svg{
     background-color: var(--themeColor-dark);
 	padding: .3125rem;
 	border-radius: 8px 0 5px 0;
-    z-index: 999;
+    z-index: 1;
 	position: absolute;
     color: var(--lightWhite);
 }
@@ -80,4 +86,22 @@ svg{
 
 div.copyIcon {
     margin-top: -0.150rem;
+}
+
+@media only screen and (max-width: 900px) {
+    .palette{
+        grid-template-columns: repeat(4, 160px);
+    }
+}
+
+@media only screen and (max-width: 735px) {
+    .palette{
+        grid-template-columns: repeat(3, 160px);
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .palette{
+        grid-template-columns: repeat(2, 160px);
+    }
 }
