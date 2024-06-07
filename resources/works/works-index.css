@@ -52,3 +52,19 @@
        align-items: center;
     }
 }
+
+@media only screen and (max-width: 520px) {
+    .blockGroup{
+        padding: 0 15px;
+    }
+    
+    .block{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--lightWhite);
+        border-radius: 6px;
+        border: 2px solid var(--themeColor-light);
+        justify-self: center;
+    }
+}
