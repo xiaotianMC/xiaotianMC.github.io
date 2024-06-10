@@ -54,31 +54,26 @@ var Succubus;
         }));
     }
     Succubus.ClipboardCopyById = ClipboardCopyById;
+    function JSON_DeepCopy(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
+    Succubus.JSON_DeepCopy = JSON_DeepCopy;
+    // ! 弃用
     // ありがとう，私の暗い世界の小さな太陽
     // 复制文本到剪贴板
     // 适用于有多个相同用途的复制按钮（所以上面那个函数到底有什么用啊）
-    // 当text中待复制文本小于获取到的元素数量时，其余元素将使用最后一个文本
-    function ClipboardCopyByClass(class_id, text, success_event_curse = (function () { }), failed_event_curse = (function () { console.log('Clipboard Write Failed.'); })) {
+    function ClipboardCopyByClassT(class_id, text, success_event_curse = () => { }, failed_event_curse = () => { console.log('Clipboard Write Failed.'); }) {
         var elements = document.getElementsByClassName(class_id);
         for (var i = 0; i < elements.length; i++) {
-            // 油猫饼，这么写好难看的欸...
             var element = elements.item(i);
-            var use_text = '';
-            if (i >= text.length) {
-                use_text = text[text.length - 1];
-            }
-            else {
-                use_text = text[i];
-            }
-            element.addEventListener('click', (function () {
-                navigator.clipboard.writeText(use_text)
-                    .then(() => {
-                    success_event_curse();
-                }, () => {
-                    failed_event_curse();
-                });
-            }));
+            element.addEventListener('click', (() => {
+                let use_text = text[i]; // 捕获当前循环的文本值
+                return () => {
+                    navigator.clipboard.writeText(use_text)
+                        .then(() => success_event_curse(), () => failed_event_curse());
+                };
+            })());
         }
     }
-    Succubus.ClipboardCopyByClass = ClipboardCopyByClass;
+    Succubus.ClipboardCopyByClassT = ClipboardCopyByClassT;
 })(Succubus || (Succubus = {}));
