@@ -32,18 +32,16 @@ svg{
 .title .innerTitle span.Search {
     background-color: var(--body);
     color: #AAAAAA;
-    border: 0px solid #000000;
+    border: 2px solid var(--body);
     border-radius: 8px;
     font-size: 0.8em;
     display: inline-block;
 }
 
-/*
-.title .innerTitle span.Search {
-    width: 0;
-    margin: 0;
+span#CLEAR_SEARCH_C {
+    font-size: 1.5em;
+    cursor: pointer;
 }
-    */
 
 .title .innerTitle span.Search {
     width: auto;
@@ -58,12 +56,6 @@ svg{
     font-size: 18px;
 }
 
-/*
-.title .innerTitle span.Search>input {
-    display: none;
-}
-    */
-
 .title .innerTitle span.Search>input {
     display: inline-block;
     border: 0px solid #000000;
@@ -72,12 +64,6 @@ svg{
     margin: -0.3rem 0;
     outline: none;
 }
-
-/*
-.title .innerTitle:hover span.Search>input:focus {
-    
-}
-*/
 
 .palette{
     max-width: 880px;
