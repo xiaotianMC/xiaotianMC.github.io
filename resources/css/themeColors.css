@@ -15,51 +15,56 @@ svg{
     justify-content: center;
 }
 
-.title h1{
-    padding: 15px;
-    background-color: var(--themeColor-dark);
-    border-radius: 4px;
-    color: var(--lightWhite);
+.innerTitle{
+    width: 880px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.title h1 span.Search {
-    background-color: var(--body-2);
+.realTitle{
+    font-size: 38px;
+    font-weight: 800;
+    border-left: 8px solid var(--themeColor-light);
+    padding-left: 10px;
+}
+
+.title .innerTitle span.Search {
+    background-color: var(--body);
     color: #AAAAAA;
     border: 0px solid #000000;
-    border-radius: 1rem;
+    border-radius: 8px;
     font-size: 0.8em;
     display: inline-block;
 }
 
 /*
-.title h1 span.Search {
+.title .innerTitle span.Search {
     width: 0;
     margin: 0;
 }
     */
 
-.title h1 span.Search {
+.title .innerTitle span.Search {
     width: auto;
     margin-left: 15px;
-    margin-top: -10px;
-    margin-bottom: -10px;
     padding: 10px 15px;
 }
 
-.title h1 span.Search>input {
+.title .innerTitle span.Search>input {
     border-style: none;
-    background-color: var(--body-2);
+    background-color: var(--body);
     height: 100%;
-    font-size: 1.5rem;
+    font-size: 18px;
 }
 
 /*
-.title h1 span.Search>input {
+.title .innerTitle span.Search>input {
     display: none;
 }
     */
 
-.title h1 span.Search>input {
+.title .innerTitle span.Search>input {
     display: inline-block;
     border: 0px solid #000000;
     border-radius: 0.5rem;
@@ -69,7 +74,7 @@ svg{
 }
 
 /*
-.title h1:hover span.Search>input:focus {
+.title .innerTitle:hover span.Search>input:focus {
     
 }
 */
@@ -80,7 +85,7 @@ svg{
     display: grid;
     grid-template-columns: repeat(auto-fill, 160px);
     grid-gap: 30px 20px;
-    margin-top: 30px;
+    margin-top: 45px;
 }
 
 .colorContainer{
