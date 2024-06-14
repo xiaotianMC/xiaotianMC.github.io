@@ -64,7 +64,7 @@
         <div class="title">
             <div class="innerTitle">
                 <span class="realTitle">萤火盛夏常用颜色</span>
-                <span class="Search"><input type="text" name="text" oninput="themeColorSearchCurse()" placeholder=""/></span>
+                <span class="Search"><input type="text" name="text" oninput="themeColorSearchCurse()" placeholder="输入颜色名，色号需加“#”"/></span>
             </div>
         </div>
         <div class="palette"><!-- BACKUP
@@ -157,7 +157,6 @@
 <script src="/works/colors/themeColor.js"></script>
 <script src="/resources/InfoShow.js"></script>
 <script>
-    document.querySelector('.title .innerTitle span.Search>input').setAttribute('placeholder', decodeURIComponent(atob('5pCc57SiIOm6puWdl+aZk+WkqQ==').split('').map(function(c){return '%' + ('00'+c.charCodeAt(0).toString(16)).slice(-2)}).join('')))
     var fetched_data = '' // 方便调试用
     Succubus.FetchJSON('/works/colors/themeColor.json')
     .then(data=>{
