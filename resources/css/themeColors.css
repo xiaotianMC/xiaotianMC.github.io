@@ -45,14 +45,15 @@ span#CLEAR_SEARCH_C {
 
 .title .innerTitle span.Search {
     width: auto;
+    height: 50px;
     margin-left: 15px;
-    padding: 10px 15px;
+    padding: 6px 15px;
 }
 
 .title .innerTitle span.Search>input {
     border-style: none;
     background-color: var(--body);
-    height: 100%;
+    height: 45px;
     font-size: 18px;
 }
 
@@ -132,17 +133,31 @@ div.copyIcon {
     .palette{
         grid-template-columns: repeat(4, 160px);
     }
+
+    .innerTitle{
+        width: 700px;
+        flex-wrap: wrap;
+    }
 }
 
 @media only screen and (max-width: 735px) {
     .palette{
         grid-template-columns: repeat(3, 160px);
     }
+    .realTitle{
+        margin-bottom: 15px;
+    }
+    .innerTitle{
+        width: 520px;
+    }
 }
 
 @media only screen and (max-width: 560px) {
     .palette{
         grid-template-columns: repeat(2, 160px);
+    }
+    .innerTitle{
+        width: 340px;
     }
 }
 
