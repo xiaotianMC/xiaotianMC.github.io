@@ -80,8 +80,10 @@ var Succubus;
     function Searching(text, target, format) {
         var t_text = JSON_DeepCopy(text);
         var t_text_score = new Array(text.length);
+        var t_IndexTable = new Array(text.length);
         for (var i = 0; i < text.length; i++) {
             t_text_score[i] = format(t_text[i], target);
+            t_IndexTable[i] = i;
         }
         // Sorting
         // 之后想到什么算法再写罢...（如果谁会快速排序能否帮忙写一下w)
@@ -94,14 +96,14 @@ var Succubus;
                     let sort_t_num = t_text_score[i];
                     t_text_score[i] = t_text_score[i + 1];
                     t_text_score[i + 1] = sort_t_num;
-                    // Swap Text
-                    let sort_t_text = t_text[i];
-                    t_text[i] = t_text[i + 1];
-                    t_text[i + 1] = sort_t_text;
+                    // Swap Index
+                    let t_sort_index = t_IndexTable[i];
+                    t_IndexTable[i] = t_IndexTable[i + 1];
+                    t_IndexTable[i + 1] = t_sort_index;
                 }
             }
         }
-        return [t_text, t_text_score];
+        return [t_IndexTable, t_text_score];
     }
     Succubus.Searching = Searching;
     function BaseTextMatchCurse(text, target) {
@@ -126,4 +128,8 @@ var Succubus;
         return (max_length * 0.9 + match_num * 0.7 / text.length + great_of_middle_length * 0.4 / text.length) / 2;
     }
     Succubus.BaseTextMatchCurse = BaseTextMatchCurse;
+    function IndexMap(obj, index) {
+        return index.map(x => obj[x]);
+    }
+    Succubus.IndexMap = IndexMap;
 })(Succubus || (Succubus = {}));

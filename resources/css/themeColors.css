@@ -22,6 +22,58 @@ svg{
     color: var(--lightWhite);
 }
 
+.title h1 span.Search {
+    background-color: var(--body-2);
+    color: #AAAAAA;
+    border: 0px solid #000000;
+    border-radius: 1rem;
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+/*
+.title h1 span.Search {
+    width: 0;
+    margin: 0;
+}
+    */
+
+.title h1 span.Search {
+    width: auto;
+    margin-left: 15px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    padding: 10px 15px;
+}
+
+.title h1 span.Search>input {
+    border-style: none;
+    background-color: var(--body-2);
+    height: 100%;
+    font-size: 1.5rem;
+}
+
+/*
+.title h1 span.Search>input {
+    display: none;
+}
+    */
+
+.title h1 span.Search>input {
+    display: inline-block;
+    border: 0px solid #000000;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0;
+    margin: -0.3rem 0;
+    outline: none;
+}
+
+/*
+.title h1:hover span.Search>input:focus {
+    
+}
+*/
+
 .palette{
     max-width: 880px;
     margin: 0 auto;
