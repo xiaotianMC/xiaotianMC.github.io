@@ -73,6 +73,7 @@ svg{
     z-index: 1;
 	position: absolute;
     color: var(--lightWhite);
+    cursor: pointer;
 }
 
 .colorName{
@@ -100,4 +101,15 @@ div.copyIcon {
     .palette{
         grid-template-columns: repeat(2, 160px);
     }
+}
+
+#INFO_SHOW_P {
+    background-color: var(--themeColor-light);
+    border: 2px solid #202020;
+    border-radius: 1rem 1rem;
+    padding: 0.3rem 2rem;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 1.5em;
+    position: fixed;
 }

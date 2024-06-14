@@ -152,7 +152,9 @@
 </body>
 <script src="/resources/Succubus.js"></script>
 <script src="/works/colors/themeColor.js"></script>
+<script src="/resources/InfoShow.js"></script>
 <script>
+    var fetched_data = '' // 方便调试用
     Succubus.FetchJSON('/works/colors/themeColor.json')
     .then(data=>{
         var color_value_list = Array(data.length)
@@ -160,7 +162,9 @@
             color_value_list[color_index] = data[color_index]['value']
         }
         document.getElementsByClassName('palette')[0].innerHTML += colorContainerWrite(data)
+        // Succubus.ClipboardCopyByClassT('copyIcon', color_value_list, ()=>{ShowInfo(document.getElementsByTagName('body')[0], '复制成功', 2000)})
         Succubus.ClipboardCopyByClassT('copyIcon', color_value_list)
+        fetched_data = data
     })
 </script>
 </html>
