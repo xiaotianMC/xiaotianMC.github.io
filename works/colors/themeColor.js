@@ -59,13 +59,12 @@ function ColorDistance(color, target){
 }
 
 function themeColorSearchCurse(){
-    let textSearch = Succubus.JSON_DeepCopy(document.querySelector('.title h1:hover span.Search>input').value)
+    let textSearch = Succubus.JSON_DeepCopy(document.querySelector('span.Search input').value)
     let color_table = Succubus.JSON_DeepCopy(fetched_data)
     let color_name_table = color_table.map(x=>x['name'])
     let color_value_table = color_table.map(x=>x['value'])
     let result
     let color = ColorText2RGB(textSearch)
-    console.log(textSearch)
     if(textSearch == ''){
         document.getElementsByClassName('palette')[0].innerHTML = colorContainerWrite(color_table)
         Succubus.ClipboardCopyByClassT('copyIcon', color_value_table)
@@ -73,16 +72,16 @@ function themeColorSearchCurse(){
         let clear_elem = document.getElementById('CLEAR_SEARCH_C')
         if(clear_elem !== null)
             clear_elem.remove()
-        document.querySelector('.title h1:hover span.Search').style.backgroundColor = 'var(--body-2)'
+        document.querySelector('span.Search').style.borderColor = 'var(--body-2)'
         return
     }
     if(color !== null && color !== undefined){
         result = Succubus.Searching(color_value_table, textSearch, (text, target)=>{return ColorDistance(ColorText2RGB(text), ColorText2RGB(target))})[0]
-        document.querySelector('.title h1:hover span.Search').style.backgroundColor = textSearch
+        document.querySelector('span.Search').style.borderColor = textSearch
     }else{
         //result = Array.from({length:color_table.length},(_, i)=>(i))
         result = Succubus.Searching(color_name_table, textSearch, Succubus.BaseTextMatchCurse)[0].reverse()
-        document.querySelector('.title h1:hover span.Search').style.backgroundColor = 'var(--body-2)'
+        document.querySelector('span.Search').style.borderColor = 'var(--body-2)'
     }
     let result_table = result.map(x=>color_table[x])
     document.getElementsByClassName('palette')[0].innerHTML = colorContainerWrite(result_table)
@@ -93,9 +92,9 @@ function themeColorSearchCurse(){
         clear_elem.id = 'CLEAR_SEARCH_C'
         clear_elem.innerHTML = '✖'
         clear_elem.onclick = ()=>{
-            document.querySelector('.title h1:hover span.Search>input').value = ''
+            document.querySelector('span.Search>input').value = ''
             document.getElementById('CLEAR_SEARCH_C').remove()
-            document.querySelector('.title h1:hover span.Search').style.backgroundColor = 'var(--body-2)'
+            document.querySelector('span.Search').style.borderColor = 'var(--body-2)'
         }
         document.getElementsByClassName('Search')[0].appendChild(clear_elem)}
 }
