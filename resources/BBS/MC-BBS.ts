@@ -61,7 +61,8 @@ namespace BBS{
     function add_bbs_type_info(title:string,content:string){
         var elem = document.createElement('a');
         elem.setAttribute('tabindex','0');
-        elem.role = 'button';
+        //elem.role = 'button';
+        elem.setAttribute('role', 'bottom');
         elem.setAttribute('data-bs-toggle','popover');
         elem.setAttribute('data-bs-placement','top');
         elem.setAttribute('data-bs-trigger','focus');
@@ -151,7 +152,8 @@ namespace BBS{
         // 每个论坛的链接
         var btn_group = document.createElement('div');
         btn_group.className = 'btn-group';
-        btn_group.role = 'group';
+        //btn_group.role = 'group';
+        btn_group.setAttribute('role', 'group')
         btn_group.ariaLabel = 'Basic example';
 
         infoCollection.getElementsByClassName('badgeStatus')[0].appendChild(set_badge_status(data));
