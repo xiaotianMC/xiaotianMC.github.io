@@ -139,7 +139,7 @@
         "name": "SarBBS",
         "type": "小型论坛",
         "value": "未备案 ×",
-        "icon": "/resources/BBS/icon/error.png",
+        "icon": "/resources/BBS/icon/SARBBS_icon.png",
         "url": "https://forum.sarskin.cn",
         "bbs-type": "小型"
     },
