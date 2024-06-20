@@ -15,6 +15,7 @@
     --themeColor-dark: #609cb3;
     --themeColor-dark-2: #5993aa;
     --grayText: #a19a9a;
+    --grayText-2: #8d8383;
     --headerBackground:#fdfdfd;
 }
 
@@ -42,7 +43,7 @@ a , h1 , h2 , h3 , h4{
 
 /* FOOTER */
 
-/* IN ORDER TO FIT HALFMOONCSS */
+/* TO FIT HALFMOONCSS */
 address, dl, ol, p, ul {
     margin-bottom: 0 !important;
 }
