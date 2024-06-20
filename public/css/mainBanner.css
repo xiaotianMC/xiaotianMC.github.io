@@ -78,7 +78,7 @@ header img{
         height: 60px;
         background-color: var(--headerBackground);
         position: relative;
-        box-shadow: #817575 0rem -1px 0.4rem 0.1rem;
+        box-shadow: #817575 0rem -4px 0.4rem 0.1rem;
     }
 
     #toggler:checked + label .box{
