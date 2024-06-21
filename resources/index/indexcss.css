@@ -165,7 +165,8 @@ footer {
     display: flex;
     height: 200px;
     background-color: var(--lightWhite);
-    padding: 10px;border-radius: 5px;
+    padding: 10px;
+    border-radius: 5px;
     border: var(--themeColor-light) solid 3px;
 }
 
