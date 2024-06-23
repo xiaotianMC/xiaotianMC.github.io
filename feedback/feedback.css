@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 300px;
 }
 
 .innerCenter{
@@ -21,4 +21,113 @@
     border-radius: 5px;
     justify-self: center;
     padding: 100px;
+}
+.button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    white-space: normal;
+    width: 200px;
+    height: 40px;
+    margin: 10px; /* 调整按钮之间的间距 */
+    padding: 24rpx;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 26rpx;
+    text-align: center;
+    border-radius: 65rpx;
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: radial-gradient(circle, #ccc 10%, transparent 10.1%);
+      transform: scale(10);
+      opacity: 0;
+      transition: all 0.45s;
+      content: '';
+    }
+
+    &:active::after {
+      transform: scale(0);
+      opacity: 0.5;
+      transition: 0s;
+    }
+  }
+  .chat-now {
+    color: #222;
+    border: 1px solid #222;
+  }
+}
+.container {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 视口高度 */
+  }
+.parent {
+    white-space: normal;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.niceButton3 {
+    background-color: #79afc5;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .niceButton3:hover {
+    background-color: #fff;
+    color: #79afc5;
+    border: 1px solid #ccc;
+  }
+  .niceButton4{
+    background-color: skyblue;
+    border: none;
+    border-radius: 12px;
+    color:white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+}
+.niceButton4:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,.24),
+    0 17px 50px 0 rgba(0,0,0,.19);
+}
+.textalign {
+    text-align: center;
+    margin: 0 10px;
+}
+.main{
+	text-align: center; /*让div内部文字居中*/
+	border-radius: 20px;
+	width: 300px;
+	height: 350px;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
