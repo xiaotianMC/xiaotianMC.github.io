@@ -17,3 +17,31 @@
     padding: 20px;
     background-color: var(--lightWhite);
 }
+/* 文字下划线动画 */
+.box {
+    width: 160px;
+    position: relative;
+}
+
+.box::before {
+    content: '';
+    height: 4px;
+    background: rgba(186, 186, 247, 0.753);
+    display: inline-block;
+    position: absolute;
+    bottom: -6px;
+    width: 0;
+    transition: width 0.36s;
+}
+
+.box:hover::before {
+    width: 100%;
+}
+/* 文字hover+transition */
+.co {
+    transition: color 0.3s ease;
+}
+
+.co:hover {
+    color: rgb(186, 186, 247);
+  }
