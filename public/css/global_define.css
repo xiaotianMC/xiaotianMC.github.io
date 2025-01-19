@@ -153,16 +153,14 @@ footer .itemTitle{
     height: 36px;
 }
 
-@media only screen and (min-width: 485px) {
-    footer .item{
-        width: 6.875rem;
-        padding: 0 .75rem;
-        border-right: .0625rem solid var(--white);
+footer .item{
+        width: 110px;
+        padding: 0 .75rem; 
+        border-right: .0625rem solid var(--white); 
         height: 1.25rem;
-    }
 }
 
-@media only screen and (max-width: 485px) {
+@media only screen and (max-width: 491px) {
     .links .footerItems_row{
         display: grid;
         margin: auto;
@@ -184,6 +182,8 @@ footer .itemTitle{
         display: flex;
         justify-content: center;
         height: 1.25rem;
+        padding: 0;
+        border-right:0;
     }
 
     footer .itemTitle{
@@ -200,5 +200,175 @@ footer .itemTitle{
 @media only screen and (max-width: 445px) {
     .webLinks span{
         margin-top: .5rem;
+    }
+}
+
+
+
+/* HEADER */
+.PCheader{
+    display: flex;
+    width: 100%;
+    background-color: var(--headerBackground);
+    height: 3.75rem;
+    position: relative;
+    box-shadow: #817575 0rem -4px 0.4rem 0.1rem;
+    align-items: center;
+}
+
+.PCheader div{
+    display: flex;
+}
+
+.headerContainer{
+    width: 100%;
+    height: inherit;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 5% 0 5%;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+header img{
+    height: 40px;
+    vertical-align: 0;
+}
+
+/* HEADER TABLE */
+.headerSelection{
+    height: inherit;
+}
+
+.headerSelection ul{
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    margin: 0 !important;
+}
+
+.headerSelection li{
+    height: inherit;
+    font-size: 16px;
+}
+
+.headerSelection a{
+    padding: 0 20px;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+}
+
+.headerSelection a:hover{
+    background-color: var(--themeColor-light);
+    color: var(--lightWhite);
+}
+
+@media screen and (min-width: 800px) {
+    .mobileHeader{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .PCheader{
+        display: none;
+    }
+
+    .mobileHeader{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 4%;
+        width: 100%;
+        height: 60px;
+        background-color: var(--headerBackground);
+        position: relative;
+        box-shadow: #817575 0rem -4px 0.4rem 0.1rem;
+    }
+
+    #toggler:checked + label .box{
+        background-color: aliceblue;
+    }
+    
+    #toggler{
+        display: none;
+    }
+    
+    .hamburgerContainer{
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        top: 5px;
+    }
+    
+    .hamburgerContainer span {
+        display: block;
+        height: 1px;
+        background-color: #000;
+        position: relative;
+        transition: transform .3s ease-in-out,top .3s ease-in-out .3s;
+        top: 0;
+    }
+    
+    .hamburgerContainer span:nth-child(2) {
+        margin-top: 7px;
+    }
+    
+    #toggler:checked + label .hamburgerContainer span:nth-child(1){
+        transform: rotate(45deg);
+        top: 4px;
+        transition: top .3s ease-in-out,transform .3s ease-in-out .3s;
+    }
+    
+    #toggler:checked + label .hamburgerContainer span:nth-child(2){
+        transform: rotate(-45deg);
+        top: -4px;
+        transition: top .3s ease-in-out,transform .3s ease-in-out .3s;
+    }
+    
+    .nav-items {
+        z-index: 999;
+        background-color: rgba(0, 0, 0,.50);
+        width:100%;
+        height: 100vh;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        transform: scaleY(0);
+        transition: transform .3s ease-in-out .3s, opacity .3s ease-in-out .3s;
+        transform-origin:50% 0;
+        opacity: 0;
+    }
+
+    .nav-items a{
+        color: var(--lightWhite);
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-items ul{
+        display: block;
+        padding-left: 0;
+    }
+
+    .nav-items li{
+        padding: 16px;
+        background-color: var(--themeColor-light);
+        border-bottom: solid 2px var(--themeColor-dark);
+        transition: 0.5s ease;
+        font-size: 1.125rem;
+        font-weight: 550;
+    }
+
+    .nav-items li:hover{
+        background-color: var(--themeColor-dark-2);
+    }
+
+    #toggler:checked ~ .nav-items{
+        transform: scaleY(1);
+        opacity: 1;
     }
 }
