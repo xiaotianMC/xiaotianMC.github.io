@@ -118,7 +118,6 @@
 .button{
     padding: 8px;
     text-align: center;
-    margin: 6px 0 40px 0;
     font-size: 22px;
     background-color: var(--themeColor-light);
     border-radius: 8px;
@@ -128,7 +127,6 @@
     transition: 0.2s ease;
     box-shadow: 0 0 3px var(--lightDark);
 }
-    
 
 .button:hover{
     background-color: var(--themeColor-dark);
@@ -360,19 +358,19 @@ footer {
     
     .blockPjModsIntro{
         background: linear-gradient(to right, transparent, 70%, var(--themeColor-dark)),
-        url(/index_img/mcModIntro.webp) no-repeat;
+        url(/resources/index/index_img/mcModIntro.webp) no-repeat;
         background-position: 50% 60%;
     }
 
     .blockMcServer{
         background: linear-gradient(to left, transparent, 60%, var(--themeColor-dark)),
-        url(/index_img/mcServer_ER2.webp) no-repeat;
+        url(/resources/index/index_img/mcServer_ER2.webp) no-repeat;
         background-position: 60% 65%;
     }
     
     .blockUs{
         background: linear-gradient(to left, transparent, 60%, var(--themeColor-dark)),
-        url(/index_img/aboutUs_bg.webp) no-repeat;
+        url(/resources/index/index_img/aboutUs_bg.webp) no-repeat;
         background-position: 50% 55%;
     }
 
@@ -386,5 +384,19 @@ footer {
 
     .block > .innerBlock , .shadowMask{
         display: none;
+    }
+
+    .leftPart h1, .rightpart h1 {
+        color: var(--lightWhite);
+        font-size: 26px;
+    }
+
+    .leftPart p, .rightpart p {
+        font-size: 18px;
+    }
+
+    .button{
+        padding: 8px;
+        font-size: 20px;
     }
 }
