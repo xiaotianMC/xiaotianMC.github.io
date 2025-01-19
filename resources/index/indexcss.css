@@ -1,21 +1,15 @@
 .headBlock h1{
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
+    font-size: 120px;
     color: var(--lightWhite);
 }
 
 .headBlock h2{
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
+    font-size: 42px;
     color: var(--lightWhite);
 }
 
 .headBlock h4{
     font-size: 20px;
-    display: flex;
-    justify-content: center;
     color: var(--lightWhite);
 }
 
@@ -44,29 +38,29 @@
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+    width: 100%;
     height: 700px;
     background-color: var(--themeColor-light);
-    background: url(/resources/index/index_img/mainBanner.jpeg) no-repeat;
+    background: url(/resources/index/index_img/headBanner-bg.jpeg) no-repeat;
     background-position: 40% 50%;
     color: var(--lightWhite);
-    padding: 4% 0;
 }
 
 .blockUs{
     background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
-    url(index_img/aboutUs_bg.webp) no-repeat;
+    url(/resources/index/index_img/aboutUs_bg.webp) no-repeat;
     background-position: 50% 55%;
 }
 
 .blockPjModsIntro{
-    background: url(index_img/mcModIntro.webp) no-repeat;
+    background: url(/resources/index/index_img/mcModIntro.webp) no-repeat;
     background-position: 100% 60%;
     justify-content: end;
 }
 
 .blockMcServer{
     background: linear-gradient(to left, transparent, 30%, var(--themeColor-dark)),
-    url(index_img/mcServer_ER2.webp) no-repeat;
+    url(/resources/index/index_img/mcServer_ER2.webp) no-repeat;
     background-position: 40% 65%;
 }
 
@@ -122,21 +116,23 @@
 }
 
 .button{
-    padding: .625rem;
+    padding: 8px;
+    text-align: center;
+    margin: 6px 0 40px 0;
+    font-size: 22px;
     background-color: var(--themeColor-light);
-    border-radius: .3125rem;
-    margin-top: 1.25rem;
-    border: solid 2px var(--lightWhite);
+    border-radius: 8px;
+    border: 3px solid var(--lightWhite);
     color: var(--lightWhite);
-    box-shadow: 3px 2px var(--lightWhite);
-    font-weight: 550;
-    font-size: 20px;
-    transition: 0.5s ease;
+    font-weight: 600;
+    transition: 0.2s ease;
+    box-shadow: 0 0 3px var(--lightDark);
 }
+    
 
 .button:hover{
     background-color: var(--themeColor-dark);
-    box-shadow: 5px 4px var(--lightWhite);
+    border: 5px solid var(--lightWhite);
 }
 
 .mobileText{
@@ -147,28 +143,93 @@ footer {
     margin-top: 0;
 }
 
+/* HEAD */
+.headIntro{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.headIntro img{
+    height: 268px;
+}
+
+.headText{
+    margin-left: 150px;
+}
+
 /* PROJ */
 .projBlock{
     max-width: inherit;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column
 }
 
 .ourProject{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
-    grid-gap: 10px;
-    align-items: center;
+    display: inherit;
+    padding: 36px 10px 18px 10px;
+}
+
+.ourProject > li+li{
+    margin-left: 10px;
 }
 
 .projectContainer{
     display: flex;
-    height: 200px;
-    background-color: var(--lightWhite);
-    padding: 10px;
-    border-radius: 5px;
-    border: var(--themeColor-light) solid 3px;
+    height: calc(1080px / 8);
+    width: calc(1920px / 8);
+    flex-direction: row;
+    background-color: var(--body);
+    border-radius: 6px;
+    overflow: hidden;
 }
+
+.projectName{
+    width: inherit;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.projectName h3{
+    width: inherit;
+    display: inherit;
+    justify-content: center;
+    height: 40px;
+    align-items: end;
+    padding-bottom: 8px;
+    background: linear-gradient(to bottom, transparent, 5%, var(--themeColor-dark));
+    color: var(--lightWhite);
+    text-shadow: 0 0 3px var(--lightDark);
+}
+
+.projBtn{
+    width: 300px;
+    text-align: center;
+    margin: 6px 0 40px 0;
+    font-size: 22px;
+    padding: 8px;
+    background-color: var(--themeColor-light);
+    border-radius: 8px;
+    border: 3px solid var(--themeColor-light);
+    color: var(--lightWhite);
+    font-weight: 600;
+    transition: 0.2s ease;
+    box-shadow: 0 0 3px var(--lightDark);
+}
+    
+
+.projBtn:hover{
+    background-color: var(--themeColor-dark);
+    border: 3px solid var(--lightWhite);
+}
+
+.mobile{
+    display: none;
+}
+
 
 @media screen and (max-width: 1100px) {
     .blockPjModsIntro{
@@ -178,28 +239,140 @@ footer {
     .blockMcServer{
         background-position: 60% 65%;
     }
+
+    .projectContainer{
+        height: calc(1080px / 9);
+        width: calc(1920px / 9);
+    }
+
+    .projectName h3{
+        font-size: 18px;
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .headBlock{
+        height: calc(100vh - 60px);
+        padding: 0;
+    }
+
+    .headIntro{
+        flex-direction: column;
+    }
+
+    .headText {
+        margin: 16% 0 0 0;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 934px) {
+    .mobile{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pc{
+        display: none;
+    }
+
+    .ourProject{
+        flex-direction: column;
+    }
+
+    .bundle{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .ourProject div+div{
+        margin-top: 15px;
+    }
+
+    .bundle :nth-child(2){
+        margin-left: 15px;
+    }
+
+    .projBtn{
+        width: 250px;
+        margin: 8px 0 36px 0;
+        font-size: 20px;
+    }
+    
+}
+
+@media screen and (max-width: 650px) {
+    .headBlock h1{
+        font-size: 80px;
+    }
+    
+    .headBlock h2{
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 486px) {
+    .projectContainer{
+        height: calc(1080px / 10);
+        width: calc(1920px / 10);
+    }
+}
+
+@media screen and (max-width: 444px) {
+    .headBlock h1{
+        font-size: 60px;
+    }
+    
+    .headBlock h2{
+        font-size: 22px;
+    }
+
+    .headIntro img{
+        height: 240px;
+    }
+
+    /* PROJ */
+    
+    .ourProject div+div{
+        margin-top: 10px;
+    }
+
+    .bundle :nth-child(2){
+        margin-left: 10px;
+    }
+    
+    .projectContainer{
+        height: calc(1080px / 11.5);
+        width: calc(1920px / 11.5);
+    }
+
+    .projectName h3{
+        height: 34px;
+        font-size: 15px;
+        padding-bottom: 8px;
+    }
 }
 
 @media screen and (max-width: 800px) {
-    .headBlock{
-        height: 100vh;
-    }
+    
     
     .blockPjModsIntro{
         background: linear-gradient(to right, transparent, 70%, var(--themeColor-dark)),
-        url(index_img/mcModIntro.webp) no-repeat;
+        url(/index_img/mcModIntro.webp) no-repeat;
         background-position: 50% 60%;
     }
 
     .blockMcServer{
         background: linear-gradient(to left, transparent, 60%, var(--themeColor-dark)),
-        url(index_img/mcServer_ER2.webp) no-repeat;
+        url(/index_img/mcServer_ER2.webp) no-repeat;
         background-position: 60% 65%;
     }
     
     .blockUs{
         background: linear-gradient(to left, transparent, 60%, var(--themeColor-dark)),
-        url(index_img/aboutUs_bg.webp) no-repeat;
+        url(/index_img/aboutUs_bg.webp) no-repeat;
         background-position: 50% 55%;
     }
 
