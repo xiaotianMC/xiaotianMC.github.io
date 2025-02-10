@@ -1,0 +1,102 @@
+body{
+    background-color: #1b1a1a;
+}
+.center{
+    display: flex;
+}
+article{
+    display: flex;
+    overflow-x: auto;
+    height: 100dvh;
+}
+.page{
+    cursor: pointer;
+    background-color: var(--lightDark);
+    margin-right: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+}
+img{
+    display: flex;
+    height: calc(100dvh - 100px);
+}
+h3{
+    top: 0;
+    left: 0;
+    background-color: var(--themeColor-dark);
+    padding: 5px 7px 5px 5px;
+    border-radius: 0 0 8px 0;
+    z-index: 999;
+    position: absolute;
+    font-size: 13px;
+    color: var(--lightWhite);
+    font-size: 16px;
+}
+.end{
+    width: 50px;
+    background-color: var(--lightDark);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+}
+.end a{
+    font-size: 26px;
+    font-weight: 600;
+    writing-mode: vertical-rl;
+    color: var(--themeColor-dark);
+    transition: 0.3s ease;
+}
+.end a:hover{
+    color: var(--lightWhite);
+}
+/* 适用于Webkit浏览器（如Chrome和Safari） */
+::-webkit-scrollbar {
+    height: 8px; /* 滚动条宽度 */
+    width: 10px;
+}
+
+/* 滚动条轨道 */
+::-webkit-scrollbar-track {
+    background: #1b1a1a; /* 轨道颜色 */
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    background: var(--themeColor-light); /* 滑块颜色 */
+    border-radius: 3px; /* 滑块圆角 */
+}
+
+/* 当鼠标悬停在滑块上时的颜色变化 */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--themeColor-dark-2);
+}
+
+@media screen and (max-width: 1024px) {
+    img{
+        display: flex;
+        height: calc(100dvh - 50px);
+    }
+}
+@media screen and (max-width: 700px) {
+    article{
+        flex-direction: column;
+    }
+    .page{
+        margin-bottom: 20px;
+        padding: 0;
+    }
+    .page:last-child{
+        justify-content: center;
+    }
+    .end{
+        width: 90%;
+        height: 50px;
+    }
+    .end a{
+        writing-mode: horizontal-tb;
+    }
+}
