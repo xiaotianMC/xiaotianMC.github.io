@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter0</title>
+    <link rel="stylesheet" href="/public/css/global_define.css">
+    <style>
+        body{
+            background-color: #1b1a1a;
+        }
+        .center{
+            display: flex;
+        }
+        article{
+            display: flex;
+            overflow-x: auto;
+            height: 100dvh;
+        }
+        .page{
+            cursor: pointer;
+            background-color: var(--lightDark);
+            margin-right: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+        }
+        img{
+            display: flex;
+            height: calc(100dvh - 100px);
+        }
+        h3{
+            top: 0;
+            left: 0;
+            background-color: var(--themeColor-dark);
+            padding: 5px 7px 5px 5px;
+            border-radius: 0 0 8px 0;
+            z-index: 999;
+            position: absolute;
+            font-size: 13px;
+            color: var(--lightWhite);
+            font-size: 16px;
+        }
+        .end{
+            width: 50px;
+            background-color: var(--lightDark);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+        }
+        .end a{
+            font-size: 26px;
+            font-weight: 600;
+            writing-mode: vertical-rl;
+            color: var(--themeColor-dark);
+            transition: 0.3s ease;
+        }
+        .end a:hover{
+            color: var(--lightWhite);
+        }
+        /* 适用于Webkit浏览器（如Chrome和Safari） */
+        ::-webkit-scrollbar {
+            height: 8px; /* 滚动条宽度 */
+            width: 10px;
+        }
+        
+        /* 滚动条轨道 */
+        ::-webkit-scrollbar-track {
+            background: #1b1a1a; /* 轨道颜色 */
+        }
+        
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            background: var(--themeColor-light); /* 滑块颜色 */
+            border-radius: 3px; /* 滑块圆角 */
+        }
+        
+        /* 当鼠标悬停在滑块上时的颜色变化 */
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--themeColor-dark-2);
+        }
+
+        @media screen and (max-width: 1024px) {
+            img{
+                display: flex;
+                height: calc(100dvh - 50px);
+            }
+        }
+        @media screen and (max-width: 700px) {
+            article{
+                flex-direction: column;
+            }
+            .page{
+                margin-bottom: 20px;
+                padding: 0;
+            }
+            .page:last-child{
+                justify-content: center;
+            }
+            .end{
+                width: 90%;
+                height: 50px;
+            }
+            .end a{
+                writing-mode: horizontal-tb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="center">
+            <article>
+                <div class="page">
+                    <h3>1</h3>
+                    <img src="/hidamari-channel/hidamariReader/res/vol1/chapter0/第1卷_001.jpg" alt="" srcset="">
+                </div>
+                <div class="page">
+                    <h3>2</h3>
+                    <img src="/hidamari-channel/hidamariReader/res/vol1/chapter0/第1卷_002.jpg" alt="" srcset="">
+                </div>
+                <div class="page">
+                    <img src="/hidamari-channel/hidamariReader/res/vol1/chapter0/第1卷_003.jpg" alt="" srcset="">
+                </div>
+                <div class="page">
+                    <img src="/hidamari-channel/hidamariReader/res/vol1/chapter0/第1卷_004.jpg" alt="" srcset="">
+                </div>
+                <div class="page">
+                    <img src="/hidamari-channel/hidamariReader/res/vol1/chapter0/第1卷_005.jpg" alt="" srcset="">
+                </div>
+                <div class="page">
+                    <img src="/hidamari-channel/hidamariReader/res/vol1/chapter0/第1卷_006.jpg" alt="" srcset="">
+                </div>
+                <div class="page" style="background-color: transparent;">
+                    <div class="end">
+                        <a href="">下一节</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+</body>
+<script>
+
+// 获取窗口的宽度和高度
+var width = window.innerWidth;
+var height = window.innerHeight;
+
+// 获取容器元素
+const container = document.querySelector('article');
+
+// 你也可以根据窗口大小执行不同的操作
+if (width >= 700) {
+    // 添加滚轮事件监听器
+    container.addEventListener('wheel', function(event) {
+    // 防止默认的垂直滚动行为
+    event.preventDefault();
+
+    // 获取滚轮的垂直和水平滚动量
+    const deltaY = event.deltaY;
+    const deltaX = event.deltaX;
+
+    // 如果是垂直滚动，则转换为水平滚动
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        // 水平方向的滚动量为垂直方向的一半，可以根据需要调整比例
+        const scrollAmount = deltaY * 4;
+
+        // 横向滚动容器
+        container.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+        });
+    }
+    });
+} 
+if (width < 700){
+        window.removeEventListener('wheel', function(event) {
+        event.preventDefault();
+    });
+}
+
+// 获取所有图片元素
+const images = document.querySelectorAll('img');
+
+// 函数用于改变图片的CSS属性
+function adjustImages() {
+  // 获取浏览器窗口的宽度
+  const width = window.innerWidth;
+
+  // 如果窗口宽度小于700px，则改变图片的CSS属性
+  
+  if (width < 700) {
+    images.forEach(img => {
+      img.style.height = '550px'; // 高度自动调整以保持图片比例
+    });
+        if (width < 400) {
+        images.forEach(img => {
+        img.style.height = '500px'; // 高度自动调整以保持图片比例
+        });
+        }
+        if (width < 350) {
+            images.forEach(img => {
+            img.style.height = '450px'; // 高度自动调整以保持图片比例
+            });
+        }
+  } else {
+    images.forEach(img => {
+      img.style.height = 'calc(100dvh - 50px)'; // 高度自动调整以保持图片比例
+    });
+  }
+}
+
+// 在页面加载时调用函数
+adjustImages();
+
+// 添加事件监听器，以便在窗口大小变化时调用函数
+window.addEventListener('resize', adjustImages);
+
+
+</script>
+</html>
