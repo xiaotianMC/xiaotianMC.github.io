@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Markdown阅读器</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #4285f4;
+            --primary-dark: #3367d6;
+            --bg-light: #ffffff;
+            --text-light: #333333;
+            --bg-dark: #1e1e1e;
+            --text-dark: #f0f0f0;
+            --card-bg-light: #ffffff;
+            --card-bg-dark: #252525;
+            --border-light: #e0e0e0;
+            --border-dark: #444444;
+            --success: #34a853;
+            --warning: #fbbc05;
+            --error: #ea4335;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --code-bg-light: #f8f8f8;
+            --code-bg-dark: #2d2d2d;
+            --blockquote-light: #f8f9fa;
+            --blockquote-dark: #2a2a2a;
+            --table-border-light: #dfe2e5;
+            --table-border-dark: #444;
+            --table-header-light: #f6f8fa;
+            --table-header-dark: #2d2d2d;
+            --scrollbar-light: #d0d0d0;
+            --scrollbar-thumb-light: #a0a0a0;
+            --scrollbar-dark: #444;
+            --scrollbar-thumb-dark: #666;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 16px;
+            margin: 0 auto;
+        }
+        
+        /* 桌面端布局优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 90%;
+                padding: 24px;
+            }
+            
+            .content-wrapper {
+                display: flex;
+                gap: 30px;
+                align-items: flex-start;
+            }
+            
+            .upload-section {
+                flex: 1;
+                max-width: 400px;
+                min-width: 300px;
+                position: sticky;
+                top: 100px;
+            }
+            
+            .preview-section {
+                flex: 2;
+                min-width: 0;
+            }
+            
+            .markdown-body {
+                max-height: 75vh;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+            }
+            
+            .content-wrapper {
+                gap: 40px;
+            }
+            
+            .upload-section {
+                max-width: 450px;
+            }
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            background: var(--bg-light);
+            z-index: 100;
+            transition: var(--transition);
+        }
+        
+        .dark-mode .header {
+            border-bottom: 1px solid var(--border-dark);
+            background: var(--bg-dark);
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header h1 i {
+            color: var(--primary);
+        }
+        
+        .desktop-tools {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .desktop-only {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .desktop-only {
+                display: block;
+            }
+            
+            .mobile-only {
+                display: none;
+            }
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dark-mode .theme-toggle {
+            color: var(--text-dark);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .dark-mode .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .upload-section {
+            background-color: var(--card-bg-light);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px dashed var(--border-light);
+            text-align: center;
+        }
+        
+        .dark-mode .upload-section {
+            background-color: var(--card-bg-dark);
+            border: 2px dashed var(--border-dark);
+        }
+        
+        .upload-section.active {
+            border-color: var(--primary);
+            background-color: rgba(66, 133, 244, 0.05);
+        }
+        
+        .dark-mode .upload-section.active {
+            background-color: rgba(66, 133, 244, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .upload-section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .upload-section p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .dark-mode .upload-section p {
+            color: #aaa;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(66, 133, 244, 0.2);
+        }
+        
+        .upload-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(66, 133, 244, 0.3);
+        }
+        
+        .upload-btn:active {
+            transform: translateY(0);
+        }
+        
+        .preview-section {
+            background-color: var(--card-bg-light);
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            margin-bottom: 24px;
+            display: none;
+        }
+        
+        .dark-mode .preview-section {
+            background-color: var(--card-bg-dark);
+        }
+        
+        .preview-header {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-light);
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .dark-mode .preview-header {
+            border-bottom: 1px solid var(--border-dark);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        
+        .preview-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+        }
+        
+        .file-info {
+            flex: 1;
+            min-width: 200px;
+            overflow: hidden;
+        }
+        
+        .file-name {
+            font-weight: normal;
+            font-size: 0.9rem;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+        }
+        
+        .dark-mode .file-name {
+            color: #aaa;
+        }
+        
+        .preview-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            min-width: 200px;
+        }
+        
+        .markdown-body {
+            padding: 24px;
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: var(--transition);
+        }
+        
+        /* 自定义滚动条 - 浅色模式 */
+        .markdown-body::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        .markdown-body::-webkit-scrollbar-track {
+            background: var(--scrollbar-light);
+            border-radius: 10px;
+            margin: 8px 0;
+        }
+        
+        .markdown-body::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-light);
+            border-radius: 10px;
+            border: 2px solid var(--scrollbar-light);
+        }
+        
+        .markdown-body::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        /* 深色模式滚动条 */
+        .dark-mode .markdown-body::-webkit-scrollbar-track {
+            background: var(--scrollbar-dark);
+        }
+        
+        .dark-mode .markdown-body::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-dark);
+            border-color: var(--scrollbar-dark);
+        }
+        
+        .dark-mode .markdown-body::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        /* Firefox滚动条样式 */
+        .markdown-body {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-light);
+        }
+        
+        .dark-mode .markdown-body {
+            scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-dark);
+        }
+        
+        /* Markdown 内容样式 - 浅色模式 */
+        .markdown-body h1, 
+        .markdown-body h2, 
+        .markdown-body h3, 
+        .markdown-body h4, 
+        .markdown-body h5, 
+        .markdown-body h6 {
+            color: var(--text-light);
+            margin: 1.5em 0 0.8em;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 0.3em;
+        }
+        
+        .markdown-body p {
+            margin: 1em 0;
+            line-height: 1.8;
+        }
+        
+        .markdown-body a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .markdown-body a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-body code {
+            background-color: var(--code-bg-light);
+            border-radius: 3px;
+            padding: 0.2em 0.4em;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+        
+        .markdown-body pre {
+            background-color: var(--code-bg-light);
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+            margin: 1.5em 0;
+            line-height: 1.45;
+        }
+        
+        .markdown-body pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .markdown-body blockquote {
+            border-left: 4px solid var(--primary);
+            background-color: var(--blockquote-light);
+            padding: 12px 20px;
+            margin: 1.5em 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .markdown-body ul, 
+        .markdown-body ol {
+            padding-left: 2em;
+            margin: 1em 0;
+        }
+        
+        .markdown-body li {
+            margin: 0.5em 0;
+        }
+        
+        .markdown-body img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin: 1em 0;
+        }
+        
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+        
+        .markdown-body th, 
+        .markdown-body td {
+            border: 1px solid var(--table-border-light);
+            padding: 8px 12px;
+        }
+        
+        .markdown-body th {
+            background-color: var(--table-header-light);
+            font-weight: 600;
+        }
+        
+        .markdown-body hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-light);
+            margin: 2em 0;
+        }
+        
+        /* 深色模式下的Markdown样式 */
+        .dark-mode .markdown-body {
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .markdown-body h1, 
+        .dark-mode .markdown-body h2, 
+        .dark-mode .markdown-body h3, 
+        .dark-mode .markdown-body h4, 
+        .dark-mode .markdown-body h5, 
+        .dark-mode .markdown-body h6 {
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-dark);
+        }
+        
+        .dark-mode .markdown-body code {
+            background-color: var(--code-bg-dark);
+            color: #f0f0f0;
+        }
+        
+        .dark-mode .markdown-body pre {
+            background-color: var(--code-bg-dark);
+        }
+        
+        .dark-mode .markdown-body pre code {
+            color: #f8f8f2;
+        }
+        
+        .dark-mode .markdown-body blockquote {
+            background-color: var(--blockquote-dark);
+            color: #d0d0d0;
+        }
+        
+        .dark-mode .markdown-body table {
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .markdown-body th, 
+        .dark-mode .markdown-body td {
+            border: 1px solid var(--table-border-dark);
+        }
+        
+        .dark-mode .markdown-body th {
+            background-color: var(--table-header-dark);
+        }
+        
+        .dark-mode .markdown-body hr {
+            background: var(--border-dark);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(66, 133, 244, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            display: none;
+            background-color: rgba(234, 67, 53, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .error-message.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dark-mode .secondary-btn {
+            color: var(--text-dark);
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(66, 133, 244, 0.1);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px 0; /* 减少上下内边距 */
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .footer a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .dark-mode .footer {
+            color: #aaa;
+        }
+
+        .dark-mode .footer a {
+            color: #ccc;
+        }
+        
+        .drag-over {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(66, 133, 244, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(66, 133, 244, 0); }
+        }
+        
+        .mobile-hint {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(66, 133, 244, 0.1);
+            color: var(--primary);
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .upload-section {
+                padding: 20px 16px;
+            }
+            
+            .markdown-body {
+                padding: 16px;
+                max-height: 50vh;
+            }
+            
+            .mobile-hint {
+                display: block;
+            }
+            
+            .preview-controls {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            
+            /* 移动端缩小滚动条 */
+            .markdown-body::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+        }
+        
+        .browser-warning {
+            display: none;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .browser-warning.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dark-mode .browser-warning {
+            background-color: #332c00;
+            border-left-color: #ffc107;
+        }
+        
+        .browser-warning i {
+            color: #ffc107;
+            margin-right: 8px;
+        }
+        
+        .theme-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .theme-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .theme-indicator i {
+            font-size: 1.2rem;
+        }
+        
+        .dark-mode .theme-indicator {
+            background: #333;
+            border: 1px solid #444;
+        }
+        
+        .desktop-features {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(66, 133, 244, 0.05);
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .dark-mode .desktop-features {
+            background: rgba(66, 133, 244, 0.1);
+        }
+        
+        .desktop-features h3 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        
+        .desktop-features ul {
+            padding-left: 20px;
+        }
+        
+        .desktop-features li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .keyboard-shortcut {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            margin: 0 3px;
+        }
+        
+        .dark-mode .keyboard-shortcut {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 全屏预览样式 */
+        .preview-section.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            border-radius: 0;
+            margin: 0;
+            max-height: none !important;
+        }
+        
+        .preview-section.fullscreen .markdown-body {
+            max-height: calc(100vh - 70px) !important;
+            padding: 30px;
+        }
+        
+        .preview-section.fullscreen .preview-header {
+            padding: 15px 30px;
+            position: relative;
+        }
+        
+        .preview-section.fullscreen .preview-controls {
+            display: none;
+        }
+        
+        .fullscreen-exit {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 1001;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .fullscreen-exit:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .dark-mode .preview-section.fullscreen {
+            background-color: var(--bg-dark);
+        }
+        
+        .dark-mode .fullscreen-exit {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark-mode .fullscreen-exit:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 新增样式 - 文件选择器按钮 */
+        .file-selector-container {
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .file-selector-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .file-selector-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-book-open"></i> Markdown阅读器</h1>
+            <div class="desktop-tools">
+                <div class="desktop-only">
+                    <span>快捷键: T-主题 | ESC-返回</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="browser-warning" id="browserWarning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>提示：部分浏览器可能限制文件访问功能，建议使用Chrome、Firefox或Edge</span>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="upload-section" id="uploadSection">
+                <div class="upload-icon">
+                    <i class="fas fa-file-import"></i>
+                </div>
+                <h2>上传Markdown文件</h2>
+                <p>拖放文件到此处或点击下方按钮选择文件</p>
+                <input type="file" id="fileInput" class="file-input" accept=".md, .markdown">
+                <button class="upload-btn" id="uploadBtn">
+                    <i class="fas fa-file-upload"></i> 选择文件
+                </button>
+                <div class="mobile-hint">
+                    提示：在移动设备上，您也可以从文件管理器直接分享到本应用
+                </div>
+                
+                <div class="file-selector-container">
+                    <button class="file-selector-btn" id="quickFileSelector">
+                        <i class="fas fa-file-code"></i> 快速选择示例文件
+                    </button>
+                </div>
+                
+                <div class="desktop-only desktop-features">
+                    <h3><i class="fas fa-desktop"></i> 桌面端增强功能</h3>
+                    <ul>
+                        <li>双栏布局，同时显示文件操作和预览</li>
+                        <li>更大的预览区域，提高阅读体验</li>
+                        <li>键盘快捷键支持：
+                            <span class="keyboard-shortcut">T</span> 切换主题，
+                            <span class="keyboard-shortcut">ESC</span> 返回上传区
+                        </li>
+                        <li>拖放区域固定显示，方便操作</li>
+                        <li>预览区域高度增加，减少滚动</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="preview-section" id="previewSection">
+                <div class="preview-header">
+                    <h2>预览</h2>
+                    <div class="file-info">
+                        <span class="file-name" id="fileName">使用指南.md</span>
+                    </div>
+                    <div class="preview-controls">
+                        <button class="secondary-btn" id="newFileBtn">
+                            <i class="fas fa-file-import"></i> 更换文件
+                        </button>
+                        <button class="secondary-btn desktop-only" id="fullscreenBtn">
+                            <i class="fas fa-expand"></i> 全屏预览
+                        </button>
+                    </div>
+                </div>
+                <div class="markdown-body" id="previewContent">
+                    <!-- Markdown内容将在这里显示 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>正在解析Markdown内容...</p>
+        </div>
+        
+        <div class="footer">
+            <p>Markdown阅读器 &copy; 2023 | 
+                <a href="https://chat.deepseek.com/" target="_blank">
+                    由Deepseek辅助开发
+                </a>
+                 | 完全在浏览器中运行
+            </p>
+            <div class="footer-links">
+                <a href="https://marked.js.org/" target="_blank">
+                    <i class="fab fa-js"></i> Marked.js
+                </a>
+                <a href="https://fontawesome.com/" target="_blank">
+                    <i class="fab fa-font-awesome"></i> Font Awesome
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-indicator" id="themeIndicator">
+        <i class="fas fa-moon"></i> <span>深色模式已启用</span>
+    </div>
+
+    <script>
+        // DOM元素
+        const uploadSection = document.getElementById('uploadSection');
+        const previewSection = document.getElementById('previewSection');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const previewContent = document.getElementById('previewContent');
+        const fileName = document.getElementById('fileName');
+        const loading = document.getElementById('loading');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const themeToggle = document.getElementById('themeToggle');
+        const newFileBtn = document.getElementById('newFileBtn');
+        const browserWarning = document.getElementById('browserWarning');
+        const themeIndicator = document.getElementById('themeIndicator');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const quickFileSelector = document.getElementById('quickFileSelector');
+        
+        // 当前加载的文件内容
+        let currentFileContent = '';
+        
+        // 显示提示（带淡入淡出效果）
+        function showIndicator(message, icon, duration = 2000) {
+            themeIndicator.innerHTML = `<i class="${icon}"></i> <span>${message}</span>`;
+            themeIndicator.classList.add('show');
+            
+            setTimeout(() => {
+                themeIndicator.classList.remove('show');
+            }, duration);
+        }
+        
+        // 检查浏览器兼容性
+        function checkBrowserCompatibility() {
+            const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isSafari || isMobile) {
+                browserWarning.classList.add('show');
+                
+                if (isSafari) {
+                    browserWarning.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Safari浏览器限制：请通过"选择文件"按钮上传文件，拖放功能可能不可用';
+                }
+                
+                if (isMobile) {
+                    browserWarning.innerHTML = '<i class="fas fa-mobile-alt"></i> 移动设备提示：部分安卓设备可能需要使用"文件"应用选择文件';
+                }
+            }
+        }
+        
+        // 主题切换
+        function toggleTheme() {
+            const isDarkMode = !document.body.classList.contains('dark-mode');
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                showIndicator('深色模式已启用', 'fas fa-moon');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                showIndicator('浅色模式已启用', 'fas fa-sun');
+            }
+            
+            // 保存主题偏好
+            try {
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            } catch (e) {
+                console.log('无法访问localStorage，使用会话级设置');
+            }
+        }
+        
+        // 初始化主题
+        function initTheme() {
+            try {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            } catch (e) {
+                console.log('无法读取localStorage，使用默认主题');
+            }
+        }
+        
+        // 上传按钮点击事件
+        uploadBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // 文件选择事件
+        fileInput.addEventListener('change', handleFileSelect);
+        
+        // 拖放功能
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('active', 'drag-over');
+        });
+        
+        uploadSection.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('active', 'drag-over');
+        });
+        
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('active', 'drag-over');
+            
+            if (e.dataTransfer.files.length) {
+                const file = e.dataTransfer.files[0];
+                if (validateFile(file)) {
+                    readAndPreviewFile(file);
+                }
+            }
+        });
+        
+        // 新文件按钮 - 修复点
+        newFileBtn.addEventListener('click', () => {
+            // 隐藏预览区域
+            previewSection.style.display = 'none';
+            
+            // 显示上传区域
+            uploadSection.style.display = 'block';
+            
+            // 清空文件输入值，允许重新选择同一文件
+            fileInput.value = '';
+            
+            // 触发文件选择对话框
+            setTimeout(() => {
+                fileInput.click();
+            }, 100);
+        });
+        
+        // 快速文件选择器
+        quickFileSelector.addEventListener('click', () => {
+            // 使用示例Markdown内容
+            const sampleMarkdown = `
+## 📖 Markdown阅读器 - 使用指南
+
+欢迎使用Markdown阅读器！这是一款功能强大的Markdown文档阅读器，支持在浏览器中直接预览.md文件。本指南将帮助您充分利用所有功能。
+
+### 🚀 基本功能
+
+1. **文件上传**
+   - 点击"选择文件"按钮上传Markdown文件
+   - 将文件拖放到上传区域（桌面端）
+   - 在移动设备上，可通过文件管理器分享到本应用
+
+2. **主题切换**
+   - 点击右上角 <i class="fas fa-moon"></i> 图标切换深色/浅色模式
+   - 桌面端快捷键: \`T\` 键
+   - 主题偏好会自动保存
+
+3. **文件预览**
+   - 上传后文件内容会自动解析并显示
+   - 支持所有标准Markdown语法
+   - 代码块、表格、列表等元素都有优化样式
+
+### 💻 桌面端专属功能
+
+1. **双栏布局**
+   - 左侧文件操作区，右侧预览区
+   - 文件操作区在滚动时保持固定位置
+
+2. **键盘快捷键**
+   - \`T\` - 切换深色/浅色模式
+   - \`ESC\` - 返回文件上传区
+
+3. **全屏预览模式**
+   - 点击预览区右上角的"全屏预览"按钮
+   - 仅预览区域进入全屏，专注内容阅读
+   - 右上角显示退出按钮，或按 \`ESC\` 退出
+
+4. **拖放支持**
+   - 直接将文件拖放到左侧上传区域
+
+### 📱 移动端优化
+
+1. **触摸友好设计**
+   - 大尺寸按钮和控件
+   - 优化滑动体验
+
+2. **文件分享支持**
+   - 从文件管理器直接分享到本应用
+
+3. **响应式布局**
+   - 自动适应各种屏幕尺寸
+   - 优化在小屏幕上的显示效果
+
+### 🧾 Markdown支持
+
+本阅读器支持所有标准Markdown语法：
+
+| 元素         | 语法示例                     |
+|--------------|-----------------------------|
+| 标题         | \`# H1\` \`## H2\`          |
+| 粗体         | \`**粗体**\`                |
+| 斜体         | \`*斜体*\`                  |
+| 代码块       | \`\`\`代码块\`\`\`          |
+| 列表         | \`- 项目1\` \`1. 项目1\`    |
+| 链接         | \`[文本](https://...)\`     |
+| 图片         | \`![描述](image.jpg)\`      |
+| 引用         | \`> 引用内容\`              |
+| 表格         | 使用 \`|\` 分隔列           |
+
+### 🔍 全屏预览功能
+
+1. **进入全屏**：
+   - 点击预览区右上角的"全屏预览"按钮
+   - 仅预览区域进入全屏模式
+   - 其他界面元素隐藏
+
+2. **全屏体验**：
+   - 更大的阅读区域
+   - 更专注的阅读环境
+   - 保留深色模式设置
+
+3. **退出全屏**：
+   - 点击右上角的退出按钮
+   - 按 \`ESC\` 键
+   - 返回正常预览模式
+
+### ⚙️ 高级功能
+
+1. **深色模式优化**
+   - 特别为代码块、表格等元素设计的深色样式
+   - 减少眼睛疲劳，适合夜间阅读
+
+2. **本地处理**
+   - 所有文件处理都在浏览器中完成
+   - 您的文件不会上传到任何服务器
+   - 保护隐私和安全
+
+3. **错误处理**
+   - 文件类型错误或过大时有明确提示
+   - 错误信息5秒后自动消失
+
+### ❓ 常见问题
+
+**Q: 全屏预览时能否编辑内容？**  
+A: 当前版本为阅读器，不支持编辑功能。
+
+> 开始使用: 点击"选择文件"按钮上传您的第一个Markdown文档吧！
+            `;
+            
+            // 更新预览内容
+            currentFileContent = sampleMarkdown;
+            previewContent.innerHTML = marked.parse(sampleMarkdown);
+            fileName.textContent = "示例文件.md";
+            
+            // 显示预览区域
+            setTimeout(() => {
+                loading.style.display = 'none';
+                previewSection.style.display = 'block';
+            }, 300);
+            
+            // 显示成功提示
+            showIndicator('已加载示例文件', 'fas fa-file-alt');
+        });
+        
+        // 全屏按钮功能
+        if(fullscreenBtn) {
+            fullscreenBtn.addEventListener('click', () => {
+                // 进入全屏模式
+                previewSection.classList.add('fullscreen');
+                
+                // 创建退出全屏按钮
+                const exitButton = document.createElement('button');
+                exitButton.className = 'fullscreen-exit';
+                exitButton.innerHTML = '<i class="fas fa-compress"></i>';
+                exitButton.id = 'exitFullscreenBtn';
+                previewSection.querySelector('.preview-header').appendChild(exitButton);
+                
+                // 添加退出事件
+                exitButton.addEventListener('click', exitFullscreen);
+            });
+        }
+        
+        // 退出全屏功能
+        function exitFullscreen() {
+            previewSection.classList.remove('fullscreen');
+            const exitButton = document.getElementById('exitFullscreenBtn');
+            if (exitButton) {
+                exitButton.remove();
+            }
+            
+            // 恢复预览内容（使用之前保存的内容）
+            previewContent.innerHTML = marked.parse(currentFileContent);
+        }
+        
+        // 文件验证
+        function validateFile(file) {
+            const validTypes = ['text/markdown', 'text/x-markdown', 'application/octet-stream'];
+            const extension = file.name.split('.').pop().toLowerCase();
+            
+            if (!validTypes.includes(file.type) && file.type !== '') {
+                if (extension !== 'md' && extension !== 'markdown') {
+                    showError('请上传有效的Markdown文件 (.md 或 .markdown)');
+                    return false;
+                }
+            }
+            
+            if (file.size > 5 * 1024 * 1024) {
+                showError('文件太大，请上传小于5MB的文件');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // 处理文件选择
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file && validateFile(file)) {
+                readAndPreviewFile(file);
+            }
+        }
+        
+        // 读取并预览文件
+        function readAndPreviewFile(file) {
+            loading.style.display = 'block';
+            hideError();
+            uploadSection.style.display = 'none';
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    // 使用marked解析Markdown
+                    const markdownContent = e.target.result;
+                    currentFileContent = markdownContent;
+                    const htmlContent = marked.parse(markdownContent);
+                    
+                    // 更新预览内容
+                    previewContent.innerHTML = htmlContent;
+                    fileName.textContent = file.name;
+                    
+                    // 显示预览区域
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        previewSection.style.display = 'block';
+                    }, 500);
+                    
+                    // 显示成功提示
+                    showIndicator('文件加载成功', 'fas fa-check-circle');
+                    
+                } catch (error) {
+                    loading.style.display = 'none';
+                    showError('解析Markdown时出错: ' + error.message);
+                    uploadSection.style.display = 'block';
+                }
+            };
+            
+            reader.onerror = function() {
+                loading.style.display = 'none';
+                showError('读取文件时出错，请尝试其他文件');
+                uploadSection.style.display = 'block';
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        // 显示错误信息（带淡入效果）
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.add('show');
+            
+            setTimeout(() => {
+                hideError();
+            }, 5000);
+        }
+        
+        // 隐藏错误信息（带淡出效果）
+        function hideError() {
+            errorMessage.classList.remove('show');
+        }
+        
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            // 按T切换主题
+            if (e.key === 't' || e.key === 'T') {
+                toggleTheme();
+            }
+            
+            // 按ESC返回上传区
+            if (e.key === 'Escape') {
+                // 如果当前是全屏状态，退出全屏
+                if (previewSection.classList.contains('fullscreen')) {
+                    exitFullscreen();
+                } else {
+                    previewSection.style.display = 'none';
+                    uploadSection.style.display = 'block';
+                }
+            }
+        });
+        
+        // 初始化
+        function initApp() {
+            // 设置主题
+            initTheme();
+            
+            // 检查浏览器兼容性
+            setTimeout(checkBrowserCompatibility, 1000);
+            
+            // 添加事件监听器
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // 初始Markdown内容 - 详细使用说明
+            const usageGuide = `
+## 📖 Markdown阅读器 - 使用指南
+
+欢迎使用Markdown阅读器！这是一款功能强大的Markdown文档阅读器，支持在浏览器中直接预览.md文件。本指南将帮助您充分利用所有功能。
+
+### 🚀 基本功能
+
+1. **文件上传**
+   - 点击"选择文件"按钮上传Markdown文件
+   - 将文件拖放到上传区域（桌面端）
+   - 在移动设备上，可通过文件管理器分享到本应用
+
+2. **主题切换**
+   - 点击右上角 <i class="fas fa-moon"></i> 图标切换深色/浅色模式
+   - 桌面端快捷键: \`T\` 键
+   - 主题偏好会自动保存
+
+3. **文件预览**
+   - 上传后文件内容会自动解析并显示
+   - 支持所有标准Markdown语法
+   - 代码块、表格、列表等元素都有优化样式
+
+### 💻 桌面端专属功能
+
+1. **双栏布局**
+   - 左侧文件操作区，右侧预览区
+   - 文件操作区在滚动时保持固定位置
+
+2. **键盘快捷键**
+   - \`T\` - 切换深色/浅色模式
+   - \`ESC\` - 返回文件上传区
+
+3. **全屏预览模式**
+   - 点击预览区右上角的"全屏预览"按钮
+   - 仅预览区域进入全屏，专注内容阅读
+   - 右上角显示退出按钮，或按 \`ESC\` 退出
+
+4. **拖放支持**
+   - 直接将文件拖放到左侧上传区域
+
+### 📱 移动端优化
+
+1. **触摸友好设计**
+   - 大尺寸按钮和控件
+   - 优化滑动体验
+
+2. **文件分享支持**
+   - 从文件管理器直接分享到本应用
+
+3. **响应式布局**
+   - 自动适应各种屏幕尺寸
+   - 优化在小屏幕上的显示效果
+
+### 🧾 Markdown支持
+
+本阅读器支持所有标准Markdown语法：
+
+| 元素         | 语法示例                     |
+|--------------|-----------------------------|
+| 标题         | \`# H1\` \`## H2\`          |
+| 粗体         | \`**粗体**\`                |
+| 斜体         | \`*斜体*\`                  |
+| 代码块       | \`\`\`代码块\`\`\`          |
+| 列表         | \`- 项目1\` \`1. 项目1\`    |
+| 链接         | \`[文本](https://...)\`     |
+| 图片         | \`![描述](image.jpg)\`      |
+| 引用         | \`> 引用内容\`              |
+| 表格         | 使用 \`|\` 分隔列           |
+
+### 🔍 全屏预览功能
+
+1. **进入全屏**：
+   - 点击预览区右上角的"全屏预览"按钮
+   - 仅预览区域进入全屏模式
+   - 其他界面元素隐藏
+
+2. **全屏体验**：
+   - 更大的阅读区域
+   - 更专注的阅读环境
+   - 保留深色模式设置
+
+3. **退出全屏**：
+   - 点击右上角的退出按钮
+   - 按 \`ESC\` 键
+   - 返回正常预览模式
+
+### ⚙️ 高级功能
+
+1. **深色模式优化**
+   - 特别为代码块、表格等元素设计的深色样式
+   - 减少眼睛疲劳，适合夜间阅读
+
+2. **本地处理**
+   - 所有文件处理都在浏览器中完成
+   - 您的文件不会上传到任何服务器
+   - 保护隐私和安全
+
+3. **错误处理**
+   - 文件类型错误或过大时有明确提示
+   - 错误信息5秒后自动消失
+
+### ❓ 常见问题
+
+**Q: 全屏预览时能否编辑内容？**  
+A: 当前版本为阅读器，不支持编辑功能。
+
+> 开始使用: 点击"选择文件"按钮上传您的第一个Markdown文档吧！
+            `;
+            
+            currentFileContent = usageGuide;
+            previewContent.innerHTML = marked.parse(usageGuide);
+            fileName.textContent = "使用指南.md";
+            previewSection.style.display = 'block';
+        }
+        
+        // 初始化应用
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
