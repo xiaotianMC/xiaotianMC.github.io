@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苍树梅展1 - 纯净阅读 (优化版)</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #4285f4;
+            --primary-dark: #3367d6;
+            --bg-light: #ffffff;
+            --text-light: #333333;
+            --bg-dark: #1e1e1e;
+            --text-dark: #f0f0f0;
+            --card-bg-light: #ffffff;
+            --card-bg-dark: #252525;
+            --border-light: #e0e0e0;
+            --border-dark: #444444;
+            --code-bg-light: #f8f8f8;
+            --code-bg-dark: #2d2d2d;
+            --blockquote-light: #f8f9fa;
+            --blockquote-dark: #2a2a2a;
+            --table-border-light: #dfe2e5;
+            --table-border-dark: #444;
+            --table-header-light: #f6f8fa;
+            --table-header-dark: #2d2d2d;
+            --scrollbar-light: #d0d0d0;
+            --scrollbar-thumb-light: #a0a0a0;
+            --scrollbar-dark: #444;
+            --scrollbar-thumb-dark: #666;
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 2px 6px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --header-height: 60px;
+            --base-font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            font-size: var(--base-font-size);
+        }
+        
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        
+        /* 全屏样式 */
+        body.fullscreen {
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        body.fullscreen .container {
+            max-width: none;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.fullscreen .header {
+            border-radius: 0;
+            margin-bottom: 0;
+            padding: 8px 20px;
+        }
+        
+        body.fullscreen .markdown-body {
+            flex: 1;
+            overflow: auto;
+            border-radius: 0;
+            padding: 20px 10%;
+            box-shadow: none;
+        }
+        
+        body.fullscreen .footer {
+            display: none;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 优化后的头部样式 */
+        .header {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            background: var(--bg-light);
+            z-index: 100;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            height: auto;
+        }
+        
+        .dark-mode .header {
+            border-bottom: 1px solid var(--border-dark);
+            background: var(--bg-dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .mobile-hint, .menu-toggle {
+            display: none !important;
+        }
+        
+        .controls-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: var(--transition);
+            max-height: none;
+            opacity: 1;
+            overflow: visible;
+        }
+        
+        /* 优化按钮垂直对齐 */
+        .nav-btn, .fullscreen-btn {
+            background: var(--bg-light);
+            color: var(--text-light);
+            border: 1px solid var(--border-light);
+            padding: 8px 14px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            line-height: 1;
+            text-decoration: none;
+        }
+        
+        .nav-btn i, .fullscreen-btn i {
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .nav-btn .btn-text, .fullscreen-btn .btn-text {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(66, 133, 244, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-btn:hover i {
+            transform: translateX(-2px);
+        }
+        
+        .nav-btn.next:hover i {
+            transform: translateX(2px);
+        }
+        
+        .dark-mode .nav-btn, .dark-mode .fullscreen-btn {
+            background: var(--card-bg-dark);
+            border: 1px solid var(--border-dark);
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .nav-btn:hover, .dark-mode .fullscreen-btn:hover {
+            background: rgba(66, 133, 244, 0.15);
+            border-color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dark-mode .theme-toggle {
+            color: var(--text-dark);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+            transform: scale(1.1);
+        }
+        
+        .dark-mode .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* 字体控制组 - 高度统一与过渡同步 */
+        .font-controls {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            height: 36px;
+            transition: var(--transition);
+        }
+        
+        .dark-mode .font-controls {
+            background: var(--card-bg-dark);
+            border: 1px solid var(--border-dark);
+        }
+        
+        .font-btn {
+            background: none;
+            border: none;
+            padding: 0 12px;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+        
+        .dark-mode .font-btn {
+            color: var(--text-dark);
+        }
+        
+        .font-btn:hover {
+            background: rgba(66, 133, 244, 0.1);
+        }
+        
+        .dark-mode .font-btn:hover {
+            background: rgba(66, 133, 244, 0.15);
+        }
+        
+        .font-btn i {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .font-reset-btn {
+            border-left: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            padding: 0 14px;
+        }
+        
+        .dark-mode .font-reset-btn {
+            border-left: 1px solid var(--border-dark);
+            border-right: 1px solid var(--border-dark);
+        }
+        
+        .markdown-body {
+            padding: 25px;
+            background: var(--card-bg-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            font-size: var(--base-font-size);
+        }
+        
+        .dark-mode .markdown-body {
+            background: var(--card-bg-dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 自定义滚动条 */
+        .markdown-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .markdown-body::-webkit-scrollbar-track {
+            background: var(--scrollbar-light);
+            border-radius: 10px;
+        }
+        
+        .markdown-body::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-light);
+            border-radius: 10px;
+        }
+        
+        .markdown-body::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        .dark-mode .markdown-body::-webkit-scrollbar-track {
+            background: var(--scrollbar-dark);
+        }
+        
+        .dark-mode .markdown-body::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-dark);
+        }
+        
+        /* Markdown 内容样式 - 浅色模式 */
+        .markdown-body h1, 
+        .markdown-body h2, 
+        .markdown-body h3, 
+        .markdown-body h4, 
+        .markdown-body h5, 
+        .markdown-body h6 {
+            color: var(--text-light);
+            margin: 1.5em 0 0.8em;
+            padding-bottom: 0.3em;
+            transition: var(--transition);
+        }
+        
+        .markdown-body h1 {
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .markdown-body h2 {
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .markdown-body p {
+            margin: 1em 0;
+            line-height: 1.8;
+            transition: var(--transition);
+        }
+        
+        .markdown-body a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .markdown-body a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-body code {
+            background-color: var(--code-bg-light);
+            border-radius: 3px;
+            padding: 0.2em 0.4em;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            transition: var(--transition);
+        }
+        
+        .markdown-body pre {
+            background-color: var(--code-bg-light);
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+            margin: 1.5em 0;
+            line-height: 1.45;
+            transition: var(--transition);
+        }
+        
+        .markdown-body pre code {
+            background: none;
+            padding: 0;
+            transition: var(--transition);
+        }
+        
+        .markdown-body blockquote {
+            border-left: 4px solid var(--primary);
+            background-color: var(--blockquote-light);
+            padding: 12px 20px;
+            margin: 1.5em 0;
+            border-radius: 0 6px 6px 0;
+            transition: var(--transition);
+        }
+        
+        .markdown-body ul, 
+        .markdown-body ol {
+            padding-left: 2em;
+            margin: 1em 0;
+            transition: var(--transition);
+        }
+        
+        .markdown-body li {
+            margin: 0.5em 0;
+            transition: var(--transition);
+        }
+        
+        .markdown-body img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin: 1em 0;
+        }
+        
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            transition: var(--transition);
+        }
+        
+        .markdown-body th, 
+        .markdown-body td {
+            border: 1px solid var(--table-border-light);
+            padding: 8px 12px;
+            transition: var(--transition);
+        }
+        
+        .markdown-body th {
+            background-color: var(--table-header-light);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .markdown-body hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-light);
+            margin: 2em 0;
+            transition: var(--transition);
+        }
+        
+        /* 深色模式下的Markdown样式 - 确保表头和代码块同步 */
+        .dark-mode .markdown-body {
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .markdown-body h1, 
+        .dark-mode .markdown-body h2, 
+        .dark-mode .markdown-body h3, 
+        .dark-mode .markdown-body h4, 
+        .dark-mode .markdown-body h5, 
+        .dark-mode .markdown-body h6 {
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .markdown-body h2 {
+            border-bottom: 1px solid var(--border-dark);
+        }
+        
+        .dark-mode .markdown-body code {
+            background-color: var(--code-bg-dark);
+            color: #f0f0f0;
+        }
+        
+        .dark-mode .markdown-body pre {
+            background-color: var(--code-bg-dark);
+        }
+        
+        .dark-mode .markdown-body pre code {
+            color: #f8f8f2;
+        }
+        
+        .dark-mode .markdown-body blockquote {
+            background-color: var(--blockquote-dark);
+            color: #d0d0d0;
+        }
+        
+        .dark-mode .markdown-body table {
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .markdown-body th, 
+        .dark-mode .markdown-body td {
+            border: 1px solid var(--table-border-dark);
+        }
+        
+        .dark-mode .markdown-body th {
+            background-color: var(--table-header-dark);
+        }
+        
+        .dark-mode .markdown-body hr {
+            background: var(--border-dark);
+        }
+        
+        .reading-progress {
+            height: 4px;
+            background: var(--primary);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: width 0.2s ease;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px 0; /* 减少上下内边距 */
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .footer a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .dark-mode .footer {
+            color: #aaa;
+        }
+
+        .dark-mode .footer a {
+            color: #ccc;
+        }
+        
+        /* 移动端样式优化 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 8px 10px;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+            
+            /* 隐藏移动端提示和菜单按钮 */
+            .mobile-hint, .menu-toggle {
+                display: none !important;
+            }
+            
+            .controls-container {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                gap: 4px;
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding: 5px 0;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .controls-container::-webkit-scrollbar {
+                display: none;
+            }
+            
+            /* 移动端按钮样式优化 - 保持与电脑端一致的36px高度 */
+            .nav-btn, .fullscreen-btn {
+                padding: 0;
+                height: 36px;
+                width: 36px;
+                flex-shrink: 0;
+                justify-content: center;
+            }
+            
+            /* 移动端隐藏按钮文字 */
+            .nav-btn .btn-text, .fullscreen-btn .btn-text {
+                display: none !important;
+            }
+            
+            /* 字体控制按钮 */
+            .font-controls {
+                height: 36px;
+                flex-shrink: 0;
+            }
+            
+            .font-btn {
+                padding: 0 12px;
+            }
+            
+            .font-reset-btn {
+                padding: 0 14px;
+            }
+            
+            /* 主题切换按钮 */
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+                flex-shrink: 0;
+            }
+            
+            .markdown-body {
+                padding: 15px;
+                border-radius: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 6px 8px;
+            }
+            
+            .controls-container {
+                gap: 3px;
+            }
+            
+            /* 小屏幕下保持36px高度 */
+            .nav-btn, .fullscreen-btn {
+                padding: 0;
+                height: 36px;
+                width: 36px;
+            }
+            
+            .font-controls {
+                height: 36px;
+            }
+            
+            .font-btn {
+                padding: 0 10px;
+            }
+            
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+            }
+        }
+        
+        .theme-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .theme-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .theme-indicator i {
+            font-size: 1.2rem;
+        }
+        
+        .dark-mode .theme-indicator {
+            background: #333;
+            border: 1px solid #444;
+        }
+        
+        .btn-text {
+            transition: opacity 0.2s ease;
+        }
+        
+        /* 全屏按钮 */
+        .fullscreen-btn {
+            background: var(--bg-light);
+            color: var(--text-light);
+            border: 1px solid var(--border-light);
+            padding: 8px 14px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+        }
+        
+        .dark-mode .fullscreen-btn {
+            background: var(--card-bg-dark);
+            border: 1px solid var(--border-dark);
+            color: var(--text-dark);
+        }
+        
+        .fullscreen-btn:hover {
+            background: rgba(66, 133, 244, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .dark-mode .fullscreen-btn:hover {
+            background: rgba(66, 133, 244, 0.15);
+        }
+        
+        /* 全屏提示 */
+        .fullscreen-hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            z-index: 300;
+            display: none;
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        .fullscreen-hint.show {
+            display: block;
+            animation: fadeInOut 3s ease;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <!-- 移除了移动端提示和菜单按钮 -->
+            </div>
+            <div class="controls-container" id="controlsContainer">
+                <a href="prev-section.html" class="nav-btn prev" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                    <span class="btn-text">上一节</span>
+                </a>
+                
+                <a href="next-section.html" class="nav-btn next" id="nextBtn">
+                    <span class="btn-text">下一节</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                
+                <a href="index.html" class="nav-btn" id="tocBtn">
+                    <i class="fas fa-home"></i>
+                    <span class="btn-text">返回目录</span>
+                </a>
+                
+                <div class="font-controls">
+                    <button class="font-btn" id="fontDecreaseBtn" title="减小字体">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="font-btn font-reset-btn" id="fontResetBtn" title="恢复默认大小">
+                        <i class="fas fa-font"></i>
+                    </button>
+                    <button class="font-btn" id="fontIncreaseBtn" title="增大字体">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                
+                <button class="fullscreen-btn" id="fullscreenBtn">
+                    <i class="fas fa-expand"></i>
+                    <span class="btn-text">全屏</span>
+                </button>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="markdown-body" id="previewContent">
+            <!-- Markdown内容将在这里显示 -->
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 萤火盛夏Aestatis（向阳频道）2025 | 
+                <a href="https://chat.deepseek.com/" target="_blank">
+                    由Deepseek辅助开发
+                </a>
+                 | 完全在浏览器中运行
+            </p>
+            <div class="footer-links">
+                <a href="https://marked.js.org/" target="_blank">
+                    <i class="fab fa-js"></i> Marked.js
+                </a>
+                <a href="https://fontawesome.com/" target="_blank">
+                    <i class="fab fa-font-awesome"></i> Font Awesome
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-indicator" id="themeIndicator">
+        <i class="fas fa-font"></i> <span>字体大小已重置</span>
+    </div>
+    
+    <div class="fullscreen-hint" id="fullscreenHint">
+        <i class="fas fa-expand-arrows-alt"></i>
+        <p>您已进入全屏阅读模式</p>
+        <p>按ESC键或再次点击全屏按钮退出</p>
+    </div>
+
+    <script>
+        // DOM元素
+        const previewContent = document.getElementById('previewContent');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIndicator = document.getElementById('themeIndicator');
+        const readingProgress = document.getElementById('readingProgress');
+        const fontIncreaseBtn = document.getElementById('fontIncreaseBtn');
+        const fontDecreaseBtn = document.getElementById('fontDecreaseBtn');
+        const fontResetBtn = document.getElementById('fontResetBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const fullscreenHint = document.getElementById('fullscreenHint');
+        
+        // 苍树梅展1.md的内容
+        const markdownContent = `
+# 苍树梅展1：传统与现代的交融
+
+苍树梅展是一场融合传统艺术与现代审美的独特展览，展示了苍树梅大师三十余年的艺术成就。本次展览以"自然与心灵"为主题，呈现了梅大师在不同创作时期的代表作。
+
+## 展览概述
+
+苍树梅展1分为三个主要部分：
+
+1. **早期作品（1985-1995）** - 传统水墨技法
+2. **转型时期（1996-2005）** - 东西方艺术融合
+3. **现代创作（2006-至今）** - 数字艺术与传统结合
+
+### 早期作品特点
+
+- **笔墨技法**：苍劲有力，注重线条表现
+- **题材选择**：以自然山水、花鸟为主
+- **代表作**：
+  - 《寒山雪霁图》(1987)
+  - 《春江花月夜》(1992)
+  - 《竹林七贤》(1995)
+
+> "传统不是束缚，而是根基。只有扎根于传统，艺术才能枝繁叶茂。" 
+> ——苍树梅《艺术随笔》(1993)
+
+### 转型时期的艺术探索
+
+1996年，苍树梅先生赴欧洲游学三年，这段经历深刻影响了他的创作风格：
+
+| 年份 | 重要事件                 | 代表作品               |
+|------|--------------------------|------------------------|
+| 1996 | 巴黎国际艺术交流展       | 《塞纳河畔的沉思》     |
+| 1998 | 威尼斯双年展参展         | 《水城印象》系列       |
+| 2000 | 东京现代美术馆个展       | 《和风》三联画         |
+| 2003 | 纽约现代艺术博物馆收藏   | 《9/11的回忆》         |
+
+这段时期的作品开始尝试将东方水墨的意境与西方油画的色彩表现相结合，形成了独特的"水墨印象派"风格。
+
+### 现代创作：数字时代的艺术表达
+
+2006年后，苍树梅先生开始探索数字艺术与传统绘画的结合：
+
+\`\`\`javascript
+// 数字艺术创作流程示例
+function createDigitalArt(traditionalSketch) {
+  const scannedArt = scanArtwork(traditionalSketch);
+  const digitalLayers = applyDigitalTechniques(scannedArt);
+  const finalArt = mergeTraditionalAndDigital(traditionalSketch, digitalLayers);
+  return finalArt;
+}
+\`\`\`
+
+#### 技术特点
+
+1. **分层创作**：在宣纸上完成基础绘画，扫描后进行数字分层处理
+2. **动态元素**：为静态作品添加AR增强现实元素
+3. **互动体验**：观众可通过手机APP与作品互动
+
+## 展览亮点
+
+### 沉浸式体验厅
+
+本次展览特别设置了360度沉浸式体验厅，通过投影技术将苍树梅的代表作放大到整个空间，配以精心设计的音乐和灯光效果，让观众仿佛置身于画中世界。
+
+### 创作手稿展示
+
+首次公开展示苍树梅先生30余本创作手稿，包括：
+
+- 素描草图
+- 色彩研究
+- 创作笔记
+- 未完成作品
+
+这些手稿揭示了大师创作过程中的思考与探索。
+
+## 学术价值
+
+苍树梅展1不仅是一场艺术展览，更是一次学术研究的契机。展览期间将举办三场学术研讨会：
+
+1. **东方美学在当代艺术中的传承**
+2. **数字技术对传统艺术的影响**
+3. **苍树梅艺术风格的形成与发展**
+
+---
+
+本次展览将持续三个月，期间还将举办五场大师工作坊，让观众有机会亲身体验苍树梅创作技法的魅力。展览画册收录了全部展出作品的高清图片及专家评论，是研究苍树梅艺术的重要文献资料。
+
+> "艺术是心灵的镜子，每一幅作品都是艺术家与自我的对话。"
+> ——苍树梅展览开幕式致辞
+`;
+
+        // 显示提示（带淡入淡出效果）
+        function showIndicator(message, icon, duration = 2000) {
+            themeIndicator.innerHTML = `<i class="${icon}"></i> <span>${message}</span>`;
+            themeIndicator.classList.add('show');
+            
+            setTimeout(() => {
+                themeIndicator.classList.remove('show');
+            }, duration);
+        }
+        
+        // 主题切换
+        function toggleTheme() {
+            const isDarkMode = !document.body.classList.contains('dark-mode');
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                showIndicator('深色模式已启用', 'fas fa-moon');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                showIndicator('浅色模式已启用', 'fas fa-sun');
+            }
+            
+            // 保存主题偏好
+            try {
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            } catch (e) {
+                console.log('无法访问localStorage，使用会话级设置');
+            }
+        }
+        
+        // 初始化主题
+        function initTheme() {
+            try {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            } catch (e) {
+                console.log('无法读取localStorage，使用默认主题');
+            }
+        }
+        
+        // 更新阅读进度
+        function updateReadingProgress() {
+            let scrollTop, scrollHeight, clientHeight;
+            
+            if (document.body.classList.contains('fullscreen')) {
+                // 全屏模式下使用 .markdown-body 的滚动数据
+                const markdownBody = document.querySelector('.markdown-body');
+                scrollTop = markdownBody.scrollTop;
+                scrollHeight = markdownBody.scrollHeight;
+                clientHeight = markdownBody.clientHeight;
+            } else {
+                // 正常模式使用 window 的滚动数据
+                scrollTop = window.scrollY;
+                scrollHeight = document.documentElement.scrollHeight;
+                clientHeight = window.innerHeight;
+            }
+            
+            const maxScroll = scrollHeight - clientHeight;
+            const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+            readingProgress.style.width = `${progress}%`;
+        }
+
+        // 全屏变化监听器
+        document.addEventListener('fullscreenchange', () => {
+            const markdownBody = document.querySelector('.markdown-body');
+            if (document.fullscreenElement) {
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i><span class="btn-text">退出全屏</span>';
+                // 添加全屏滚动监听
+                markdownBody.addEventListener('scroll', updateReadingProgress);
+                // 初始化进度条位置
+                updateReadingProgress();
+            } else {
+                document.body.classList.remove('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i><span class="btn-text">全屏</span>';
+                // 移除全屏滚动监听
+                markdownBody.removeEventListener('scroll', updateReadingProgress);
+                // 恢复进度条位置
+                updateReadingProgress();
+            }
+        });
+        
+        // 调整字体大小 - 仅影响Markdown内容
+        function adjustFontSize(direction) {
+            const markdownBody = document.querySelector('.markdown-body');
+            // 使用Math.round确保获取整数值
+            const currentSize = Math.round(parseFloat(getComputedStyle(markdownBody).fontSize));
+            let newSize;
+            let message = '';
+            let icon = '';
+            
+            if (direction === 'increase') {
+                if (currentSize >= 20) {
+                    message = '字体已增至最大';
+                    icon = 'fas fa-exclamation-circle';
+                    newSize = 20;
+                } else {
+                    newSize = Math.min(currentSize + 1, 20);
+                    message = `字体增大: ${newSize}px`;
+                    icon = 'fas fa-plus';
+                }
+            } else {
+                if (currentSize <= 14) {
+                    message = '字体已减至最小';
+                    icon = 'fas fa-exclamation-circle';
+                    newSize = 14;
+                } else {
+                    newSize = Math.max(currentSize - 1, 14);
+                    message = `字体减小: ${newSize}px`;
+                    icon = 'fas fa-minus';
+                }
+        }
+        
+        markdownBody.style.fontSize = `${newSize}px`;
+        localStorage.setItem('fontSize', newSize);
+        showIndicator(message, icon);
+        }
+        
+        // 恢复默认字体大小 - 仅影响Markdown内容
+        function resetFontSize() {
+            const markdownBody = document.querySelector('.markdown-body');
+            markdownBody.style.fontSize = '';
+            localStorage.removeItem('fontSize');
+            showIndicator('字体大小已重置', 'fas fa-font');
+        }
+        
+        // 初始化字体大小
+        function initFontSize() {
+            try {
+                const savedSize = localStorage.getItem('fontSize');
+                if (savedSize) {
+                    const markdownBody = document.querySelector('.markdown-body');
+                    markdownBody.style.fontSize = `${savedSize}px`;
+                }
+            } catch (e) {
+                console.log('无法读取字体大小设置');
+            }
+        }
+        
+        // 全屏功能
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                // 进入全屏
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`全屏请求错误: ${err.message}`);
+                });
+                document.body.classList.add('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i><span class="btn-text">退出全屏</span>';
+                
+                // 显示提示
+                fullscreenHint.classList.add('show');
+                setTimeout(() => {
+                    fullscreenHint.classList.remove('show');
+                }, 3000);
+            } else {
+                // 退出全屏
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+        
+        // 初始化应用
+        function initApp() {
+            // 设置主题
+            initTheme();
+            
+            // 设置字体大小
+            initFontSize();
+            
+            // 解析并显示Markdown内容
+            previewContent.innerHTML = marked.parse(markdownContent);
+            
+            // 添加事件监听器
+            themeToggle.addEventListener('click', toggleTheme);
+            window.addEventListener('scroll', updateReadingProgress);
+            fontIncreaseBtn.addEventListener('click', () => adjustFontSize('increase'));
+            fontDecreaseBtn.addEventListener('click', () => adjustFontSize('decrease'));
+            fontResetBtn.addEventListener('click', resetFontSize);
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            
+            // 初始更新阅读进度
+            updateReadingProgress();
+        }
+        
+        // 初始化应用
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
