@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>苍树梅展1 - 纯净阅读 (优化版)</title>
+    <title>苍树梅展p5-p12</title>
+    <link rel="shortcut icon" href="/public/img/Ume_sensei.webp">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -994,7 +995,7 @@
             20%, 80% { opacity: 1; }
         }
         
-         /* QQ/微信浏览器提示层样式 */
+         /* QQ/微信浏览器提示层样式 - 蓝色系 */
         .browser-warning {
             position: fixed;
             top: 0;
@@ -1013,36 +1014,35 @@
         }
         
         .browser-warning-content {
-            background: var(--card-bg-light);
-            color: var(--text-light);
+            background: linear-gradient(135deg, #1976d2, #64b5f6);
+            color: white;
             border-radius: 12px;
             padding: 30px;
             max-width: 500px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: scaleIn 0.3s ease;
-        }
-        
-        .dark-mode .browser-warning-content {
-            background: var(--card-bg-dark);
-            color: var(--text-dark);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .browser-warning-icon {
             font-size: 3.5rem;
-            color: #f44336;
+            color: white;
             margin-bottom: 20px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
         .browser-warning h2 {
             margin-bottom: 15px;
             font-size: 1.5rem;
-            color: #f44336;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         
         .browser-warning p {
             margin-bottom: 15px;
             line-height: 1.6;
+            opacity: 0.9;
         }
         
         .browser-warning-actions {
@@ -1062,30 +1062,25 @@
         }
         
         .browser-warning-btn.primary {
-            background: #f44336;
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1976d2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
         
         .browser-warning-btn.primary:hover {
-            background: #d32f2f;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
         .browser-warning-btn.secondary {
-            background: #e0e0e0;
-            color: #333;
-        }
-        
-        .dark-mode .browser-warning-btn.secondary {
-            background: #444;
-            color: #eee;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .browser-warning-btn.secondary:hover {
-            background: #d0d0d0;
-        }
-        
-        .dark-mode .browser-warning-btn.secondary:hover {
-            background: #555;
+            background: rgba(255, 255, 255, 0.25);
         }
         
         @keyframes scaleIn {
@@ -1241,7 +1236,7 @@
                 browserWarning.style.display = 'none';
             });
         }
-        
+
         // DOM元素
         const previewContent = document.getElementById('previewContent');
         const themeToggle = document.getElementById('themeToggle');
