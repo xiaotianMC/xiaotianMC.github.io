@@ -994,9 +994,150 @@
             20%, 80% { opacity: 1; }
         }
         
+         /* QQ/微信浏览器提示层样式 */
+        .browser-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .browser-warning-content {
+            background: var(--card-bg-light);
+            color: var(--text-light);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: scaleIn 0.3s ease;
+        }
+        
+        .dark-mode .browser-warning-content {
+            background: var(--card-bg-dark);
+            color: var(--text-dark);
+        }
+        
+        .browser-warning-icon {
+            font-size: 3.5rem;
+            color: #f44336;
+            margin-bottom: 20px;
+        }
+        
+        .browser-warning h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #f44336;
+        }
+        
+        .browser-warning p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .browser-warning-actions {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .browser-warning-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        
+        .browser-warning-btn.primary {
+            background: #f44336;
+            color: white;
+        }
+        
+        .browser-warning-btn.primary:hover {
+            background: #d32f2f;
+        }
+        
+        .browser-warning-btn.secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .dark-mode .browser-warning-btn.secondary {
+            background: #444;
+            color: #eee;
+        }
+        
+        .browser-warning-btn.secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .dark-mode .browser-warning-btn.secondary:hover {
+            background: #555;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .browser-warning-content {
+                padding: 20px;
+            }
+            
+            .browser-warning-icon {
+                font-size: 2.8rem;
+            }
+            
+            .browser-warning h2 {
+                font-size: 1.3rem;
+            }
+            
+            .browser-warning-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .browser-warning-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+     <div class="browser-warning" id="browserWarning" style="display: none;">
+        <div class="browser-warning-content">
+            <div class="browser-warning-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2>检测到内置浏览器访问</h2>
+            <p>您正在使用QQ或微信的内置浏览器访问本页面，这可能会影响阅读体验和功能正常使用。</p>
+            <p>建议点击右上角菜单，选择在系统浏览器（如Chrome、Safari等）中打开以获得最佳体验。</p>
+            <div class="browser-warning-actions">
+                <button class="browser-warning-btn primary" id="browserWarningUnderstand">我明白了</button>
+                <button class="browser-warning-btn secondary" id="browserWarningContinue">继续使用</button>
+            </div>
+        </div>
+    </div>
     <div class="reading-progress" id="readingProgress"></div>
     
     <div class="container">
@@ -1080,6 +1221,27 @@
     </div>
 
     <script>
+        // 检测是否为QQ或微信内置浏览器
+        function isQQOrWeixinBrowser() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('qq/') > -1 || ua.indexOf('micromessenger') > -1;
+        }
+        
+        // 显示浏览器警告
+        function showBrowserWarning() {
+            const browserWarning = document.getElementById('browserWarning');
+            browserWarning.style.display = 'flex';
+            
+            // 添加事件监听器
+            document.getElementById('browserWarningUnderstand').addEventListener('click', function() {
+                browserWarning.style.display = 'none';
+            });
+            
+            document.getElementById('browserWarningContinue').addEventListener('click', function() {
+                browserWarning.style.display = 'none';
+            });
+        }
+        
         // DOM元素
         const previewContent = document.getElementById('previewContent');
         const themeToggle = document.getElementById('themeToggle');
@@ -1321,6 +1483,10 @@
         
         // 初始化应用
         function initApp() {
+            // 检测QQ/微信浏览器并显示提示
+            if (isQQOrWeixinBrowser()) {
+                showBrowserWarning();
+            }
             // 设置主题
             initTheme();
             
