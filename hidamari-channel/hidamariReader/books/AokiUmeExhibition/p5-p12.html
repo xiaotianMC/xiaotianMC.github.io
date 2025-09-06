@@ -17,6 +17,9 @@
         :root {
             --primary: #4285f4;
             --primary-dark: #3367d6;
+            --error: #f44336;
+            --error-light: #ffebee;
+            --error-dark: #c62828;
             --bg-light: #ffffff;
             --text-light: #333333;
             --bg-dark: #1e1e1e;
@@ -80,7 +83,7 @@
         body.fullscreen .header {
             border-radius: 0;
             margin-bottom: 0;
-            padding: 8px 20px;
+            padding: 12px 20px;
         }
         
         body.fullscreen .markdown-body {
@@ -293,6 +296,7 @@
             border-left: 1px solid var(--border-light);
             border-right: 1px solid var(--border-light);
             padding: 0 14px;
+            font-weight: bold;
         }
         
         .dark-mode .font-reset-btn {
@@ -522,7 +526,7 @@
         
         .footer {
             text-align: center;
-            padding: 15px 0; /* 减少上下内边距 */
+            padding: 15px 0;
             color: #666;
             font-size: 0.9rem;
             display: flex;
@@ -559,6 +563,185 @@
 
         .dark-mode .footer a {
             color: #ccc;
+        }
+        
+        /* 加载指示器 */
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        .dark-mode .loader {
+            color: var(--text-dark);
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(66, 133, 244, 0.2);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            animation: spin 1s linear infinite;
+            margin-bottom: 25px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loader p {
+            font-size: 1.1rem;
+            margin-top: 15px;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+        
+        .dark-mode .loader p {
+            color: var(--text-dark);
+        }
+        
+        /* 错误消息 - 优化样式 */
+        .error-container {
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 20px 0;
+            background: var(--card-bg-light);
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--error);
+            transition: var(--transition);
+        }
+        
+        .dark-mode .error-container {
+            background: var(--card-bg-dark);
+            border-left: 5px solid var(--error);
+        }
+        
+        .error-icon {
+            font-size: 3.5rem;
+            color: var(--error);
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .error-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--error);
+            font-weight: 600;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .dark-mode .error-message {
+            color: var(--text-dark);
+        }
+        
+        .error-details {
+            background: rgba(244, 67, 54, 0.08);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow-x: auto;
+            border: 1px solid rgba(244, 67, 54, 0.2);
+        }
+        
+        .dark-mode .error-details {
+            background: rgba(244, 67, 54, 0.12);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+        
+        .suggestions {
+            background: rgba(66, 133, 244, 0.08);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(66, 133, 244, 0.2);
+        }
+        
+        .dark-mode .suggestions {
+            background: rgba(66, 133, 244, 0.12);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+        }
+        
+        .suggestions h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .suggestions ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        
+        .suggestions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .suggestions li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .retry-btn {
+            margin-top: 20px;
+            padding: 12px 28px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .retry-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .retry-btn:active {
+            transform: translateY(0);
         }
         
         /* 移动端样式优化 */
@@ -634,6 +817,34 @@
                 padding: 15px;
                 border-radius: 8px;
             }
+            
+            /* 移动端错误提示优化 */
+            .error-container {
+                padding: 25px 20px;
+                margin: 15px 0;
+            }
+            
+            .error-icon {
+                font-size: 2.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-message {
+                font-size: 1rem;
+            }
+            
+            .suggestions, .error-details {
+                padding: 12px;
+            }
+            
+            .retry-btn {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -663,6 +874,23 @@
             .theme-toggle {
                 width: 36px;
                 height: 36px;
+            }
+            
+            /* 小屏幕错误提示优化 */
+            .error-container {
+                padding: 20px 15px;
+            }
+            
+            .error-icon {
+                font-size: 2.5rem;
+            }
+            
+            .error-title {
+                font-size: 1.3rem;
+            }
+            
+            .error-message {
+                font-size: 0.95rem;
             }
         }
         
@@ -816,16 +1044,20 @@
         </div>
         
         <div class="markdown-body" id="previewContent">
-            <!-- Markdown内容将在这里显示 -->
+            <div class="loader" id="loader">
+                <div class="loader-spinner"></div>
+                <p>正在加载内容...</p>
+            </div>
         </div>
         
         <div class="footer">
-            <p>&copy; 萤火盛夏Aestatis（向阳频道）2025 | 
+            <p>译文&copy; 萤火盛夏Aestatis（向阳频道）2025 | 
                 <a href="https://chat.deepseek.com/" target="_blank">
-                    由Deepseek辅助开发
+                    网页由Deepseek辅助开发
                 </a>
                  | 完全在浏览器中运行
             </p>
+            <p>若内容侵犯了您的版权权益，请通过邮件联系我们：hidamari-group@aestatis.cn</p>
             <div class="footer-links">
                 <a href="https://marked.js.org/" target="_blank">
                     <i class="fab fa-js"></i> Marked.js
@@ -858,99 +1090,11 @@
         const fontResetBtn = document.getElementById('fontResetBtn');
         const fullscreenBtn = document.getElementById('fullscreenBtn');
         const fullscreenHint = document.getElementById('fullscreenHint');
+        const loader = document.getElementById('loader');
         
-        // 苍树梅展1.md的内容
-        const markdownContent = `
-# 苍树梅展1：传统与现代的交融
-
-苍树梅展是一场融合传统艺术与现代审美的独特展览，展示了苍树梅大师三十余年的艺术成就。本次展览以"自然与心灵"为主题，呈现了梅大师在不同创作时期的代表作。
-
-## 展览概述
-
-苍树梅展1分为三个主要部分：
-
-1. **早期作品（1985-1995）** - 传统水墨技法
-2. **转型时期（1996-2005）** - 东西方艺术融合
-3. **现代创作（2006-至今）** - 数字艺术与传统结合
-
-### 早期作品特点
-
-- **笔墨技法**：苍劲有力，注重线条表现
-- **题材选择**：以自然山水、花鸟为主
-- **代表作**：
-  - 《寒山雪霁图》(1987)
-  - 《春江花月夜》(1992)
-  - 《竹林七贤》(1995)
-
-> "传统不是束缚，而是根基。只有扎根于传统，艺术才能枝繁叶茂。" 
-> ——苍树梅《艺术随笔》(1993)
-
-### 转型时期的艺术探索
-
-1996年，苍树梅先生赴欧洲游学三年，这段经历深刻影响了他的创作风格：
-
-| 年份 | 重要事件                 | 代表作品               |
-|------|--------------------------|------------------------|
-| 1996 | 巴黎国际艺术交流展       | 《塞纳河畔的沉思》     |
-| 1998 | 威尼斯双年展参展         | 《水城印象》系列       |
-| 2000 | 东京现代美术馆个展       | 《和风》三联画         |
-| 2003 | 纽约现代艺术博物馆收藏   | 《9/11的回忆》         |
-
-这段时期的作品开始尝试将东方水墨的意境与西方油画的色彩表现相结合，形成了独特的"水墨印象派"风格。
-
-### 现代创作：数字时代的艺术表达
-
-2006年后，苍树梅先生开始探索数字艺术与传统绘画的结合：
-
-\`\`\`javascript
-// 数字艺术创作流程示例
-function createDigitalArt(traditionalSketch) {
-  const scannedArt = scanArtwork(traditionalSketch);
-  const digitalLayers = applyDigitalTechniques(scannedArt);
-  const finalArt = mergeTraditionalAndDigital(traditionalSketch, digitalLayers);
-  return finalArt;
-}
-\`\`\`
-
-#### 技术特点
-
-1. **分层创作**：在宣纸上完成基础绘画，扫描后进行数字分层处理
-2. **动态元素**：为静态作品添加AR增强现实元素
-3. **互动体验**：观众可通过手机APP与作品互动
-
-## 展览亮点
-
-### 沉浸式体验厅
-
-本次展览特别设置了360度沉浸式体验厅，通过投影技术将苍树梅的代表作放大到整个空间，配以精心设计的音乐和灯光效果，让观众仿佛置身于画中世界。
-
-### 创作手稿展示
-
-首次公开展示苍树梅先生30余本创作手稿，包括：
-
-- 素描草图
-- 色彩研究
-- 创作笔记
-- 未完成作品
-
-这些手稿揭示了大师创作过程中的思考与探索。
-
-## 学术价值
-
-苍树梅展1不仅是一场艺术展览，更是一次学术研究的契机。展览期间将举办三场学术研讨会：
-
-1. **东方美学在当代艺术中的传承**
-2. **数字技术对传统艺术的影响**
-3. **苍树梅艺术风格的形成与发展**
-
----
-
-本次展览将持续三个月，期间还将举办五场大师工作坊，让观众有机会亲身体验苍树梅创作技法的魅力。展览画册收录了全部展出作品的高清图片及专家评论，是研究苍树梅艺术的重要文献资料。
-
-> "艺术是心灵的镜子，每一幅作品都是艺术家与自我的对话。"
-> ——苍树梅展览开幕式致辞
-`;
-
+        // 外部Markdown文件的URL（使用一个可能不存在的URL来测试错误界面）
+        const markdownUrl = '/hidamari-channel/hidamariReader/books/AokiUmeExhibition/res/p5-p12.md';
+        
         // 显示提示（带淡入淡出效果）
         function showIndicator(message, icon, duration = 2000) {
             themeIndicator.innerHTML = `<i class="${icon}"></i> <span>${message}</span>`;
@@ -959,6 +1103,65 @@ function createDigitalArt(traditionalSketch) {
             setTimeout(() => {
                 themeIndicator.classList.remove('show');
             }, duration);
+        }
+        
+        // 从外部URL加载Markdown内容
+        async function loadMarkdownContent() {
+            try {
+                loader.style.display = 'flex';
+                
+                // 模拟网络延迟，方便查看加载效果
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                const response = await fetch(markdownUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP错误 ${response.status}: ${response.statusText}`);
+                }
+                
+                const markdownContent = await response.text();
+                
+                // 解析并显示Markdown内容
+                previewContent.innerHTML = marked.parse(markdownContent);
+                
+                // 初始化阅读进度
+                updateReadingProgress();
+                
+            } catch (error) {
+                console.error('加载Markdown内容失败:', error);
+                
+                // 显示优化后的错误信息
+                previewContent.innerHTML = `
+                    <div class="error-container">
+                        <div class="error-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h2 class="error-title">内容加载失败</h2>
+                        <p class="error-message">无法从外部URL加载Markdown内容，请检查网络连接或URL是否正确。</p>
+                        
+                        <div class="error-details">
+                            <strong>错误详情:</strong><br>
+                            ${error.message || '未知错误'}
+                        </div>
+                        
+                        <div class="suggestions">
+                            <h3><i class="fas fa-lightbulb"></i> 建议解决方案</h3>
+                            <ul>
+                                <li>检查网络连接是否正常</li>
+                                <li>确认Markdown文件URL是否正确</li>
+                                <li>检查Markdown文件是否具有正确的CORS设置</li>
+                                <li>尝试刷新页面或稍后再试</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="retry-btn" onclick="loadMarkdownContent()">
+                            <i class="fas fa-redo"></i> 重新加载
+                        </button>
+                    </div>
+                `;
+            } finally {
+                loader.style.display = 'none';
+            }
         }
         
         // 主题切换
@@ -1124,8 +1327,8 @@ function createDigitalArt(traditionalSketch) {
             // 设置字体大小
             initFontSize();
             
-            // 解析并显示Markdown内容
-            previewContent.innerHTML = marked.parse(markdownContent);
+            // 加载外部Markdown内容
+            loadMarkdownContent();
             
             // 添加事件监听器
             themeToggle.addEventListener('click', toggleTheme);
