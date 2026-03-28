@@ -1,6 +1,6 @@
 "use strict";
 /*
-    Copyright 2024 Qiong-Mengzi.
+    Copyright 2024-2026 Qiong-Mengzi.
     This code is under Do What the Fuck You Want to Public License.
 
     放一下乱七八糟的东西，反正没人看就对了
@@ -85,6 +85,7 @@ var Succubus;
             t_text_score[i] = format(t_text[i], target);
             t_IndexTable[i] = i;
         }
+        // TODO: 使用Array.sort排序
         // Sorting
         // 之后想到什么算法再写罢...（如果谁会快速排序能否帮忙写一下w)
         // I don't know how to quickly sort.
@@ -106,6 +107,12 @@ var Succubus;
         return [t_IndexTable, t_text_score];
     }
     Succubus.Searching = Searching;
+    /**
+     * TODO: 写文档说明这一大堆是什么东西
+     * @param text
+     * @param target
+     * @returns
+     */
     function BaseTextMatchCurse(text, target) {
         let reg = RegExp('[' + target + ']+', 'ig');
         let result = text.match(reg);
