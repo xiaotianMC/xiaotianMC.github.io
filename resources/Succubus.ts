@@ -84,33 +84,22 @@ namespace Succubus {
         (text: string, target: string): number
     }
     export function Searching(text: Array<string>, target: string, format: SearchingFormat): number[][] {
-        var t_text: Array<string> = JSON_DeepCopy(text)
-        var t_text_score: Array<number> = new Array(text.length)
-        var t_IndexTable: Array<number> = new Array(text.length)
+        const t_text: Array<string> = JSON_DeepCopy(text)
+        const t_text_score: Array<number> = new Array(text.length)
+        const t_IndexTable: Array<number> = new Array(text.length)
         for (var i: number = 0; i < text.length; i++) {
             t_text_score[i] = format(t_text[i], target)
             t_IndexTable[i] = i
         }
-        // TODO: 使用Array.sort排序
         // Sorting
-        // 之后想到什么算法再写罢...（如果谁会快速排序能否帮忙写一下w)
-        // I don't know how to quickly sort.
-        // If anyone knows, could you help me write it down? Thank you.
-        for (var j = 0; j < text.length - 1; j++) {
-            for (var i = 0; i < text.length - j - 1; i++) {
-                if (t_text_score[i] > t_text_score[i + 1]) {
-                    // Swap scores
-                    let sort_t_num = t_text_score[i]
-                    t_text_score[i] = t_text_score[i + 1]
-                    t_text_score[i + 1] = sort_t_num
-                    // Swap Index
-                    let t_sort_index = t_IndexTable[i]
-                    t_IndexTable[i] = t_IndexTable[i + 1]
-                    t_IndexTable[i + 1] = t_sort_index
-                }
-            }
-        }
-        return [t_IndexTable, t_text_score]
+        // 创建索引
+        const indices: number[] = Array.from({ length: t_text_score.length }, (_, i) => i)
+        // 根据t_text_score排序索引
+        indices.sort((a, b) => t_text_score[a] - t_text_score[b])
+        // 用排序好的索引排序t_text_score和t_IndexTable
+        const sorted_t_IndexTable: number[] = indices.map(i => t_IndexTable[i])
+        const sorted_t_text_score: number[] = indices.map(i => t_text_score[i])
+        return [sorted_t_IndexTable, sorted_t_text_score]
     }
 
     /**
