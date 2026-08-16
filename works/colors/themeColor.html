@@ -5,11 +5,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>萤火盛夏-常用颜色</title>
+    <meta name="description" content="萤火盛夏站点统一配色速查：常用颜色色号，支持按名称或色号搜索，点击卡片即可复制。">
     <link rel="shortcut icon" href="/public/img/Glowstone_JE4_BE2.webp">
     <!--STYLE-->
     <link rel="stylesheet" href="/public/css/global_define.css">
-    <link rel="stylesheet" href="/public/css/mainBanner.css">
-    <link rel="stylesheet" href="/resources/css/themeColors.css">
+    <link rel="stylesheet" href="/resources/css/themeColors.css?v=202506">
     <!--SCRIPT-->
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>
@@ -23,7 +23,7 @@
             <div class="headerSelection">
                 <ul>
                     <li>
-                        <a href="/minecraft/MCserver/server-index.html">Minecraft 服务器</a>
+                        <a href="/minecraft/minecraft-index.html">Minecraft 服务器</a>
                     </li>
                     <li>
                         <a href="/minecraft/minecraft-index.html">Minecraft 相关内容</a>
@@ -33,6 +33,7 @@
                     </li>
                 </ul>
             </div>
+        </div>
     </header>
     <header class="mobileHeader">
         <div>
@@ -48,7 +49,7 @@
                 <div class="nav-items">
                     <ul>
                         <li>
-                            <a href="/minecraft/MCserver/server-index.html">Minecraft 服务器</a>
+                            <a href="/minecraft/minecraft-index.html">Minecraft 服务器</a>
                         </li>
                         <li>
                             <a href="/minecraft/minecraft-index.html">Minecraft 相关内容</a>
@@ -59,115 +60,107 @@
                     </ul>
                 </div>
     </header>
-<main>
-    <div class="center">
-        <div class="title">
-            <div class="innerTitle">
-                <span class="realTitle">萤火盛夏常用颜色</span>
-                <span class="Search"><input type="text" name="text" oninput="themeColorSearchCurse()" placeholder="输入颜色名，色号需加“#”"/></span>
+    <main>
+        <div class="center">
+            <!-- 页头：标题 + 搜索 -->
+            <section class="page-head">
+                <div class="page-head-row">
+                    <div class="page-head-text">
+                        <h1 class="page-title">萤火盛夏常用颜色</h1>
+                        <p class="page-subtitle">站点统一配色 · 点击卡片即可复制色号</p>
+                    </div>
+                    <div class="search-box">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <input id="search-input" type="text" placeholder="搜索颜色名，或输入色号如 #79afc5" aria-label="搜索颜色" autocomplete="off" spellcheck="false">
+                        <button id="search-clear" class="hidden" type="button" aria-label="清除搜索">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <p class="page-meta"><span id="color-count">0</span> 种颜色 · 支持按名称或色号搜索 · 完整色号匹配最接近颜色，部分色号按前缀查找</p>
+            </section>
+
+            <!-- 色板 -->
+            <section id="palette" class="palette" aria-label="颜色列表"></section>
+
+            <!-- 无结果提示 -->
+            <div id="empty-state" class="empty-state hidden" role="status">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2.5-1 2.5-2.5 0-.6-.2-1.1-.6-1.5-.4-.4-.6-.9-.6-1.5 0-1.4 1-2.5 2.5-2.5H17a4.5 4.5 0 0 0 4.5-4.5C21.5 6.6 17.2 3 12 3z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+                <p>没有找到匹配的颜色</p>
+                <button id="empty-reset" type="button">显示全部颜色</button>
             </div>
         </div>
-        <div class="palette"><!-- BACKUP
-            <div class="colorContainer">
-                <div class="innerColor">
-                    <div class="color" style="background-color: #CE4545;"></div>
-                    <p class="colorNum">#CE4545</p>
-                    <p class="colorName">萤火盛夏红</p>
-                    <a href="" class="copyNum">
-                        <div class="copyIcon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z" fill="#f8f9fa"/></svg>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            -->
-            <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-        </div>
-    </div>
-</main>
-    <!--FOOTER-->
-    <footer>
-        <div class="footerContainer">
-            <!--LINKS-->
-            <div class="links">
-                <div class="itemContainer">
-                    <ul class="footerItems_row">
-                        <li class="item , itemTitle"><a href="">合作</a></li>
-                        <li class="item"><a href="/developer.html">了解我们</a></li>
-                        <li class="item"><a href="">加入我们</a></li>
-                        <li class="item"><a href="">向我们反馈</a></li>
-                    </ul>
-                    <ul class="footerItems_row ">
-                        <li class="item , itemTitle"><a href="">帮助&工具</a></li>
-                        <li class="item"><a href="/works/works-index.html">资源中心</a></li>
-                        <li class="item"><a href="">文件下载</a></li>
-                        <li class="item"><a href="">内部资料</a></li>
-                    </ul>
-                    <ul class="footerItems_row ">
-                        <li class="item , itemTitle"><a href="">其他</a></li>
-                        <li class="item"><a href="">爱发电</a></li>
-                        <li class="item"><a href="">友情链接</a></li>
-                        <li class="item"><a href="">向阳频道</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!--TEXTS-->
-            <div class="info">
-                <div class="infoContainer">
-                    <ul class="footerItems_row">
-                        <li>欢迎您的来访！ヾ(≧▽≦*)o</li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li>
-                            <span id="busuanzi_container_site_uv">本站访客数 <span id="busuanzi_value_site_uv">
-                            </span> 人次</span>
-                        </li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li class="footer-item-info"><a href=""></a></li>
-                        <li class="footer-item-info"></li>
-                        <li class="footer-item-info"><a></a></li>
-                    </ul>
-                    <div class="webLinks">
-                        <ul>
-                            <p class="itemTitle">在社交媒体关注我们</p>
-                            <span>
-                                <li class="Bilibili-link" onclick="window.open('https://space.bilibili.com/3493263021443433','_self')">
-                                    <svg t="1642932213543" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2343" width="40" height="40"><path d="M234.909 9.656a80.468 80.468 0 0 1 68.398 0 167.374 167.374 0 0 1 41.843 30.578l160.937 140.82h115.07l160.936-140.82a168.983 168.983 0 0 1 41.843-30.578A80.468 80.468 0 0 1 930.96 76.445a80.468 80.468 0 0 1-17.703 53.914 449.818 449.818 0 0 1-35.406 32.187 232.553 232.553 0 0 1-22.531 18.508h100.585a170.593 170.593 0 0 1 118.289 53.109 171.397 171.397 0 0 1 53.914 118.288v462.693a325.897 325.897 0 0 1-4.024 70.007 178.64 178.64 0 0 1-80.468 112.656 173.007 173.007 0 0 1-92.539 25.75h-738.7a341.186 341.186 0 0 1-72.421-4.024A177.835 177.835 0 0 1 28.91 939.065a172.202 172.202 0 0 1-27.36-92.539V388.662a360.498 360.498 0 0 1 0-66.789A177.03 177.03 0 0 1 162.487 178.64h105.414c-16.899-12.07-31.383-26.555-46.672-39.43a80.468 80.468 0 0 1-25.75-65.984 80.468 80.468 0 0 1 39.43-63.57M216.4 321.873a80.468 80.468 0 0 0-63.57 57.937 108.632 108.632 0 0 0 0 30.578v380.615a80.468 80.468 0 0 0 55.523 80.469 106.218 106.218 0 0 0 34.601 5.632h654.208a80.468 80.468 0 0 0 76.444-47.476 112.656 112.656 0 0 0 8.047-53.109v-354.06a135.187 135.187 0 0 0 0-38.625 80.468 80.468 0 0 0-52.304-54.719 129.554 129.554 0 0 0-49.89-7.242H254.22a268.764 268.764 0 0 0-37.82 0z m0 0" fill="#ffffff" p-id="2344"></path><path d="M348.369 447.404a80.468 80.468 0 0 1 55.523 18.507 80.468 80.468 0 0 1 28.164 59.547v80.468a80.468 80.468 0 0 1-16.094 51.5 80.468 80.468 0 0 1-131.968-9.656 104.609 104.609 0 0 1-10.46-54.719v-80.468a80.468 80.468 0 0 1 70.007-67.593z m416.02 0a80.468 80.468 0 0 1 86.102 75.64v80.468a94.148 94.148 0 0 1-12.07 53.11 80.468 80.468 0 0 1-132.773 0 95.757 95.757 0 0 1-12.875-57.133V519.02a80.468 80.468 0 0 1 70.007-70.812z m0 0" fill="#ffffff" p-id="2345"></path></svg>
-                                </li>
-                                <li class="GitHub-link" onclick="window.open('https://github.com/xiaotianMC','_self')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-                                    </svg>
-                                </li>
-                                <li class="QQ-link" onclick="window.open('http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=l_TbGx4NrMnTZ70AGzPKp85VOIBjoDK4&authKey=rsDVfPvssfXTxTNMt44DYPMhm5v%2FLpKjG6ZHDjExnRjZlpMROInCW0lCc4TMPzhW&noverify=0&group_code=109149113','_self')">
-                                    <svg t="1642934989830" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7117" width="40" height="40"><path d="M897.031 626.742s-26.016-96.832-73.711-155.853c0 0 26.016-48.877-17.344-116.198 0 0-10.406-290.496-293.977-290.496S218.023 354.69 218.023 354.69c-43.359 67.321-17.344 116.198-17.344 116.198-47.695 59.021-73.711 155.853-73.711 155.853-24.281 118.043 21.68 139.254 28.617 141.098s22.547-16.6 27.75-24.9c5.203-8.3 16.477-35.044 19.078-36.888s6.938 13.833 6.938 13.833c18.211 59.944 57.234 103.288 57.234 103.288-39.023 14.755-65.906 43.344-65.906 43.344s-49.43 75.621 82.383 90.377 218.531-31.355 218.531-31.355h20.813s86.719 46.111 218.531 31.355 82.383-90.377 82.383-90.377-26.883-28.589-65.906-43.344c0 0 39.023-43.344 57.234-103.288 0 0 4.336-15.678 6.938-13.833s13.875 28.589 19.078 36.888c5.203 8.3 20.813 26.744 27.75 24.9s52.898-23.054 28.617-141.097z" p-id="7118" fill="#ffffff"></path></svg>
-                                </li>
-                            </span>
+
+        <!-- 复制成功提示 -->
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+        <!--FOOTER-->
+        <footer>
+            <div class="footerContainer">
+                <!--LINKS-->
+                <div class="links">
+                    <div class="itemContainer">
+                        <ul class="footerItems_row">
+                            <li class="item , itemTitle"><a href="">合作</a></li>
+                            <li class="item"><a href="/works/aboutUs.html">了解我们</a></li>
+                            <li class="item"><a href="">加入我们</a></li>
+                            <li class="item"><a href="/feedback/feedback-index.html">向我们反馈</a></li>
+                        </ul>
+                        <ul class="footerItems_row ">
+                            <li class="item , itemTitle"><a href="">帮助&工具</a></li>
+                            <li class="item"><a href="/works/works-index.html">资源中心</a></li>
+                            <li class="item"><a href="">文件下载</a></li>
+                            <li class="item"><a href="">内部资料</a></li>
+                        </ul>
+                        <ul class="footerItems_row ">
+                            <li class="item , itemTitle"><a href="">其他</a></li>
+                            <li class="item"><a href="">爱发电</a></li>
+                            <li class="item"><a href="">友情链接</a></li>
+                            <li class="item"><a href="/hidamari-channel/index.html">向阳频道</a></li>
                         </ul>
                     </div>
-                    <li class="footerItems_row , C-info">Copyright &copy; 萤火盛夏 Team Aestatis 2021-2025 All right reserved</li>
                 </div>
-            </div>    
-        </div>
-    </footer>
-</main>
+                <!--TEXTS-->
+                <div class="info">
+                    <div class="infoContainer">
+                        <ul class="footerItems_row">
+                            <li>欢迎您的来访！ヾ(≧▽≦*)o</li>
+                        </ul>
+                        <ul class="footerItems_row">
+                            <li>
+                                <span id="busuanzi_container_site_uv">本站访客数 <span id="busuanzi_value_site_uv">
+                                </span> 人次</span>
+                            </li>
+                        </ul>
+                        <ul class="footerItems_row">
+                            <li class="footer-item-info"><a href=""></a></li>
+                            <li class="footer-item-info"></li>
+                            <li class="footer-item-info"><a></a></li>
+                        </ul>
+                        <div class="webLinks">
+                            <ul>
+                                <p class="itemTitle">在社交媒体关注我们</p>
+                                <span>
+                                    <li class="Bilibili-link" onclick="window.open('https://space.bilibili.com/3493263021443433','_self')">
+                                        <svg t="1642932213543" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2343" width="40" height="40"><path d="M234.909 9.656a80.468 80.468 0 0 1 68.398 0 167.374 167.374 0 0 1 41.843 30.578l160.937 140.82h115.07l160.936-140.82a168.983 168.983 0 0 1 41.843-30.578A80.468 80.468 0 0 1 930.96 76.445a80.468 80.468 0 0 1-17.703 53.914 449.818 449.818 0 0 1-35.406 32.187 232.553 232.553 0 0 1-22.531 18.508h100.585a170.593 170.593 0 0 1 118.289 53.109 171.397 171.397 0 0 1 53.914 118.288v462.693a325.897 325.897 0 0 1-4.024 70.007 178.64 178.64 0 0 1-80.468 112.656 173.007 173.007 0 0 1-92.539 25.75h-738.7a341.186 341.186 0 0 1-72.421-4.024A177.835 177.835 0 0 1 28.91 939.065a172.202 172.202 0 0 1-27.36-92.539V388.662a360.498 360.498 0 0 1 0-66.789A177.03 177.03 0 0 1 162.487 178.64h105.414c-16.899-12.07-31.383-26.555-46.672-39.43a80.468 80.468 0 0 1-25.75-65.984 80.468 80.468 0 0 1 39.43-63.57M216.4 321.873a80.468 80.468 0 0 0-63.57 57.937 108.632 108.632 0 0 0 0 30.578v380.615a80.468 80.468 0 0 0 55.523 80.469 106.218 106.218 0 0 0 34.601 5.632h654.208a80.468 80.468 0 0 0 76.444-47.476 112.656 112.656 0 0 0 8.047-53.109v-354.06a135.187 135.187 0 0 0 0-38.625 80.468 80.468 0 0 0-52.304-54.719 129.554 129.554 0 0 0-49.89-7.242H254.22a268.764 268.764 0 0 0-37.82 0z m0 0" fill="#ffffff" p-id="2344"></path><path d="M348.369 447.404a80.468 80.468 0 0 1 55.523 18.507 80.468 80.468 0 0 1 28.164 59.547v80.468a80.468 80.468 0 0 1-16.094 51.5 80.468 80.468 0 0 1-131.968-9.656 104.609 104.609 0 0 1-10.46-54.719v-80.468a80.468 80.468 0 0 1 70.007-67.593z m416.02 0a80.468 80.468 0 0 1 86.102 75.64v80.468a94.148 94.148 0 0 1-12.07 53.11 80.468 80.468 0 0 1-132.773 0 95.757 95.757 0 0 1-12.875-57.133V519.02a80.468 80.468 0 0 1 70.007-70.812z m0 0" fill="#ffffff" p-id="2345"></path></svg>
+                                    </li>
+                                    <li class="GitHub-link" onclick="window.open('https://github.com/xiaotianMC','_self')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                                        </svg>
+                                    </li>
+                                    <li class="QQ-link" onclick="window.open('http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=l_TbGx4NrMnTZ70AGzPKp85VOIBjoDK4&authKey=rsDVfPvssfXTxTNMt44DYPMhm5v%2FLpKjG6ZHDjExnRjZlpMROInCW0lCc4TMPzhW&noverify=0&group_code=109149113','_self')">
+                                        <svg t="1642934989830" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7117" width="40" height="40"><path d="M897.031 626.742s-26.016-96.832-73.711-155.853c0 0 26.016-48.877-17.344-116.198 0 0-10.406-290.496-293.977-290.496S218.023 354.69 218.023 354.69c-43.359 67.321-17.344 116.198-17.344 116.198-47.695 59.021-73.711 155.853-73.711 155.853-24.281 118.043 21.68 139.254 28.617 141.098s22.547-16.6 27.75-24.9c5.203-8.3 16.477-35.044 19.078-36.888s6.938 13.833 6.938 13.833c18.211 59.944 57.234 103.288 57.234 103.288-39.023 14.755-65.906 43.344-65.906 43.344s-49.43 75.621 82.383 90.377 218.531-31.355 218.531-31.355h20.813s86.719 46.111 218.531 31.355 82.383-90.377 82.383-90.377-26.883-28.589-65.906-43.344c0 0 39.023-43.344 57.234-103.288 0 0 4.336-15.678 6.938-13.833s13.875 28.589 19.078 36.888c5.203 8.3 20.813 26.744 27.75 24.9s52.898-23.054 28.617-141.097z" p-id="7118" fill="#ffffff"></path></svg>
+                                    </li>
+                                </span>
+                            </ul>
+                        </div>
+                        <li class="footerItems_row , C-info">Copyright &copy; 萤火盛夏 Team Aestatis 2021-2025 All right reserved</li>
+                    </div>
+                </div>    
+            </div>
+        </footer>
+    </main>
+    <script src="/works/colors/themeColor.js?v=202506b"></script>
 </body>
-<script src="/resources/Succubus.js"></script>
-<script src="/works/colors/themeColor.js"></script>
-<script src="/resources/InfoShow.js"></script>
-<script>
-    var fetched_data = '' // 方便调试用
-    Succubus.FetchJSON('/works/colors/themeColor.json')
-    .then(data=>{
-        var color_value_list = Array(data.length)
-        for(var color_index = 0; color_index < data.length; color_index++){
-            color_value_list[color_index] = data[color_index]['value']
-        }
-        document.getElementsByClassName('palette')[0].innerHTML += colorContainerWrite(data)
-        // Succubus.ClipboardCopyByClassT('copyIcon', color_value_list, ()=>{ShowInfo(document.getElementsByTagName('body')[0], '复制成功', 2000)})
-        Succubus.ClipboardCopyByClassT('copyIcon', color_value_list)
-        fetched_data = data
-    })
-</script>
 </html>

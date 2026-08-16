@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部作品 | 向阳频道汉化组</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sun: { 400: '#FFD100', 500: '#FF9100' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; transition: background-color 0.4s, color 0.4s; }
+        .sun-gradient { background: linear-gradient(135deg, #FFD100 0%, #FF9100 100%); }
+        
+        /* 瀑布流核心样式 */
+        .waterfall-container {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .waterfall-container { column-count: 2; } }
+        @media (min-width: 1024px) { .waterfall-container { column-count: 3; } }
+        @media (min-width: 1280px) { .waterfall-container { column-count: 4; } }
+
+        .waterfall-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .hover-lift { 
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease; 
+        }
+        .hover-lift:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); 
+        }
+        .dark .hover-lift:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #FFD100 0%, #FF9100 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .fade-in { animation: fadeIn 0.4s ease forwards; }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-yellow-100 dark:border-slate-800 transition-colors">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 sun-gradient rounded-full flex items-center justify-center text-white shadow-sm">
+                    <i class="fas fa-sun text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tighter text-gray-800 dark:text-white">向阳频道<span class="text-yellow-500">.</span></span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="index.html" class="hover:text-yellow-500 transition dark:text-slate-300">首页</a>
+                <a href="index.html" class="text-yellow-500 transition dark:text-yellow-400 font-bold border-b-2 border-yellow-400">全部作品</a>
+                <button id="theme-toggle" class="ml-4 p-2 w-10 h-10 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-yellow-400 hover:ring-2 ring-yellow-400 transition-all">
+                    <i id="theme-toggle-dark-icon" class="hidden fas fa-moon"></i>
+                    <i id="theme-toggle-light-icon" class="hidden fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 筛选 -->
+    <section class="py-6 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-sm sticky top-[73px] z-40 border-b border-gray-200 dark:border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-6 justify-between items-center">
+                <div class="flex flex-wrap justify-center gap-3" id="filter-group">
+                    <button data-filter="all" class="filter-btn active px-5 py-2 rounded-full border border-gray-200 dark:border-slate-700 text-sm font-medium transition-all">全部</button>
+                    <button data-filter="manga" class="filter-btn px-5 py-2 rounded-full border border-gray-200 dark:border-slate-700 text-sm font-medium transition-all">漫画</button>
+                    <button data-filter="video" class="filter-btn px-5 py-2 rounded-full border border-gray-200 dark:border-slate-700 text-sm font-medium transition-all">长视频</button>
+                    <button data-filter="short" class="filter-btn px-5 py-2 rounded-full border border-gray-200 dark:border-slate-700 text-sm font-medium transition-all">短视频</button>
+                </div>
+                <div class="relative w-full md:w-80">
+                    <input type="text" id="search-input" placeholder="输入关键词检索..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-yellow-400 transition-all outline-none text-sm">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 瀑布流网格 -->
+    <main class="flex-grow py-12 container mx-auto px-6">
+        <div id="works-grid" class="waterfall-container">
+            <!-- 动态注入数据 -->
+        </div>
+
+        <div id="no-results" class="hidden text-center py-20">
+            <p class="text-gray-400">没有找到相关内容呢...</p>
+        </div>
+    </main>
+
+    <script>
+        // 1. JSON 数据结构（增加 video 和 short 类型）
+        const projectsData = [
+            {
+                id: 1,
+                title: "某部动人的青春物语",
+                author: "阳光下的绘画者",
+                type: "manga", // 漫画
+                aspect: "manga", // 3:4
+                tags: ["纯爱", "校园"],
+                cover: "https://images.unsplash.com/photo-1541512416146-3cf58d9b271b?auto=format&fit=crop&q=80&w=400",
+                update: "2小时前"
+            },
+            {
+                id: 2,
+                title: "【向阳频道】汉化组成员日常VLOG",
+                author: "向阳小助手",
+                type: "video", // 横屏视频
+                aspect: "video", // 16:9
+                tags: ["日常", "花絮"],
+                cover: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=600",
+                update: "昨天"
+            },
+            {
+                id: 3,
+                title: "15秒带你看完《蔚蓝幻想》名场面",
+                author: "剪辑师A",
+                type: "short", // 竖屏短视频
+                aspect: "short", // 9:16
+                tags: ["剪辑", "名场面"],
+                cover: "https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=400",
+                update: "12-05"
+            },
+            {
+                id: 4,
+                title: "向阳频道汉化组：日常漫",
+                author: "组内打杂",
+                type: "manga",
+                aspect: "manga",
+                tags: ["搞笑"],
+                cover: "https://images.unsplash.com/photo-1578632738980-43314a574d67?auto=format&fit=crop&q=80&w=400",
+                update: "3天前"
+            },
+            {
+                id: 5,
+                title: "新番推荐：这个夏天的阳光依然刺眼",
+                author: "漫评人X",
+                type: "video",
+                aspect: "video",
+                tags: ["漫评", "推荐"],
+                cover: "https://images.unsplash.com/photo-1528459801416-a7e97477ee70?auto=format&fit=crop&q=80&w=600",
+                update: "2023-11-20"
+            },
+            {
+                id: 6,
+                title: "二次元萌妹子变装瞬间",
+                author: "Cosplay-Link",
+                type: "short",
+                aspect: "short",
+                tags: ["Cosplay", "变装"],
+                cover: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400",
+                update: "刚刚"
+            }
+        ];
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        const grid = document.getElementById('works-grid');
+        const noResults = document.getElementById('no-results');
+        const searchInput = document.getElementById('search-input');
+
+        function renderWorks() {
+            const filtered = projectsData.filter(item => {
+                const matchesFilter = (currentFilter === 'all') || (item.type === currentFilter);
+                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                     item.tags.some(t => t.includes(searchQuery));
+                return matchesFilter && matchesSearch;
+            });
+
+            grid.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            filtered.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = `waterfall-item bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover-lift border border-gray-100 dark:border-slate-700 fade-in`;
+                
+                // 动态判断比例类名
+                let aspectClass = "aspect-[3/4]"; // 默认漫画比例
+                if(item.aspect === 'video') aspectClass = "aspect-video";
+                if(item.aspect === 'short') aspectClass = "aspect-[9/16]";
+
+                // 动态渲染图标
+                const isMedia = item.type === 'video' || item.type === 'short';
+
+                card.innerHTML = `
+                    <div class="${aspectClass} relative overflow-hidden bg-gray-200">
+                        <img src="${item.cover}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                        
+                        <!-- 媒体标识 -->
+                        ${isMedia ? `
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group">
+                                <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/30 shadow-lg transition-transform group-hover:scale-110">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div class="absolute top-3 left-3 flex flex-wrap gap-2">
+                            <span class="bg-black/40 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded-md uppercase tracking-tighter">
+                                ${item.type === 'manga' ? 'Manga' : (item.type === 'video' ? 'Video' : 'Shorts')}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-sm mb-1 leading-snug dark:text-white line-clamp-2">${item.title}</h3>
+                        <p class="text-[10px] text-gray-400 mb-2">@${item.author}</p>
+                        <div class="flex justify-between items-center text-[9px] text-gray-400 mt-2 pt-2 border-t border-gray-50 dark:border-slate-700">
+                            <span>${item.update} 更新</span>
+                            <i class="fas fa-external-link-alt opacity-50"></i>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 事件监听
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderWorks();
+        });
+
+        document.getElementById('filter-group').addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.getAttribute('data-filter');
+                renderWorks();
+            }
+        });
+
+        // 深色模式 (同前)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-toggle-dark-icon').classList.toggle('hidden');
+            document.getElementById('theme-toggle-light-icon').classList.toggle('hidden');
+        });
+
+        // 初始化
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-toggle-light-icon').classList.remove('hidden');
+        } else {
+            document.getElementById('theme-toggle-dark-icon').classList.remove('hidden');
+        }
+
+        renderWorks();
+    </script>
+</body>
+</html>

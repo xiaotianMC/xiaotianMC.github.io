@@ -1,132 +1,537 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>向阳频道</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="向阳频道汉化组官方主页：精品漫画与游戏的汉化、汉化进度看板与长期招募信息。向阳而生，传递温暖。">
+    <meta name="theme-color" content="#FFD100">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="向阳频道汉化组 | 向阳而生，传递温暖">
+    <meta property="og:description" content="精品漫画与游戏的汉化，进度看板与招募信息。向阳而生，传递温暖。">
+    <meta property="og:locale" content="zh_CN">
+    <title>向阳频道汉化组 | 向阳而生，传递温暖</title>
     <link rel="shortcut icon" href="/public/img/hidamari-channel.png">
-    <!--STYLE-->
-    <link rel="stylesheet" href="/public/css/global_define.css">
-    <!--SCRIPT-->
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <!-- 预连接：加速第三方资源加载 -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sun: { 400: '#FFD100', 500: '#FF9100' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { color-scheme: light; }
+        .dark { color-scheme: dark; }
+        body { font-family: 'Noto Sans SC', sans-serif; transition: background-color 0.4s, color 0.4s; }
+        .sun-gradient { background: linear-gradient(135deg, #FFD100 0%, #FF9100 100%); }
+
+        /* 轮播图渐变过渡 */
+        .carousel-item { opacity: 0; transition: opacity 0.8s ease-in-out; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .carousel-item.active { opacity: 1; position: relative; }
+        .carousel-item:not(.active) { pointer-events: none; }
+
+        /* 鼠标悬浮效果 */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .hover-lift:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-bar { transition: width 1.5s ease-in-out; }
+
+        /* 锚点跳转避开吸顶导航 */
+        section[id] { scroll-margin-top: 5rem; }
+
+        /* 键盘焦点可见性 */
+        a:focus-visible, button:focus-visible { outline: 2px solid #FF9100; outline-offset: 2px; border-radius: 0.5rem; }
+
+        /* 尊重「减少动态效果」系统偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
-<body>
-<main>
-    <header class="PCheader">
-        <div class="headerContainer">
-            <div>
-                <a href="/hidamari-channel/index.html">向阳频道</a>
+<body class="bg-slate-50 text-gray-800 dark:bg-slate-900 dark:text-slate-100">
+
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-yellow-100 dark:border-slate-800 transition-colors">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center gap-4">
+            <a href="#home" class="flex items-center space-x-2" aria-label="向阳频道，回到首页">
+                <div class="w-10 h-10 sun-gradient rounded-full flex items-center justify-center text-white shadow-sm">
+                    <i class="fas fa-sun text-xl" aria-hidden="true"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tighter text-gray-800 dark:text-white">向阳频道<span class="text-yellow-500">.</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="#home" class="hover:text-yellow-500 transition dark:text-slate-300">首页</a>
+                <a href="#works" class="hover:text-yellow-500 transition dark:text-slate-300">汉化作品</a>
+                <a href="#progress" class="hover:text-yellow-500 transition dark:text-slate-300">进度看板</a>
+                <a href="#join" class="hover:text-yellow-500 transition dark:text-slate-300">加入我们</a>
             </div>
-            <div class="headerSelection">
-                <ul>
-                    <li>
-                        <a href="#MCserver">向阳阅读器</a>
-                    </li>
-                    <li>
-                        <a href="#project">资源下载</a>
-                    </li>
-                    <li>
-                        <a href="#blockUs">关于我们</a>
-                    </li>
-                </ul>
+
+            <div class="flex items-center space-x-3">
+                <button id="theme-toggle" aria-label="切换深色 / 浅色模式" class="p-2 w-10 h-10 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-yellow-400 hover:ring-2 ring-yellow-400 transition-all">
+                    <i id="theme-toggle-dark-icon" class="hidden fas fa-moon" aria-hidden="true"></i>
+                    <i id="theme-toggle-light-icon" class="hidden fas fa-sun" aria-hidden="true"></i>
+                </button>
+
+                <a href="#join" class="hidden md:inline-block bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 rounded-full text-sm font-bold transition shadow-md shadow-sky-100 dark:shadow-none">
+                    联系我们
+                </a>
+
+                <!-- 移动端菜单开关 -->
+                <button id="menu-toggle" aria-label="打开菜单" aria-expanded="false" class="md:hidden p-2 w-10 h-10 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:ring-2 ring-yellow-400 transition-all">
+                    <i id="menu-icon-open" class="fas fa-bars" aria-hidden="true"></i>
+                    <i id="menu-icon-close" class="hidden fas fa-xmark" aria-hidden="true"></i>
+                </button>
             </div>
-    </header>
-    <header class="mobileHeader">
-        <div>
-            <a href="/hidamari-channel/index.html">向阳频道</a>
         </div>
-        <input type="checkbox" name="" id="toggler">
-                <label for="toggler">
-                    <div class="hamburgerContainer">
-                        <span></span>
-                        <span></span>
-                    </div>
-                </label>
-                <div class="nav-items">
-                    <ul>
-                        <li>
-                            <a href="/minecraft/MCserver/server-index.html">向阳阅读器</a>
-                        </li>
-                        <li>
-                            <a href="/minecraft/minecraft-index.html">资源下载</a>
-                        </li>
-                        <li>
-                            <a href="/works/aboutUs.html">关于我们</a>
-                        </li>
-                    </ul>
-                </div>
-    </header>  
-    <!--FOOTER-->
-    <footer>
-        <div class="footerContainer">
-            <!--LINKS-->
-            <div class="links">
-                <div class="itemContainer">
-                    <ul class="footerItems_row">
-                        <li class="item , itemTitle"><a href="">合作</a></li>
-                        <li class="item"><a href="developer.html">了解我们</a></li>
-                        <li class="item"><a href="">加入我们</a></li>
-                        <li class="item"><a href="">向我们反馈</a></li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li class="item , itemTitle"><a href="">帮助&工具</a></li>
-                        <li class="item"><a href="/works/works-index.html">资源中心</a></li>
-                        <li class="item"><a href="">文件下载</a></li>
-                        <li class="item"><a href="">内部资料</a></li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li class="item , itemTitle"><a href="">其他</a></li>
-                        <li class="item"><a href="">爱发电</a></li>
-                        <li class="item"><a href="">友情链接</a></li>
-                        <li class="item"><a href="">向阳频道</a></li>
-                    </ul>
+
+        <!-- 移动端下拉菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-1 font-medium">
+                <a href="#home" class="mobile-menu-link px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition">首页</a>
+                <a href="#works" class="mobile-menu-link px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition">汉化作品</a>
+                <a href="#progress" class="mobile-menu-link px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition">进度看板</a>
+                <a href="#join" class="mobile-menu-link px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition">加入我们</a>
+                <a href="#join" class="mobile-menu-link px-3 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-center transition">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (轮播图版) -->
+    <section id="home" class="relative overflow-hidden bg-white dark:bg-slate-950 pt-16 pb-32 transition-colors">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0 z-10">
+                <span class="inline-block px-4 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-bold mb-6">连接好故事，传递光与热</span>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 dark:text-white">
+                    向阳而生，<br><span class="text-transparent bg-clip-text sun-gradient">传递每一份感动</span>
+                </h1>
+                <p class="text-gray-500 dark:text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
+                    向阳频道汉化组致力于精品漫画与游戏的汉化工作。我们不仅是文字的搬运工，更是情感的传递者。
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#works" class="sun-gradient text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-yellow-200 dark:shadow-none hover:opacity-90 transition">浏览作品库集</a>
+                    <a href="#join" class="bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-200 px-8 py-4 rounded-2xl font-bold hover:bg-gray-200 dark:hover:bg-slate-700 transition">加入汉化组</a>
                 </div>
             </div>
-            <!--TEXTS-->
-            <div class="info">
-                <div class="infoContainer">
-                    <ul class="footerItems_row">
-                        <li>欢迎您的来访！ヾ(≧▽≦*)o</li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li>
-                            <span id="busuanzi_container_site_uv">
-                                本站访客数 
-                                <span id="busuanzi_value_site_uv"></span> 
-                                人次
-                            </span>
-                        </li>
-                    </ul>
-                    <ul class="footerItems_row">
-                        <li class="footer-item-info"><a href=""></a></li>
-                        <li class="footer-item-info"></li>
-                        <li class="footer-item-info"><a></a></li>
-                    </ul>
-                    <div class="webLinks">
-                        <ul>
-                            <p class="itemTitle">在社交媒体关注我们</p>
-                            <span>
-                                <li class="Bilibili-link" onclick="window.open('https://space.bilibili.com/382997989/','_self')">
-                                    <svg t="1642932213543" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2343" width="40" height="40"><path d="M234.909 9.656a80.468 80.468 0 0 1 68.398 0 167.374 167.374 0 0 1 41.843 30.578l160.937 140.82h115.07l160.936-140.82a168.983 168.983 0 0 1 41.843-30.578A80.468 80.468 0 0 1 930.96 76.445a80.468 80.468 0 0 1-17.703 53.914 449.818 449.818 0 0 1-35.406 32.187 232.553 232.553 0 0 1-22.531 18.508h100.585a170.593 170.593 0 0 1 118.289 53.109 171.397 171.397 0 0 1 53.914 118.288v462.693a325.897 325.897 0 0 1-4.024 70.007 178.64 178.64 0 0 1-80.468 112.656 173.007 173.007 0 0 1-92.539 25.75h-738.7a341.186 341.186 0 0 1-72.421-4.024A177.835 177.835 0 0 1 28.91 939.065a172.202 172.202 0 0 1-27.36-92.539V388.662a360.498 360.498 0 0 1 0-66.789A177.03 177.03 0 0 1 162.487 178.64h105.414c-16.899-12.07-31.383-26.555-46.672-39.43a80.468 80.468 0 0 1-25.75-65.984 80.468 80.468 0 0 1 39.43-63.57M216.4 321.873a80.468 80.468 0 0 0-63.57 57.937 108.632 108.632 0 0 0 0 30.578v380.615a80.468 80.468 0 0 0 55.523 80.469 106.218 106.218 0 0 0 34.601 5.632h654.208a80.468 80.468 0 0 0 76.444-47.476 112.656 112.656 0 0 0 8.047-53.109v-354.06a135.187 135.187 0 0 0 0-38.625 80.468 80.468 0 0 0-52.304-54.719 129.554 129.554 0 0 0-49.89-7.242H254.22a268.764 268.764 0 0 0-37.82 0z m0 0" fill="#ffffff" p-id="2344"></path><path d="M348.369 447.404a80.468 80.468 0 0 1 55.523 18.507 80.468 80.468 0 0 1 28.164 59.547v80.468a80.468 80.468 0 0 1-16.094 51.5 80.468 80.468 0 0 1-131.968-9.656 104.609 104.609 0 0 1-10.46-54.719v-80.468a80.468 80.468 0 0 1 70.007-67.593z m416.02 0a80.468 80.468 0 0 1 86.102 75.64v80.468a94.148 94.148 0 0 1-12.07 53.11 80.468 80.468 0 0 1-132.773 0 95.757 95.757 0 0 1-12.875-57.133V519.02a80.468 80.468 0 0 1 70.007-70.812z m0 0" fill="#ffffff" p-id="2345"></path></svg>
-                                </li>
-                                <li class="GitHub-link" onclick="window.open('https://github.com/xiaotianMC','_self')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-                                    </svg>
-                                </li>
-                                <li class="QQ-link" onclick="window.open('https://qm.qq.com/q/1auPuU45WS','_self')">
-                                    <svg t="1642934989830" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7117" width="40" height="40"><path d="M897.031 626.742s-26.016-96.832-73.711-155.853c0 0 26.016-48.877-17.344-116.198 0 0-10.406-290.496-293.977-290.496S218.023 354.69 218.023 354.69c-43.359 67.321-17.344 116.198-17.344 116.198-47.695 59.021-73.711 155.853-73.711 155.853-24.281 118.043 21.68 139.254 28.617 141.098s22.547-16.6 27.75-24.9c5.203-8.3 16.477-35.044 19.078-36.888s6.938 13.833 6.938 13.833c18.211 59.944 57.234 103.288 57.234 103.288-39.023 14.755-65.906 43.344-65.906 43.344s-49.43 75.621 82.383 90.377 218.531-31.355 218.531-31.355h20.813s86.719 46.111 218.531 31.355 82.383-90.377 82.383-90.377-26.883-28.589-65.906-43.344c0 0 39.023-43.344 57.234-103.288 0 0 4.336-15.678 6.938-13.833s13.875 28.589 19.078 36.888c5.203 8.3 20.813 26.744 27.75 24.9s52.898-23.054 28.617-141.097z" p-id="7118" fill="#ffffff"></path></svg>
-                                </li>
-                            </span>
-                        </ul>
+
+            <!-- 轮播图区域 -->
+            <div class="md:w-1/2 relative w-full h-[400px] md:h-[500px]">
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-yellow-200 dark:bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" aria-hidden="true"></div>
+                <div class="absolute -bottom-10 left-10 w-64 h-64 bg-sky-200 dark:bg-sky-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30" aria-hidden="true"></div>
+
+                <!-- 轮播容器 -->
+                <div id="hero-carousel" tabindex="0"
+                     class="relative h-full w-full rounded-3xl shadow-2xl border-8 border-white dark:border-slate-800 overflow-hidden group"
+                     role="group" aria-roledescription="轮播图" aria-label="精选作品展示">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active" role="group" aria-roledescription="幻灯片" aria-label="第 1 张，共 3 张">
+                        <img src="/hidamari-channel/res/index/BASE-COVER-3.png" width="1920" height="1080" fetchpriority="high" class="w-full h-full object-cover" alt="向阳频道主题横幅：热气球与夏日天空">
                     </div>
-                    <li class="footerItems_row , C-info">本网站非向阳素描官方网站，部分资源来源于网络，若有侵权，请联系删除。</li>
-                    <li class="footerItems_row , C-info">Copyright &copy; 向阳频道 Hidamari Channel 2025 All right reserved</li>
+                    <!-- Slide 2 -->
+                    <div class="carousel-item" role="group" aria-roledescription="幻灯片" aria-label="第 2 张，共 3 张" aria-hidden="true">
+                        <img src="/hidamari-channel/res/index/BASE-COVER-2.png" width="1920" height="1080" decoding="async" class="w-full h-full object-cover" alt="向阳频道主题横幅">
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-item" role="group" aria-roledescription="幻灯片" aria-label="第 3 张，共 3 张" aria-hidden="true">
+                        <img src="/hidamari-channel/res/index/BASE-COVER.png" width="1920" height="1080" decoding="async" class="w-full h-full object-cover" alt="向阳频道主题横幅">
+                    </div>
+
+                    <!-- 上/下一张按钮 -->
+                    <button id="carousel-prev" aria-label="上一张" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white transition opacity-0 group-hover:opacity-100 focus-visible:opacity-100">
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button id="carousel-next" aria-label="下一张" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white transition opacity-0 group-hover:opacity-100 focus-visible:opacity-100">
+                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- 轮播控制指示点 -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+                        <button class="carousel-dot w-8 h-3 rounded-full bg-white transition-all" data-index="0" aria-label="第 1 张"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" data-index="1" aria-label="第 2 张"></button>
+                        <button class="carousel-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" data-index="2" aria-label="第 3 张"></button>
+                    </div>
                 </div>
-            </div>    
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新作品板块 -->
+    <section id="works" class="py-24 bg-slate-50 dark:bg-slate-900 transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2 dark:text-white">最新发布</h2>
+                    <p class="text-gray-500 dark:text-slate-400">第一时间感受来自向阳的温暖</p>
+                </div>
+                <a href="/hidamari-channel/works/index.html" class="text-sky-500 font-bold hover:underline">查看全部作品 <i class="fas fa-arrow-right ml-1" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 卡片 1 -->
+                <a href="/hidamari-channel/works/index.html" class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-sm hover-lift border border-gray-100 dark:border-slate-700 transition-all group">
+                    <div class="h-64 bg-gray-200 dark:bg-slate-700 relative overflow-hidden">
+                        <img src="/hidamari-channel/res/index/cover.jpg" width="620" height="357" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="某部动人的青春物语封面">
+                        <span class="absolute top-4 right-4 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full">已完结</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">某部动人的青春物语</h3>
+                        <p class="text-gray-500 dark:text-slate-400 text-sm mb-4 line-clamp-2">关于在这个夏天，我们与向日葵田发生的故事...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400"><i class="far fa-clock mr-1" aria-hidden="true"></i> 2小时前更新</span>
+                            <span class="text-sky-500 font-bold text-sm group-hover:underline">立即阅读</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 卡片 2 -->
+                <a href="/hidamari-channel/works/index.html" class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-sm hover-lift border border-gray-100 dark:border-slate-700 transition-all group">
+                    <div class="h-64 bg-gray-200 dark:bg-slate-700 relative overflow-hidden">
+                        <img src="/hidamari-channel/res/index/join.png" width="1470" height="827" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="蔚蓝色的幻想日记封面">
+                        <span class="absolute top-4 right-4 bg-sky-400 text-white text-xs font-bold px-3 py-1 rounded-full">连载中</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">蔚蓝色的幻想日记</h3>
+                        <p class="text-gray-500 dark:text-slate-400 text-sm mb-4 line-clamp-2">在这座充满奇迹的城市，所有的相遇都是注定。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400"><i class="far fa-clock mr-1" aria-hidden="true"></i> 昨天更新</span>
+                            <span class="text-sky-500 font-bold text-sm group-hover:underline">立即阅读</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 卡片 3 -->
+                <a href="/hidamari-channel/works/index.html" class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-sm hover-lift border border-gray-100 dark:border-slate-700 transition-all group">
+                    <div class="h-64 bg-gray-200 dark:bg-slate-700 relative overflow-hidden">
+                        <img src="/hidamari-channel/res/index/banner.jpg" width="380" height="542" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="向阳频道汉化组日常封面">
+                        <span class="absolute top-4 right-4 bg-sky-400 text-white text-xs font-bold px-3 py-1 rounded-full">连载中</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">向阳频道汉化组：日常</h3>
+                        <p class="text-gray-500 dark:text-slate-400 text-sm mb-4 line-clamp-2">记录汉化组内部那些搞笑又励志的瞬间。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400"><i class="far fa-clock mr-1" aria-hidden="true"></i> 3天前更新</span>
+                            <span class="text-sky-500 font-bold text-sm group-hover:underline">立即阅读</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 进度看板 -->
+    <section id="progress" class="py-24 bg-white dark:bg-slate-950 transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4 dark:text-white">汉化进度看板</h2>
+                    <div class="w-20 h-1 sun-gradient mx-auto rounded-full"></div>
+                </div>
+                <div class="space-y-8">
+                    <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold dark:text-slate-200">作品名称 A (第12话)</span>
+                            <span class="text-yellow-600 dark:text-yellow-400 font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="作品名称 A 第12话的汉化进度">
+                            <div class="sun-gradient h-3 rounded-full progress-bar" style="width: 0%" data-target="85"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold dark:text-slate-200">神秘新作 (第一卷)</span>
+                            <span class="text-sky-500 font-bold">40%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="神秘新作第一卷第 40% 汉化进度">
+                            <div class="bg-sky-400 h-3 rounded-full progress-bar" style="width: 0%" data-target="40"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 招新板块 -->
+    <section id="join" class="py-24 bg-slate-900 dark:bg-black text-white relative overflow-hidden transition-colors">
+        <div class="absolute top-0 right-0 p-20 opacity-10" aria-hidden="true"><i class="fas fa-sun text-[200px]"></i></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl font-bold mb-6">想成为那束光吗？</h2>
+            <p class="text-gray-400 mb-12 max-w-xl mx-auto">我们长期招募：日语翻译、润色、修图、嵌字。无论你是大触还是热血新人，只要有爱，向阳频道就为你敞开大门。</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto text-sm">
+                <div class="border border-gray-700 p-4 rounded-xl hover:border-yellow-400 transition cursor-help" title="负责日译中的文字翻译工作">日语翻译</div>
+                <div class="border border-gray-700 p-4 rounded-xl hover:border-yellow-400 transition cursor-help" title="负责图片清理、修复与调色">修图打杂</div>
+                <div class="border border-gray-700 p-4 rounded-xl hover:border-yellow-400 transition cursor-help" title="负责特效字体与对白嵌字">特效嵌字</div>
+                <div class="border border-gray-700 p-4 rounded-xl hover:border-yellow-400 transition cursor-help" title="负责资源收集与整理发布">资源搬运</div>
+            </div>
+            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=l_TbGx4NrMnTZ70AGzPKp85VOIBjoDK4&authKey=rsDVfPvssfXTxTNMt44DYPMhm5v%2FLpKjG6ZHDjExnRjZlpMROInCW0lCc4TMPzhW&noverify=0&group_code=109149113"
+               target="_blank" rel="noopener"
+               class="inline-block sun-gradient text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:scale-105 transition">
+                立即提交申请表 <i class="fab fa-qq ml-1" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-white dark:bg-slate-950 py-12 border-t border-gray-100 dark:border-slate-900 transition-colors">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                <div class="text-left mb-6 md:mb-0">
+                    <div class="text-xl font-bold mb-2 tracking-tighter dark:text-white">向阳频道<span class="text-yellow-500">.</span></div>
+                    <p class="text-gray-400 text-sm">连接每一个好故事，向阳而生。</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://space.bilibili.com/3493263021443433" target="_blank" rel="noopener" aria-label="哔哩哔哩" class="text-gray-400 hover:text-blue-400 text-2xl transition"><i class="fab fa-bilibili" aria-hidden="true"></i></a>
+                    <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=l_TbGx4NrMnTZ70AGzPKp85VOIBjoDK4&authKey=rsDVfPvssfXTxTNMt44DYPMhm5v%2FLpKjG6ZHDjExnRjZlpMROInCW0lCc4TMPzhW&noverify=0&group_code=109149113" target="_blank" rel="noopener" aria-label="QQ 交流群" class="text-gray-400 hover:text-green-500 text-2xl transition"><i class="fab fa-qq" aria-hidden="true"></i></a>
+                    <a href="https://github.com/xiaotianMC" target="_blank" rel="noopener" aria-label="GitHub" class="text-gray-400 hover:text-gray-900 dark:hover:text-white text-2xl transition"><i class="fab fa-github" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- 开发库与工具信息 -->
+            <div class="pt-8 border-t border-gray-100 dark:border-slate-900">
+                <div class="flex flex-wrap justify-center gap-6 text-gray-500 dark:text-gray-400 text-xs">
+                    <span class="flex items-center"><i class="fas fa-wind mr-1 text-sky-400" aria-hidden="true"></i> Tailwind CSS 3.0</span>
+                    <span class="flex items-center"><i class="fas fa-font mr-1 text-blue-500" aria-hidden="true"></i> Google Fonts (Noto Sans SC)</span>
+                    <span class="flex items-center"><i class="fab fa-font-awesome mr-1 text-indigo-500" aria-hidden="true"></i> Font Awesome 6.0</span>
+                </div>
+                <p class="mt-8 text-gray-400 text-[10px]">
+                    &copy; 2023-<span id="year">2025</span> 向阳频道汉化组 Xiangyang Channel Scanlation. 本站纯静态托管。
+                </p>
+                <p class="mt-2 text-[10px]">
+                    <a href="/index.html" class="text-gray-400 hover:text-yellow-500 transition">← 返回萤火盛夏主页</a>
+                </p>
+            </div>
         </div>
     </footer>
-</main>
+
+    <!-- 回到顶部 -->
+    <button id="back-to-top" aria-label="回到顶部"
+            class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full sun-gradient text-white shadow-lg shadow-yellow-200 dark:shadow-none opacity-0 pointer-events-none translate-y-2 transition-all duration-300 hover:scale-105">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- 页面逻辑 -->
+    <script>
+        (function () {
+            'use strict';
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* ========== 深色模式 ========== */
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateIcons(isDark) {
+                if (!darkIcon || !lightIcon) return;
+                lightIcon.classList.toggle('hidden', !isDark);
+                darkIcon.classList.toggle('hidden', isDark);
+            }
+
+            function applyTheme(theme) {
+                const isDark = theme === 'dark';
+                document.documentElement.classList.toggle('dark', isDark);
+                updateIcons(isDark);
+            }
+
+            const userTheme = localStorage.getItem('color-theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(userTheme === 'dark' || (!userTheme && systemDark) ? 'dark' : 'light');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                    applyTheme(next);
+                    localStorage.setItem('color-theme', next);
+                });
+            }
+            // 未手动选择时，跟随系统主题变化
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('color-theme')) applyTheme(e.matches ? 'dark' : 'light');
+            });
+
+            /* ========== 移动端菜单 ========== */
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+
+            function setMenu(open) {
+                if (!mobileMenu || !menuToggle) return;
+                mobileMenu.classList.toggle('hidden', !open);
+                menuToggle.setAttribute('aria-expanded', String(open));
+                menuToggle.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+                if (menuIconOpen) menuIconOpen.classList.toggle('hidden', open);
+                if (menuIconClose) menuIconClose.classList.toggle('hidden', !open);
+            }
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
+
+                // 点击菜单项后自动收起
+                mobileMenu.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', () => setMenu(false));
+                });
+
+                // 点击菜单外区域或按 Esc 收起
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.classList.contains('hidden') &&
+                        !menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        setMenu(false);
+                    }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') setMenu(false);
+                });
+            }
+
+            /* ========== 轮播图 ========== */
+            const carousel = document.getElementById('hero-carousel');
+            const slides = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+            let currentSlide = 0;
+            let slideInterval = null;
+
+            function updateCarousel() {
+                slides.forEach((slide, index) => {
+                    const active = index === currentSlide;
+                    slide.classList.toggle('active', active);
+                    slide.setAttribute('aria-hidden', String(!active));
+                    if (dots[index]) {
+                        dots[index].classList.toggle('bg-white', active);
+                        dots[index].classList.toggle('bg-white/50', !active);
+                        dots[index].classList.toggle('w-8', active);
+                        dots[index].classList.toggle('w-3', !active);
+                    }
+                });
+            }
+
+            function goTo(index) {
+                currentSlide = (index + slides.length) % slides.length;
+                updateCarousel();
+            }
+            const nextSlide = () => goTo(currentSlide + 1);
+            const prevSlide = () => goTo(currentSlide - 1);
+
+            function startAutoplay() {
+                if (prefersReducedMotion || !slides.length) return;
+                stopAutoplay();
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            function stopAutoplay() {
+                if (slideInterval) { clearInterval(slideInterval); slideInterval = null; }
+            }
+            function restartAutoplay() { stopAutoplay(); startAutoplay(); }
+
+            if (slides.length && dots.length) {
+                updateCarousel();
+
+                dots.forEach((dot) => {
+                    dot.addEventListener('click', () => { goTo(Number(dot.dataset.index) || 0); restartAutoplay(); });
+                });
+                if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); restartAutoplay(); });
+                if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); restartAutoplay(); });
+
+                // 键盘 ← / → 切换（轮播容器可聚焦）
+                if (carousel) {
+                    carousel.addEventListener('keydown', (e) => {
+                        if (e.key === 'ArrowLeft') { prevSlide(); restartAutoplay(); }
+                        if (e.key === 'ArrowRight') { nextSlide(); restartAutoplay(); }
+                    });
+                }
+
+                // 触摸滑动
+                let touchStartX = null;
+                if (carousel) {
+                    carousel.addEventListener('touchstart', (e) => {
+                        touchStartX = e.touches[0].clientX;
+                        stopAutoplay();
+                    }, { passive: true });
+                    carousel.addEventListener('touchend', (e) => {
+                        if (touchStartX === null) return;
+                        const delta = e.changedTouches[0].clientX - touchStartX;
+                        if (Math.abs(delta) > 40) {
+                            if (delta < 0) { nextSlide(); } else { prevSlide(); }
+                        }
+                        touchStartX = null;
+                        startAutoplay();
+                    }, { passive: true });
+
+                    // 悬停 / 聚焦时暂停
+                    carousel.addEventListener('mouseenter', stopAutoplay);
+                    carousel.addEventListener('mouseleave', startAutoplay);
+                    carousel.addEventListener('focusin', stopAutoplay);
+                    carousel.addEventListener('focusout', startAutoplay);
+                }
+
+                startAutoplay();
+            }
+
+            /* ========== 进度条滚动入场动画 ========== */
+            const progressBars = document.querySelectorAll('.progress-bar[data-target]');
+            if (progressBars.length && 'IntersectionObserver' in window) {
+                if (prefersReducedMotion) {
+                    progressBars.forEach((bar) => { bar.style.width = bar.dataset.target + '%'; });
+                } else {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.width = entry.target.dataset.target + '%';
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.3 });
+                    progressBars.forEach((bar) => observer.observe(bar));
+                }
+            }
+
+            /* ========== 回到顶部 ========== */
+            const backToTop = document.getElementById('back-to-top');
+            if (backToTop) {
+                const onScroll = () => {
+                    const show = window.scrollY > 600;
+                    backToTop.classList.toggle('opacity-0', !show);
+                    backToTop.classList.toggle('pointer-events-none', !show);
+                    backToTop.classList.toggle('translate-y-2', !show);
+                };
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+                });
+            }
+
+            /* ========== 页脚年份 ========== */
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+        })();
+    </script>
 </body>
 </html>
