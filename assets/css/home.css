@@ -181,7 +181,7 @@ a:focus-visible, button:focus-visible {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('/resources/index/index_img/headBanner-bg.jpeg') center 30% / cover no-repeat;
+    background: url('/assets/images/home/head-banner-bg.jpeg') center 30% / cover no-repeat;
     opacity: .28;
 }
 
